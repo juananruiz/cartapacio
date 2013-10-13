@@ -2,19 +2,16 @@
 <html lang="es">
   <head>
     <meta charset="utf-8">
-    <title>{if isset($_nombre_pagina)}{$_nombre_pagina} - {/if}Universidad de Sevilla</title>
+    <title>{if isset($_nombre_pagina)}{$_nombre_pagina} - {/if}Cartapacio</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Intranet de Recursos Humanos de la Universidad de Sevilla">
-    <meta name="author" content="Unidad Técnica Recursos Humanos">
+    <meta name="description" content="Administración y consulta de recursos patrimoniales">
+    <meta name="author" content="Juan Antonio Ruiz Rivas">
 
     <!-- Le styles -->
     <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/comunica.css" rel="stylesheet">
+    <link href="css/cartapacio.css" rel="stylesheet">
     <link href="css/comunica-responsive.css" rel="stylesheet">
     <link href="css/dataTables.bootstrap.css" rel="stylesheet">
-    <link href="css/bootstrap-wysihtml5.css" rel="stylesheet">
-    <link href="css/faq.css" rel="stylesheet">
-    <link href="css/evento.css" rel="stylesheet">
     <style>
       body {
         padding-top: 60px; /* 60px hacen que el contenido nunca pise la barra de navegación superior */
@@ -31,20 +28,16 @@
     <script src="js/jquery-ui-1.9.2.min.js"></script>
     ================================================== -->
     <!-- Deberían estar al final para que la carga sea más rápida -->
-    <script src="js/jquery-1.8.0.js"></script>
+    <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/jquery.dataTables.js"></script>
     <script src="js/DT_bootstrap.js"></script>
-    <script src="js/wysihtml5.js"></script>
-    <script src="js/bootstrap-wysihtml5.js"></script>
     <script src="js/bootstrap.file-input.js"></script>
     <script src="js/bootstrap-popover.js"></script>
     <script src="js/bootstrap-tooltip.js"></script>
-    <script src="js/evento.js"></script>
 
     <!-- Imágenes para el favicon y para el touch icon de los móviles -->
-    <!-- Pendiente Yvan -->
     <link rel="shortcut icon" href="ico/favicon.ico">
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
@@ -54,17 +47,17 @@
 
   <body>
 
-    {$sector = $_usuario->id_sector}
-    {$menu_sector = "menu_sector_$sector.tpl"}
-    {if file_exists("../app_code/$menu_sector")}
-      {include file=$menu_sector}
+    {$rol = $_usuario->id_rol}
+    {$menu_rol = "menu_rol_$rol.tpl"}
+    {if file_exists("../app_code/$menu_rol")}
+      {include file=$menu_rol}
     {else}
-      {include file="menu_sector_0.tpl"}
+      {include file="menu_rol_4.tpl"}
     {/if}
 
     <div class="container-fluid">
 			<ul class="breadcrumb">
-				<li><a href="index.php?page=inicio">Intranet <i class="icon-chevron-right"></i></a></li>
+				<li><a href="index.php?page=inicio">Cartapacio <i class="icon-chevron-right"></i></a></li>
 				{$_breadcrumb}	
 			</ul>
 
@@ -85,12 +78,9 @@
     <footer class="footer">
       <img class="pull-left" src="img/logo-US-footer.png" alt="logo-US-footer" width="120" height="100" />
             <div>
-              <p align="right" class="pull-right"><strong>Direcci&oacute;n de Recursos Humanos de la Universidad de Sevilla</strong><br>
-              <a href="#">recursoshumanos.us.es</a><br>
+              <p align="right" class="pull-right"><strong>Centro de Iniciativas Culturales Universidad de Sevilla</strong><br>
               C/ San Fernando s/n, 41001 Sevilla, España</br>
           <small>
-          <span id="designed_by">Desarrollado y diseñado en la Universidad de Sevilla.<br>
-          Colabora: <a href="http://yvanpinto.com">Yvan Pinto Sierralta</a></span> |
               <a href="#">Créditos</a> |
               <a href="#">Condiciones</a> |
               <a href="index.php?page=contactar">Contactar</a>

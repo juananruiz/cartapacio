@@ -10,7 +10,7 @@
 //ini_set('display_errors', '1');
 //error_reporting(E_ALL);
 
-include_once('app_code/app_config.php');
+include_once('../app_code/app_config.php');
 include_once('../cascara_core/lib/adodb5/adodb.inc.php');
 include_once('../cascara_core/lib/adodb5/adodb-active-record.inc.php');
 include_once('../cascara_core/lib/smarty/Smarty.class.php');
@@ -125,12 +125,14 @@ else
 {
 	$smarty->assign("plantilla", $plantilla);
   // Preparamos los elementos del menú de herramientas
+  /*
   $herramienta = new herramienta();
   $herramientas = $herramienta->Find("1 = 1");
   $smarty->assign("herramientas", $herramientas);
   $permiso = new permiso();
   $permisos = $permiso->Find_joined("id_persona = $usuario->id GROUP BY id_aplicacion");
   $smarty->assign("permisos", $permisos);
+  */
  
   // Si hemos llamado a un subdirectorio comprueba si hay que cargar auto_menu
   $smarty->assign("auto_menu", false);

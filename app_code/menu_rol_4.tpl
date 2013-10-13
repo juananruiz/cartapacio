@@ -6,7 +6,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="index.php?page=inicio"><i class="icon-home icon-white"></i>Intranet Dirección Recursos Humanos</a>
+      <a class="brand" href="index.php?page=inicio"><i class="icon-home icon-white"></i>Cartapacio</a>
       <div class="nav-collapse subnav-collapse">
         <p class="navbar-text pull-right">
           <i class="icon-user icon-white"></i> 
@@ -19,10 +19,9 @@
           data-placement="bottom" style="text-decoration:none;">{$_usuario->nombre} {$_usuario->apellidos}</a>
         </p>
         <ul class="nav">
-          {include file = "menu_herramientas.tpl"}
-          <li><a href="index.php?page=accion_social"><span>Acción Social</span></a></li>
-          <li><a href="index.php?page=prevencion"><span>Prevención</span></a></li>
-          <li><a href="{$CC_URL_PORTAL}"> <i class="icon-globe icon-white"></i> Web RRHH</span></a></li>
+          {*include file = "menu_herramientas.tpl"*}
+          <li><a href="index.php?page="><span>Secciones</span></a></li>
+          <li><a href="index.php?page="><span>Colecciones</span></a></li>
         </ul>
       </div><!-- .nav-collapse -->
     </div><!-- .container -->
