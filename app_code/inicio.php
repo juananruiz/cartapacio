@@ -1,17 +1,12 @@
 <?php
 //---------------------------------------------------------------------------------------------------
-// Proyecto: Comunica - Intranet 
+// Proyecto: Cartapacio
 // Archivo: inicio.php
 //---------------------------------------------------------------------------------------------------
-// Portada de la intranet de Recursos Humanos con las últimas noticias publicadas
+// Página de inicio de la aplicación
 //---------------------------------------------------------------------------------------------------
 global $smarty;
-
-$evento = new evento_evento();
-$id_sector = 2;
-
-//$editoriales = $evento->editoriales($id_sector);
-//$smarty->assign('editoriales',$editoriales);
+global $usuario;
 
 $smarty->assign('_nombre_pagina', 'Inicio');
 ?>
