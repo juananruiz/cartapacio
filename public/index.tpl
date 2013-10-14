@@ -52,7 +52,7 @@
     {if file_exists("../app_code/$menu_rol")}
       {include file=$menu_rol}
     {else}
-      {include file="menu_rol_4.tpl"}
+      {include file="menu_rol_1.tpl"}
     {/if}
 
     <div class="container-fluid">

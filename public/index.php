@@ -124,15 +124,6 @@ if (isset($_REQUEST['ajax']) AND $_REQUEST['ajax'] == 'true')
 else
 {
 	$smarty->assign("plantilla", $plantilla);
-  // Preparamos los elementos del menú de herramientas
-  /*
-  $herramienta = new herramienta();
-  $herramientas = $herramienta->Find("1 = 1");
-  $smarty->assign("herramientas", $herramientas);
-  $permiso = new permiso();
-  $permisos = $permiso->Find_joined("id_persona = $usuario->id GROUP BY id_aplicacion");
-  $smarty->assign("permisos", $permisos);
-  */
  
   // Si hemos llamado a un subdirectorio comprueba si hay que cargar auto_menu
   $smarty->assign("auto_menu", false);
