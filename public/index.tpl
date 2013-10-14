@@ -78,8 +78,8 @@
     <footer class="footer">
       <img class="pull-left" src="img/logo-US-footer.png" alt="logo-US-footer" width="120" height="100" />
             <div>
-              <p align="right" class="pull-right"><strong>Centro de Iniciativas Culturales Universidad de Sevilla</strong><br>
-              C/ San Fernando s/n, 41001 Sevilla, España</br>
+              <p align="right" class="pull-right"><strong>Cartapacio - Universidad de Sevilla</strong><br>
+              C/ San Fernando 4, 41001 Sevilla, España</br>
           <small>
               <a href="#">Créditos</a> |
               <a href="#">Condiciones</a> |

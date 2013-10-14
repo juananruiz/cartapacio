@@ -7,7 +7,6 @@
 //---------------------------------------------------------------------------------------------------
 global $smarty;
 global $usuario;
-global $plantilla;
 
 $tipo = new tipo();
 $tipos = $tipo->Find("true");
@@ -17,11 +16,17 @@ $serie = new serie();
 $series = $serie->Find("true");
 $smarty->assign('series', $series);
 
-$coleccion = new coleccion();
-$colecciones = $coleccion->Find("true");
-$smarty->assign('colecciones', $colecciones);
+$autor = new autor();
+$autores = $autor->Find("true");
+$smarty->assign('autores', $autores);
+
+$seccion = new seccion();
+$secciones = $seccion->Find("true");
+$smarty->assign('secciones', $secciones);
+
+$estado = new estado();
+$estados = $estado->Find("true");
+$smarty->assign('estados', $estados);
 
 $smarty->assign('_nombre_pagina', 'Nuevo Recurso');
-$plantilla = "nuevo_recurso.tpl";
 ?>
-
