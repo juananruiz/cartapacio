@@ -10,7 +10,6 @@ global $usuario;
 
 // Comprueba que el usuario tiene permisos para crear un nuevo recurso
 // TODO
-print_r($_REQUEST);
 
 if (isset($_REQUEST['id_tipo'], $_REQUEST['nombre'], $_REQUEST['id_autor']))
 {
@@ -22,14 +21,13 @@ if (isset($_REQUEST['id_tipo'], $_REQUEST['nombre'], $_REQUEST['id_autor']))
   $recurso->descripcion = isset($_REQUEST['descripcion'])?sanitize($_REQUEST['descripcion'], SQL):NULL;
   $recurso->id_seccion = isset($_REQUEST['id_seccion'])?sanitize($_REQUEST['id_seccion'], INT):NULL;
   $recurso->id_serie = isset($_REQUEST['id_serie'])?sanitize($_REQUEST['id_serie'], INT):NULL;
-  $recurso->comentarios = isset($_REQUEST['comentarios'])?sanitize($_REQUEST['comentarios'], SQL):NULL;
+  $recurso->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
   $recurso->id_estado = isset($_REQUEST['id_estado'])?sanitize($_REQUEST['id_estado'], INT):NULL;
 
   // Estos no vienen del formulario
   $recurso->fecha_alta = "2013-10-10 17:45:00";
   $recurso->id_usuario = $usuario->id;
- print_r($recurso); 
- exit();
+ 
   if ($recurso->save())
   {
     header("location:index.php?page=ficheros_subir&id_recurso=$recurso->id");

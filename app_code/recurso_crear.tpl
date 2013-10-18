@@ -3,7 +3,7 @@
   <div class="control-group">
     <label class="control-label" for="id_tipo">Tipo</label>
     <div class="controls">
-      <select id="id_tipo">
+      <select name="id_tipo" id="id_tipo">
         <option value=""></option>
         {foreach $tipos as $tipo}
           <option value="{$tipo->id}">{$tipo->nombre}</option>
@@ -15,14 +15,14 @@
   <div class="control-group">
     <label class="control-label" for="nombre">Nombre</label>
     <div class="controls">
-      <input class="input-xxlarge" type="text" id="nombre" placeholder="Nombre del recurso">
+      <input class="input-xxlarge" type="text" name="nombre" id="nombre" placeholder="Nombre del recurso">
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="id_autor">Autor</label>
     <div class="controls">
-      <select class="input-xxlarge" id="id_autor">
+      <select class="input-xxlarge" name="id_autor" id="id_autor">
         <option value=""></option>
         {foreach $autores as $autor}
           <option value="{$autor->id}">{$autor->apellidos}, {$autor->nombre}</option>
@@ -34,21 +34,23 @@
   <div class="control-group">
     <label class="control-label" for="fecha_original">Fecha obra</label>
     <div class="controls">
-      <input class="input-mini" type="text" id="fecha_original"><span class="help-inline">Indique el año en que está datada la obra o documento</span>
+      <input class="input-mini" type="text" name="fecha_original" id="fecha_original">
+      <span class="help-inline">Indique el año en que está datada la obra o documento</span>
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="descripcion">Descripción</label>
     <div class="controls">
-      <textarea class="input-xxlarge" id="descripcion" rows="5">Descripción detallada del recurso</textarea>
+      <textarea class="input-xxlarge" name="descripcion"  id="descripcion" rows="5"></textarea>
+      <span class="help-inline">Descripción detallada del recurso</span>
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="id_seccion">Sección</label>
     <div class="controls">
-      <select class="input-xxlarge" id="id_seccion">
+      <select class="input-xxlarge" name="id_seccion" id="id_seccion">
         <option value=""></option>
         {foreach $secciones as $seccion}
           <option value="{$seccion->id}">{$seccion->nombre}</option>
@@ -60,7 +62,7 @@
   <div class="control-group">
     <label class="control-label" for="id_serie">Serie</label>
     <div class="controls">
-      <select class="input-xxlarge" id="id_serie">
+      <select class="input-xxlarge" name="id_serie" id="id_serie">
         <option value=""></option>
         {foreach $series as $serie}
           <option value="{$serie->id}">{$serie->nombre}</option>
@@ -70,16 +72,17 @@
   </div>
 
   <div class="control-group">
-    <label class="control-label" for="comentarios">Comentarios</label>
+    <label class="control-label" for="notas">Notas</label>
     <div class="controls">
-      <textarea class="input-xxlarge" id="comentarios" rows="5">Comentarios sobre el recurso no disponibles al público</textarea>
+      <textarea class="input-xxlarge" name="notas" id="notas" rows="5"></textarea>
+      <span class="help-inline">Notas sobre el recurso no disponibles al público</span>
     </div>
   </div>
 
   <div class="control-group">
     <label class="control-label" for="id_estado">Estado</label>
     <div class="controls">
-      <select class="input-medium" id="id_estado">
+      <select class="input-medium" name="id_estado" id="id_estado">
         <option value=""></option>
         {foreach $estados as $estado}
           <option value="{$estado->id}">{$estado->nombre}</option>
