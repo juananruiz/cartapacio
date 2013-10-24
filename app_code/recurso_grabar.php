@@ -25,7 +25,7 @@ if (isset($_REQUEST['id_tipo'], $_REQUEST['nombre'], $_REQUEST['id_autor']))
   $recurso->id_estado = isset($_REQUEST['id_estado'])?sanitize($_REQUEST['id_estado'], INT):NULL;
 
   // Estos no vienen del formulario
-  $recurso->fecha_alta = "2013-10-10 17:45:00";
+  $recurso->fecha_alta = date("Y-m-d H:m:i");
   $recurso->id_usuario = $usuario->id;
  
   if ($recurso->save())

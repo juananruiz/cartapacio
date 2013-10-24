@@ -1,8 +1,8 @@
 <?php 
 //-------------------------------------------------------------------------------
-// Proyecto Comunica - Intranet
+// Proyecto Cartapacio
 // Archivo: index.php
-// Desarrolladores: Juanan Ruiz <juanan@us.es>, Jesús Martin <jjmc@us.es>
+// Desarrollador: Juanan Ruiz <juanan@us.es>
 //-------------------------------------------------------------------------------
 // Descripcion: Esta es la página que carga a todas las demas en su seno maternal 
 //-------------------------------------------------------------------------------

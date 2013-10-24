@@ -8,16 +8,10 @@
     <meta name="author" content="Juan Antonio Ruiz Rivas">
 
     <!-- Le styles -->
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/cartapacio.css" rel="stylesheet">
-    <link href="css/comunica-responsive.css" rel="stylesheet">
-    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
-    <style>
-      body {
-        padding-top: 60px; /* 60px hacen que el contenido nunca pise la barra de navegación superior */
-      }
-    </style>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/docs.css" rel="stylesheet">
+    <link href="css/dataTables.bootstrap.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -25,7 +19,6 @@
     <![endif]-->
 
     <!-- Librerías javascript
-    <script src="js/jquery-ui-1.9.2.min.js"></script>
     ================================================== -->
     <!-- Deberían estar al final para que la carga sea más rápida -->
     <script src="js/jquery-1.10.2.min.js"></script>
@@ -45,7 +38,7 @@
     <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
 
     {$rol = $_usuario->id_rol}
     {$menu_rol = "menu_rol_$rol.tpl"}
@@ -56,10 +49,6 @@
     {/if}
 
     <div class="container-fluid">
-			<ul class="breadcrumb">
-				<li><a href="index.php?page=inicio">Cartapacio <i class="icon-chevron-right"></i></a></li>
-				{$_breadcrumb}	
-			</ul>
 
       {if isset($smarty.get.mensaje) AND isset($smarty.get.mensaje_tipo)}
         <div class="alert alert-{$smarty.get.mensaje_tipo} se-desvanece">
@@ -67,29 +56,30 @@
           {$smarty.get.mensaje}
         </div>
       {/if}
+      <!-- La plantilla secundaria es la que lleva la manteca -->
+      {include file="$plantilla"}
 
-      {if $auto_menu}
-        {include file="$auto_menu"}
-      {else}
-        {include file="$plantilla"}
-      {/if}
     </div>
-
+    
+    <!-- Footer
+    ================================================== -->
     <footer class="footer">
-      <img class="pull-left" src="img/logo-US-footer.png" alt="logo-US-footer" width="120" height="100" />
-            <div>
-              <p align="right" class="pull-right"><strong>Cartapacio - Universidad de Sevilla</strong><br>
-              C/ San Fernando 4, 41001 Sevilla, España</br>
-          <small>
-              <a href="#">Créditos</a> |
-              <a href="#">Condiciones</a> |
-              <a href="index.php?page=contactar">Contactar</a>
-          </small></p> 
-          </div>
+      <div class="container">
+        <p>Designed and built with all the love in the world by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
+        <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
+        <ul class="footer-links">
+          <li><a href="http://blog.getbootstrap.com">Blog</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://github.com/twbs/bootstrap/issues?state=open">Issues</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="https://github.com/twbs/bootstrap/releases">Changelog</a></li>
+        </ul>
+      </div>
     </footer>
 
+
     <script>
-      $('#usuario-pop').popover();
       $(".se-desvanece").delay(2500).hide(1000,function(){
         $(this).remove();
       });

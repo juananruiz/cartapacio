@@ -1,3 +1,6 @@
+<div class="span8">
+<div class="well">
+
 <form class="form-horizontal" action="index.php?page=recurso_grabar" method="POST">
 
   <div class="control-group">
@@ -96,3 +99,5 @@
     <button type="button" class="btn">Cancelar</button>
   </div>
 </form>
+</div>
+</div>
