@@ -1,13 +1,14 @@
 <?php
 //---------------------------------------------------------------------------------------------------
-// Proyecto: ComerBien 
-// Archivo: preguntas_frecuentes.php
+// Proyecto: Cartapacio
+// Archivo: coleccion_listar.php
 //---------------------------------------------------------------------------------------------------
+// Lista de colecciones en la base de datos
 //---------------------------------------------------------------------------------------------------
 global $smarty;
 global $usuario;
-global $plantilla;
 
-$smarty->assign('_nombre_pagina', 'Preguntas Frecuentes');
-$plantilla = 'preguntas_frecuentes.tpl';
+$coleccion = new coleccion();
+$colecciones = $coleccion->Find("true");
+$smarty->assign('colecciones', $colecciones);
 ?>

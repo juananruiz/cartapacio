@@ -21,22 +21,22 @@ if (isset($_REQUEST['nombre']))
   $autor->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
 
   // Estos no vienen del formulario
-  $autor->fecha_alta = "date("Y-m-d H:m:i");
+  $autor->fecha_alta = date("Y-m-d H:m:i");
   $autor->id_usuario = $usuario->id;
  
   if ($autor->save())
   {
-    header("location:index.php?page=autor_listar");
+    header("location:index.php?page=admin/autor_listar");
   }
   else
   {
     $error = "No se ha podido grabar el autor en la base de datos";
-    header("location:index.php?page=autor_crear&error=$error");
+    header("location:index.php?page=admin/autor_crear&error=$error");
   }
 }
 else
 {
   $error = "Faltan datos para crear un nuevo autor";
-  header("location:index.php?page=autor_crear&error=$error");
+  header("location:index.php?page=admin/autor_crear&error=$error");
 }
 ?>

@@ -1,14 +1,12 @@
 <?php
 //---------------------------------------------------------------------------------------------------
-// Proyecto: ComerBien 
-// Archivo: disenio.php
+// Proyecto: Cartapacio
+// Archivo: coleccion_crear.php
 //---------------------------------------------------------------------------------------------------
+// Formulario para dar de alta una nueva coleccion
 //---------------------------------------------------------------------------------------------------
 global $smarty;
 global $usuario;
-global $plantilla;
 
-$smarty->assign('_nombre_pagina', 'Elementos de diseño');
-
-$plantilla = 'disenio.tpl';
+$smarty->assign('_nombre_pagina', 'Nueva colección');
 ?>

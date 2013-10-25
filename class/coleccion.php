@@ -1,12 +1,12 @@
 <?php
 //---------------------------------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: seccion_crear.php
+// Archivo: class/coleccion.php
 //---------------------------------------------------------------------------------------------------
-// Formulario para dar de alta una nueva seccion
+// Descripcion: gestiona las colecciones
 //---------------------------------------------------------------------------------------------------
-global $smarty;
-global $usuario;
-
-$smarty->assign('_nombre_pagina', 'Nueva sección');
+class coleccion extends ADOdb_Active_Record
+{
+	public $_table = 'colecciones';
+}
 ?>

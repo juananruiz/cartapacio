@@ -1,7 +1,8 @@
 <div class="span8">
-  <h2><i class="fa fa-folder-open"></i> Alta sección</h2>
-  <div class="">
-    <form class="form-horizontal" action="index.php?page=admin/seccion_grabar" method="POST">
+  <h2>Alta coleccion</h2>
+
+  <div class="well">
+    <form class="form-horizontal" action="index.php?page=admin/coleccion_grabar" method="POST">
 
       <div class="control-group">
         <label class="control-label" for="nombre">Nombre</label>
@@ -14,7 +15,7 @@
         <label class="control-label" for="descripcion">Descripción</label>
         <div class="controls">
           <textarea class="input-xxlarge" name="descripcion" id="descripcion" rows="5"></textarea>
-          <span class="help-inline">Descripción pública de la sección</span>
+          <span class="help-inline">Descripción pública de la coleccion</span>
         </div>
       </div>
 
@@ -22,7 +23,7 @@
         <label class="control-label" for="notas">Notas</label>
         <div class="controls">
           <textarea class="input-xxlarge" name="notas" id="notas" rows="5"></textarea>
-          <span class="help-inline">Notas sobre la sección no disponibles al público</span>
+          <span class="help-inline">Notas sobre la coleccion no disponibles al público</span>
         </div>
       </div>
 
