@@ -10,10 +10,10 @@
         <td>{$recurso->coleccion->nombre}</td>
         <td>{$recurso->estado->nombre}</td>
         <td>
-          <a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i> Editar</a> 
+          <a href="index.php?page=recurso_editar&id_recurso={$recurso->id}"><i class="fa fa-pencil"></i> Editar</a> 
         </td>
         <td>
-          <a href="index.php?page=recurso_eliminar&id={$recurso->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
+          <a href="index.php?page=recurso_eliminar&id_recurso={$recurso->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
         </td>
       </tr>
     {/foreach}
