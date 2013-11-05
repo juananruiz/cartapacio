@@ -1,7 +1,7 @@
 <div class="span12">
   <h1><i class="fa fa-male"></i> Autores</h1>
 
-  <table class="table table-striped">
+  <table class="table table-striped table-bordered">
     {foreach $autores as $autor}
       <tr>
         <td>{$autor->id}</td>
@@ -17,6 +17,6 @@
     {/foreach}
   </table>
 
-  <p><button><a href="index.php?page=admin/autor_crear"><i class="fa fa-plus-circle"></i> Nuevo autor</a></button></p>
+  <section><a href="index.php?page=admin/autor_crear" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Autor</a></section>
   
 </div>

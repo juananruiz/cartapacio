@@ -1,14 +1,14 @@
 <?php
 //---------------------------------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: coleccion_listar.php
+// Archivo: recurso_listar.php
 //---------------------------------------------------------------------------------------------------
-// Lista de colecciones en la base de datos
+// Lista de recursos en la base de datos
 //---------------------------------------------------------------------------------------------------
 global $smarty;
-global $coleccion;
+global $usuario;
 
-$coleccion = new coleccion();
-$colecciones = $coleccion->Find("true");
-$smarty->assign('colecciones', $colecciones);
+$recurso = new recurso();
+$recursos = $recurso->Find_joined("id_estado <> 4 ORDER BY fecha_alta DESC");
+$smarty->assign('recursos', $recursos);
 ?>

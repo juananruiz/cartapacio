@@ -20,7 +20,7 @@ if (isset($_REQUEST['id_tipo'], $_REQUEST['nombre'], $_REQUEST['id_autor']))
   $recurso->fecha_original = isset($_REQUEST['fecha_original'])?sanitize($_REQUEST['fecha_original'], SQL):NULL;
   $recurso->descripcion = isset($_REQUEST['descripcion'])?sanitize($_REQUEST['descripcion'], SQL):NULL;
   $recurso->id_seccion = isset($_REQUEST['id_seccion'])?sanitize($_REQUEST['id_seccion'], INT):NULL;
-  $recurso->id_serie = isset($_REQUEST['id_serie'])?sanitize($_REQUEST['id_serie'], INT):NULL;
+  $recurso->id_coleccion = isset($_REQUEST['id_coleccion'])?sanitize($_REQUEST['id_coleccion'], INT):NULL;
   $recurso->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
   $recurso->id_estado = isset($_REQUEST['id_estado'])?sanitize($_REQUEST['id_estado'], INT):NULL;
 

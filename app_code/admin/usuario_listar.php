@@ -1,14 +1,14 @@
 <?php
 //---------------------------------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: coleccion_listar.php
+// Archivo: usuario_listar.php
 //---------------------------------------------------------------------------------------------------
-// Lista de colecciones en la base de datos
+// Lista de usuarios en la base de datos
 //---------------------------------------------------------------------------------------------------
 global $smarty;
-global $coleccion;
+global $usuario;
 
-$coleccion = new coleccion();
-$colecciones = $coleccion->Find("true");
-$smarty->assign('colecciones', $colecciones);
+$usuario = new usuario();
+$usuarios = $usuario->Find("true");
+$smarty->assign('usuarios', $usuarios);
 ?>

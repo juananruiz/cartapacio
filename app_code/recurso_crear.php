@@ -9,24 +9,24 @@ global $smarty;
 global $usuario;
 
 $tipo = new tipo();
-$tipos = $tipo->Find("true");
+$tipos = $tipo->Find("activo = 1 ORDER BY nombre");
 $smarty->assign('tipos', $tipos);
 
-$serie = new serie();
-$series = $serie->Find("true");
-$smarty->assign('series', $series);
+$coleccion = new coleccion();
+$colecciones = $coleccion->Find("activo = 1 ORDER BY nombre");
+$smarty->assign('colecciones', $colecciones);
 
 $autor = new autor();
-$autores = $autor->Find("true");
+$autores = $autor->Find("activo =  1 ORDER BY nombre");
 $smarty->assign('autores', $autores);
 
 $seccion = new seccion();
-$secciones = $seccion->Find("true");
+$secciones = $seccion->Find("activo =  1 ORDER BY nombre");
 $smarty->assign('secciones', $secciones);
 
 $estado = new estado();
 $estados = $estado->Find("true");
 $smarty->assign('estados', $estados);
 
-$smarty->assign('_nombre_pagina', 'Nuevo Recurso');
+$smarty->assign('_nombre_pagina', 'Crear Recurso');
 ?>

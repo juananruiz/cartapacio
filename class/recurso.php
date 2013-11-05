@@ -8,6 +8,34 @@
 class recurso extends ADOdb_Active_Record
 {
 	public $_table = 'recursos';
+  public $autor;
+  public $seccion;
+  public $coleccion;
+  public $estado;
+
+  public function Find_joined($condicion)
+  {
+    $recursos = array();
+    if ($recursos = $this->Find($condicion))
+    {
+      foreach($recursos as& $recurso)
+      {
+        $recurso->autor = new autor();
+        $recurso->autor->load("id = $recurso->id_autor");
+        $recurso->seccion = new seccion();
+        $recurso->seccion->load("id = $recurso->id_seccion");
+        $recurso->coleccion = new coleccion();
+        $recurso->coleccion->load("id = $recurso->id_coleccion");
+        $recurso->estado = new estado();
+        $recurso->estado->load("id = $recurso->id_estado");
+      }
+      return $recursos;
+    }
+    else
+    {
+      return false;
+    }
+  }
 
 }
 ?>

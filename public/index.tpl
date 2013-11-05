@@ -46,7 +46,7 @@
       {include file="menu_rol_2.tpl"}
     {/if}
 
-    <div style="height:30px;">
+    <div style="height:20px;">
     </div>
 
     <div class="container-fluid">
@@ -66,7 +66,12 @@
     
     <footer class="footer">
       <div class="container">
-        <p><a href="http://www.us.es">Universidad de Sevilla</a>
+        <h1>Proyecto Anunciación</h1>
+        <ul class="footer-links">
+          <li><a href="http://cicus.us.es">Centro de Iniciativas Culturales</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://www.us.es">Universidad de Sevilla</a></li>
+        </ul>
 
         <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
         <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>

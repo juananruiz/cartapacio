@@ -1,14 +1,12 @@
 <?php
 //---------------------------------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: coleccion_listar.php
+// Archivo: class/usuario.php
 //---------------------------------------------------------------------------------------------------
-// Lista de colecciones en la base de datos
+// Descripcion: gestiona los usuarios
 //---------------------------------------------------------------------------------------------------
-global $smarty;
-global $coleccion;
-
-$coleccion = new coleccion();
-$colecciones = $coleccion->Find("true");
-$smarty->assign('colecciones', $colecciones);
+class usuario extends ADOdb_Active_Record
+{
+	public $_table = 'usuarios';
+}
 ?>

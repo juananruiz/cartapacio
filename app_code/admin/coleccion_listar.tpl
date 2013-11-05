@@ -1,16 +1,18 @@
 <div class="span12">
   <h1><i class="fa fa-camera-retro"></i> Colecciones</h1>
-  <table class="table table-striped">
+  <table class="table table-striped table-bordered">
     {foreach $colecciones as $coleccion}
       <tr>
         <td>{$coleccion->id}</td>
         <td>{$coleccion->nombre}</td>
         <td>
-          <a href="index.php?page=admin/coleccion_editar&id={$coleccion->id}">Editar</a> 
-          <a href="index.php?page=admin/coleccion_eliminar&id={$coleccion->id}">Eliminar</a> 
+          <a href="index.php?page=admin/coleccion_editar&id={$coleccion->id}"><i class="fa fa-pencil"></i> Editar</a> 
+        </td>
+        <td>
+          <a href="index.php?page=admin/coleccion_eliminar&id={$coleccion->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
         </td>
       </tr>
     {/foreach}
   </table>
-  <p><a href="index.php?page=admin/coleccion_crear">Nueva coleccion</a></p>
+  <section><a class="btn btn-inverse" href="index.php?page=admin/coleccion_crear"><i class="fa fa-plus-circle"></i> Crear colección</a></section>
 </div>
