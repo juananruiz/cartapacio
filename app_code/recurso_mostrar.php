@@ -9,9 +9,10 @@ global $smarty;
 global $usuario;
 $recurso = new recurso();
 
-if (isset($_GET['id_recurso']))
+if (isset($_REQUEST['id']))
 {
-  if ($recurso->load_joined("id = $id_recurso"))
+  $id = sanitize($_REQUEST['id'], INT);
+  if ($recurso->load_joined("id = $id"))
   {
     $smarty->assign("recurso", $recurso);
   }

@@ -33,6 +33,7 @@
               <option value="{$autor->id}">{$autor->apellidos}, {$autor->nombre}</option>
             {/foreach}
           </select>
+          <a href="index.php?page=admin/autor_crear"><i class="fa fa-plus-circle"></i></a>
         </div>
       </div>
 
@@ -65,7 +66,7 @@
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="id_coleccion">coleccion</label>
+        <label class="control-label" for="id_coleccion">Colección</label>
         <div class="controls">
           <select class="input-xxlarge" name="id_coleccion" id="id_coleccion">
             <option value=""></option>
@@ -121,6 +122,7 @@
       <!-- Para subir imágenes http://jasny.github.io/bootstrap/javascript/#fileinput -->
 
       <div class="control-group">
+        <label class="control-label" for="nolvide"></label>
         <label class="checkbox">
           <input type="checkbox"> No olvide marcar esta casilla
         </label>

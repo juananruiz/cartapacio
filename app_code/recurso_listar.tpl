@@ -4,7 +4,7 @@
     {foreach $recursos as $recurso}
       <tr {if $recurso->id_estado == 1}class="muted"{/if}>
         <td>{$recurso->id}</td>
-        <td>{$recurso->nombre}</td>
+        <td><a href="index.php?page=recurso_mostrar&id={$recurso->id}"><i class="fa fa-arrow-right"></i> {$recurso->nombre}</a></td>
         <td>{$recurso->autor->apellidos}, {$recurso->autor->nombre}</td>
         <td>{$recurso->seccion->nombre}</td>
         <td>{$recurso->coleccion->nombre}</td>

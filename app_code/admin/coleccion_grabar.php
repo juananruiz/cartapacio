@@ -19,6 +19,7 @@ if (isset($_REQUEST['nombre']))
   $coleccion->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
 
   // Estos no vienen del formulario
+  $coleccion->activo = 1;
   $coleccion->fecha_alta = date("Y-m-d H:m:i");
   $coleccion->id_usuario = $usuario->id;
  
