@@ -1,7 +1,9 @@
-<div class="span8">
-  <h1><i class="fa fa-archive"></i> Editar Recurso</h1>
+<div class="span12">
+<h1><i class="fa fa-archive"></i> Editar Recurso</h1>
+</div>
 
-  <form class="form-horizontal" action="index.php?page=recurso_grabar" method="POST">
+<div class="span7">
+  <form action="index.php?page=recurso_grabar" method="POST">
     <input type="hidden" name="id_recurso" value="{$recurso->id}">
     <div class="control-group">
       <label class="control-label" for="id_tipo">Tipo</label>
@@ -37,7 +39,7 @@
     <div class="control-group">
       <label class="control-label" for="fecha_original">Fecha obra</label>
       <div class="controls">
-        <input class="input-mini" type="text" name="fecha_original" id="fecha_original" value="{$recurso->fecha_original}">
+        <input class="input-normal" type="text" name="fecha_original" id="fecha_original" value="{$recurso->fecha_original}">
         <span class="help-inline">Indique el año en que está datada la obra o documento</span>
       </div>
     </div>
@@ -63,7 +65,7 @@
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="id_coleccion">coleccion</label>
+      <label class="control-label" for="id_coleccion">Colección</label>
       <div class="controls">
         <select class="input-xxlarge" name="id_coleccion" id="id_coleccion">
           <option value=""></option>
@@ -99,4 +101,104 @@
       <button type="button" class="btn">Cancelar</button>
     </div>
   </form>
-</div> <!-- .span8 -->
+</div> <!-- .span7 -->
+<div class="span5" style="padding-left:20px;border-left:1px solid #dedede;">
+  <h3><i class="fa fa-file"></i> Ficheros asociados al recurso</h3>
+
+  {if isset($archivos)}
+    <table class="table">
+    {foreach from=$archivos item=archivo }
+        {* Evitamos que se vean los directorios ".", ".." y cualquier archivo o directorio que empiece por "." *}
+        {if $archivo[0][0] == '.'}
+        {else}
+            <tr>
+            <td><a href="upload/{$directorio}/{$archivo[0]}"><i class="fa fa-file"</i> {$archivo[0]}</a></td>
+            <td>{$archivo[1]}</td>
+            <td><a href="index.php?page=archivo_borrar&fichero={$archivo[0]}&dir={$directorio}" 
+                onclick="javascript: return confirm('Quieres borrar el archivo : {$archivo[0]}');"><i class="fa fa-trash-o"></i></a></td>
+            </tr>
+        {/if}
+    {/foreach}
+    </table>
+  {else}
+    <p class="alert">No existen ficheros asociados con este recurso</p>
+  {/if}
+
+  <p class="alert alert-info"><strong>IMPORTANTE:</strong> el nombre de los ficheros no debe contener caracteres como ñ, acentos o espacios en blanco. Renombra tu archivo antes de subirlo para que sea clarificador de su contenido.</p>
+  
+  <form id="form-fichero" enctype="multipart/form-data">
+    <input type="hidden" name="id_recurso" value="{$recurso->id}">
+    <div class="control-group">
+      <label class="control-label" for="fichero1">Añadir nuevo fichero</label>
+      <div class="controls">
+        <input id="fichero1" type="file" style="display:none" name="fichero1">
+        <div class="input-append">
+          <input id="falso1" class="input-xlarge" type="text">
+          <a class="btn btn-file"><i class="fa fa-folder-open-o"></i> Seleccionar fichero</a>
+        <progress></progress>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="button" id="btn-subir" class="btn btn-primary">Subir fichero</button>
+      <button type="button" class="btn">Cancelar</button>
+    </div>
+  </form>
+
+</div>  <!-- .span4 -->
+
+{literal}
+<script type="text/javascript">
+  // ---------- Falso input file ------------
+  // http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/ 
+  // Cuando se pulsa el falso manda el click al autentico
+  $('.btn-file').on('click', function(){
+    $(this).parent().prev().click();
+  });
+
+  // Cuando el autentico cambia hace cambiar al falso
+  $('input[type=file]').on('change', function(event){
+    $(this).next().find('input').val($(this).val());
+  });
+
+  // ---------- Petición ajax subir fichero --------
+  $('#btn-subir').on('click', function(event){
+    event.preventDefault();
+    var formDatos = new FormData($('#form-fichero')[0]);
+    $.ajax(
+    {
+      type: 'POST',
+      url: 'index.php?page=recurso_grabar_fichero',
+      xhr: function() {  // Custom XMLHttpRequest
+        var myXhr = $.ajaxSettings.xhr();
+        if(myXhr.upload){ // Check if upload property exists
+          // For handling the progress of the upload
+          myXhr.upload.addEventListener('progress',progressFunction, false); 
+        }
+        return myXhr;
+      },
+      // Form data
+      data: formDatos,
+      //Options to tell jQuery not to process data or worry about content-type.
+      cache: false,
+      contentType: false,
+      processData: false,
+      success: function(datos) {  
+        // Lanza la respuesa a consolar para depurar
+        console.log(datos)
+      },                    
+      error: function (xhr, ajaxOptions, thrownError) {
+        console.log(xhr.status);
+        console.log(thrownError);
+      }
+    });    
+  });
+
+  function progressFunction(e){
+    if(e.lengthComputable){
+      $('progress').attr({value:e.loaded,max:e.total});
+    }
+  }
+</script>
+{/literal}

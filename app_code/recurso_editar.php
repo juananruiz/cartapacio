@@ -35,6 +35,20 @@ if (isset($_REQUEST['id_recurso']))
   $estados = $estado->Find("true");
   $smarty->assign('estados', $estados);
 
+  // Buscamos los archivos en el directorio de este recurso  
+  $ruta_completa = CC_DIR_BASE . 'public/upload/recurso/' . $id_recurso;
+  if (is_dir($ruta_completa))
+  {
+    $directorio = opendir($ruta_completa);
+    while ($archivo = readdir($directorio))
+    {
+      $fecha = date ("d-m-Y", filemtime($ruta_completa . "/" . $archivo));
+      $archivos[] = array($archivo, $fecha);
+    }
+    closedir($directorio);
+    $smarty->assign('archivos',$archivos);
+  }
+
   $smarty->assign('_nombre_pagina', 'Editar Recurso');
 }
 else

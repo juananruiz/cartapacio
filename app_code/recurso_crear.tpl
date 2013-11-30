@@ -4,7 +4,6 @@
 
   <form class="form-horizontal" action="index.php?page=recurso_grabar" method="POST">
 
-
       <div class="control-group">
         <label class="control-label" for="id_tipo">Tipo</label>
         <div class="controls">
@@ -98,35 +97,39 @@
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="fichero0">Añadir fichero 1</label>
+        <label class="control-label" for="fichero1">Añadir fichero 1</label>
         <div class="controls">
-          <input id="oculto0" type="file" style="display:none" name="oculto0">
+          <input id="fichero1" type="file" style="display:none" name="fichero1">
           <div class="input-append">
-            <input id="fichero0" class="input-xlarge" type="text">
-            <a class="btn" onclick="$('input[id=oculto0]').click();"><i class="fa fa-folder-open-o"></i> Seleccionar fichero</a>
+            <input id="falso1" class="input-xlarge" type="text">
+            <a class="btn btn-file"><i class="fa fa-folder-open-o"></i> Seleccionar fichero</a>
           </div>
         </div>
       </div>
 
       <div class="control-group">
-        <label class="control-label" for="archivo0">Añadir fichero 2</label>
+        <label class="control-label" for="fichero2">Añadir fichero 2</label>
         <div class="controls">
-          <input id="oculto1" type="file" style="display:none" name="oculto1">
+          <input id="fichero2" type="file" style="display:none" name="fichero2">
           <div class="input-append">
-            <input id="fichero1" class="input-xlarge" type="text">
-            <a class="btn" onclick="$('input[id=oculto1]').click();"><i class="fa fa-folder-open-o"></i> Seleccionar fichero</a>
+            <input id="falso2" class="input-xlarge" type="text">
+            <a class="btn btn-file"><i class="fa fa-folder-open-o"></i> Seleccionar fichero</a>
           </div>
         </div>
       </div>
 
+      <!-- El que estoy usando: http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/ -->
       <!-- Para subir imágenes http://jasny.github.io/bootstrap/javascript/#fileinput -->
-
+    
+     
+      <!--
       <div class="control-group">
         <label class="control-label" for="nolvide"></label>
         <label class="checkbox">
           <input type="checkbox"> No olvide marcar esta casilla
         </label>
       </div>
+      -->
       
 
     <div class="form-actions">
@@ -137,3 +140,18 @@
   </form>
 
 </div>  <!-- .span12 -->
+
+<script type="text/javascript">
+  // ---------- Falso input file ------------
+  // Cuando se pulsa el falso manda el click al autentico
+  $('.btn-file').on('click', function(){
+    console.log(this);
+    $(this).parent().prev().click();
+  });
+
+  // Cuando el autentico cambia hace cambiar al falso
+  $('input[type=file]').change(function() {
+    $(this).next().find('input').val($(this).val());
+  });
+</script>
+

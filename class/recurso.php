@@ -13,6 +13,7 @@ class recurso extends ADOdb_Active_Record
   public $coleccion;
   public $estado;
   public $ficheros = array();
+  public $imagen_principal;
 
   public function load_joined($condicion)
   {
@@ -28,6 +29,8 @@ class recurso extends ADOdb_Active_Record
       $this->estado->load("id = $recurso->id_estado");
       $fichero = new fichero();
       $this->ficheros = $fichero->Find("id_recurso = $this->id");
+      $this->imagen_principal = new fichero();
+      $this->imagen_principal->load("id_recurso = $this->id AND es_imagen_principal = 1");
       return $this;
     }
     else

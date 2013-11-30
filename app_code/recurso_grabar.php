@@ -36,12 +36,10 @@ if (isset($_REQUEST['id_tipo'], $_REQUEST['nombre'], $_REQUEST['id_autor']))
   $recurso->id_coleccion = isset($_REQUEST['id_coleccion'])?sanitize($_REQUEST['id_coleccion'], INT):NULL;
   $recurso->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
   $recurso->id_estado = isset($_REQUEST['id_estado'])?sanitize($_REQUEST['id_estado'], INT):NULL;
-
  
   if ($recurso->save())
   {
-    //header("location:index.php?page=ficheros_subir&id_recurso=$recurso->id");
-    header("location:index.php?page=recurso_listar");
+    header("location:index.php?page=fichero_subir&id_recurso=$recurso->id");
   }
   else
   {

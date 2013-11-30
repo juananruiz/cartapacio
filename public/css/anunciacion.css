@@ -20,6 +20,8 @@ h3 code {
 }
 
 .container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
 }
 
 
@@ -135,7 +137,7 @@ hr.soften {
 }
 
 h1.ficha {
-  margin-top:25px;
+  margin:25px 10px 5px 25px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 24px;
   font-weight:400;
@@ -329,6 +331,18 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   margin-bottom: 1px;
   background-color: #F5F5F5;
   border-top: 1px solid #ccc;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #800000;
+}
+
+.help-block, .help-inline {
+  color: #AAA;
+  font-weight: 200;
 }
 
 /* Footer

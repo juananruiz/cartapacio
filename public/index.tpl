@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="css/jquery.dataTables.css">
     <link rel="stylesheet" href="css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/dropzone.css">
     <link rel="stylesheet" href="css/anunciacion.css">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -52,11 +53,12 @@
     <div class="container-fluid">
 
       <!-- Mensajes de aviso y error -->
-      {if isset($smarty.get.mensaje) AND isset($smarty.get.mensaje_tipo)}
-        <div class="alert alert-{$smarty.get.mensaje_tipo} se-desvanece">
-          <h4>{$smarty.get.mensaje_tipo}</h4>
-          {$smarty.get.mensaje}
-        </div>
+      {if $smarty.get.aviso}
+        <p class='alert alert-success seva'>{$smarty.get.aviso}</p>
+      {/if}
+
+      {if $smarty.get.error}
+        <p class='alert alert-error seva'>{$smarty.get.error}</p>
       {/if}
 
       <!-- La plantilla secundaria es la que lleva la manteca -->
@@ -70,6 +72,8 @@
         <ul class="footer-links">
           <li><a href="http://cicus.us.es">Centro de Iniciativas Culturales</a></li>
           <li class="muted">&middot;</li>
+          <li><a href="#">Laboratorio de Arte</a></li>
+          <li class="muted">&middot;</li>
           <li><a href="http://www.us.es">Universidad de Sevilla</a></li>
         </ul>
 
@@ -78,15 +82,15 @@
         <ul class="footer-links">
           <li><a href="#">Blog</a></li>
           <li class="muted">&middot;</li>
-          <li><a href="#">Issues</a></li>
+          <li><a href="#">Acerca del proyecto</a></li>
           <li class="muted">&middot;</li>
-          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Contactar</a></li>
         </ul>
       </div>
     </footer>
 
     <script>
-      $(".se-desvanece").delay(2500).hide(1000,function(){
+      $(".seva").delay(2500).hide(1000,function(){
         $(this).remove();
       });
     </script>

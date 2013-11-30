@@ -1,28 +1,28 @@
 <h1 class="ficha">{$recurso->nombre}</h1>
-
   <div class="span7">
     <div class="caja">
-      <a href=""><img class="img-polaroid" src="upload/visitacion_retablo_inmaculada.jpeg" alt="Visitación retablo Inmaculada" width="600px" /></a>
+      <a href="{$recurso->imagen_principal->url}"><img class="img-polaroid" 
+        src="{$recurso->imagen_principal->url}" alt="{$recurso->imagen_principal->nombre}" width="600px" /></a>
     </div>
 
     <div class="caja">
       <ul class="thumbnails">
         <li class="span2">
           <div class="thumbnail">
-            <img src="upload/visitacion_thumb_1.jpg" alt="">
-            <p>Detalle de las santas</p>
+            <img src="img/thumb_140.png" alt="">
+            <p>Miniatura foto 1</p>
           </div>
         </li>
         <li class="span2">
           <div class="thumbnail">
-            <img src="upload/visitacion_thumb_2.jpg" alt="">
-            <p>Detalle del santo</p
+            <img src="img/thumb_140.png" alt="">
+            <p>Miniatura foto 2</p>
           </div>
         </li>
         <li class="span2">
           <div class="thumbnail">
-            <img  src="upload/visitacion_thumb_3.jpg" alt="">
-            <p>Detalle de la virgen</p>
+            <img src="img/thumb_140.png" alt="">
+            <p>Miniatura foto 3</p>
           </div>
         </li>
       </ul>
@@ -37,10 +37,10 @@
       </div>
 
       <table class="table table-condensed">
-        <tr><th>Autor</th><td>{$recurso->autor->nombre} {$recurso->autor->apellidos}</td></tr>
+        <tr><th>Autor</th><td><a href="index.php?page=autor_mostrar&id={$recurso->autor->id}">{$recurso->autor->nombre} {$recurso->autor->apellidos}</a></td></tr>
         <tr><th>Fecha obra</th><td>{$recurso->fecha_original|date_format:'%Y'}</td></tr>
-        <tr><th>Sección</th><td>{$recurso->seccion->nombre}</td></tr>
-        <tr><th>Colección</th><td>{$recurso->coleccion->nombre}</td></tr>
+        <tr><th>Sección</th><td><a href="index.php?page=seccion_mostrar?id={$recurso->seccion->id}">{$recurso->seccion->nombre}</a></td></tr>
+        <tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>
       </table>
     </div>
   </div>
