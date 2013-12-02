@@ -59,7 +59,7 @@
         <select class="ajax input-xxlarge" name="id_seccion" id="id_seccion">
           <option value=""></option>
           {foreach $secciones as $seccion}
-            <option value="{$seccion->id}">{$seccion->nombre} {if $recurso->id_seccion == $seccion->id}selected="selected"{/if}</option>
+            <option value="{$seccion->id}" {if $recurso->id_seccion == $seccion->id}selected="selected"{/if}>{$seccion->nombre}</option>
           {/foreach}
         </select>
       </div>
@@ -139,11 +139,17 @@
         <div class="input-append">
           <input id="falso1" class="input-xlarge" type="text">
           <a class="btn btn-file"><i class="fa fa-folder-open-o"></i> Seleccionar</a>
-        <progress></progress>
         </div>
       </div>
+      <label class="control-label" for="titulo">Título</label>
+      <input class="input-xlarge" type="text" name="titulo" id="titulo">
+      <label class="control-label" for="descripcion">Descripción</label>
+      <textarea class="input-xlarge" name="descripcion" id="descripcion"></textarea>  
     </div>
-    
+    <progress></progress>
+    <div id="progress" class="progress progress-danger progress-striped">
+      <div class="bar" id="barra"></div>
+    </div>
     <div class="form-actions">
       <button type="button" id="btn-subir" class="btn btn-primary">Subir fichero</button>
       <button type="button" class="btn">Cancelar</button>
@@ -191,6 +197,7 @@
   $('#btn-subir').on('click', function(evento){
     evento.preventDefault();
     var formDatos = new FormData($('#form-fichero')[0]);
+    console.log(formDatos);
     $.ajax(
     {
       type: 'POST',
@@ -199,7 +206,6 @@
         var myXhr = $.ajaxSettings.xhr();
         if(myXhr.upload){ // Check if upload property exists
           // For handling the progress of the upload
-          console.log("tenemos upload");
           myXhr.upload.addEventListener('progress',progressFunction, false); 
         }
         return myXhr;
