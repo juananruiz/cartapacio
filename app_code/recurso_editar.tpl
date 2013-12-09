@@ -1,11 +1,11 @@
 <div class="span12">
-<h1><i class="fa fa-archive"></i> Editar Recurso</h1>
+<h1><i class="fa fa-archive"></i> {$_nombre_pagina}</h1>
 </div>
 
 <div class="row-fluid">
 <div class="span8">
-  <form action="index.php?page=recurso_grabar" method="POST">
-    <input type="hidden" name="id_recurso" value="{$recurso->id}">
+  <!--<form action="index.php?page=recurso_grabar" method="POST">-->
+    <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
     <div class="control-group">
       <label class="control-label" for="id_tipo">Tipo</label>
       <div class="controls">
@@ -103,8 +103,8 @@
       <button type="button" class="btn">Cancelar</button>
     </div>
     -->
+<!--  </form> -->
 
-  </form>
 </div> <!-- .span8 -->
 <div class="span4" style="padding-left:20px;border-left:1px solid #dedede;">
   <h3><i class="fa fa-file"></i> Ficheros asociados al recurso</h3>
@@ -124,6 +124,34 @@
         {/if}
     {/foreach}
     </table>
+
+    <div class="accordion" id="accordion2">
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+            Collapsible Group Item #1
+          </a>
+        </div>
+        <div id="collapseOne" class="accordion-body collapse">
+          <div class="accordion-inner">
+            Anim pariatur cliche...
+          </div>
+        </div>
+      </div>
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+            Collapsible Group Item #2
+          </a>
+        </div>
+        <div id="collapseTwo" class="accordion-body collapse">
+          <div class="accordion-inner">
+            Anim pariatur cliche...
+          </div>
+        </div>
+      </div>
+    </div>
+
   {else}
     <p class="alert">No existen ficheros asociados con este recurso</p>
   {/if}
@@ -131,7 +159,7 @@
   <p class="alert alert-info"><strong>IMPORTANTE:</strong> el nombre de los ficheros no debe contener caracteres como ñ, acentos o espacios en blanco. Renombra tu archivo antes de subirlo para que sea clarificador de su contenido.</p>
   
   <form id="form-fichero" enctype="multipart/form-data">
-    <input type="hidden" name="id_recurso" value="{$recurso->id}">
+    <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
     <div class="control-group">
       <label class="control-label" for="fichero1">Añadir nuevo fichero</label>
       <div class="controls">
@@ -145,6 +173,10 @@
       <input class="input-xlarge" type="text" name="titulo" id="titulo">
       <label class="control-label" for="descripcion">Descripción</label>
       <textarea class="input-xlarge" name="descripcion" id="descripcion"></textarea>  
+      <label class="checkbox" for="es_imagen_principal">
+        <input type="checkbox" name="es_imagen_principal" id="es_imagen_principal">
+        Imagen principal del recurso
+      </label>
     </div>
     <progress></progress>
     <div id="progress" class="progress progress-danger progress-striped">
@@ -161,6 +193,8 @@
 
 {literal}
 <script type="text/javascript">
+    var id_recurso = $('#id_recurso').val();
+    console.log(id_recurso);
   // ---------- Falso input file ------------
   // http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/ 
   // Cuando se pulsa el falso manda el click al autentico
@@ -177,14 +211,18 @@
   $('.ajax').on('change', function(evento){ 
     var campo = $(this).attr('name');
     var valor = $(this).val();
+    var campoValor = {};
+    campoValor[campo] = valor;
     var id_recurso = $('#id_recurso').val();
+    console.log(campoValor);
+
     $.ajax(
     {
       type: 'POST',
-      url: 'index.php?page=recurso_grabar&recurso_id='+id_recurso,
-      data: { campo: valor },
+      url: 'index.php?page=recurso_grabar&ajax=true&id_recurso='+id_recurso,
+      data: campoValor ,
       success: function(datos) {  
-        // Lanza la respuesa a consola para depurar
+        // Lanza la respuesta a consola para depurar
         console.log(datos)
       },                    
       error: function (xhr, ajaxOptions, thrownError) {
@@ -217,7 +255,7 @@
       contentType: false,
       processData: false,
       success: function(datos) {  
-        // Lanza la respuesa a consola para depurar
+        // Lanza la respuesta a consola para depurar
         console.log(datos)
       },                    
       error: function (xhr, ajaxOptions, thrownError) {

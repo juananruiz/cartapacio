@@ -7,17 +7,16 @@
         <td><a href="index.php?page=recurso_mostrar&id={$recurso->id}"><i class="fa fa-arrow-right"></i> {$recurso->nombre}</a></td>
         <td>{$recurso->autor->apellidos}, {$recurso->autor->nombre}</td>
         <td>{$recurso->seccion->nombre}</td>
-        <td>{$recurso->coleccion->nombre}</td>
         <td>{$recurso->estado->nombre}</td>
         <td>
-          <a href="index.php?page=recurso_editar&id_recurso={$recurso->id}"><i class="fa fa-pencil"></i> Editar</a> 
+          <a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i></a> 
         </td>
         <td>
-          <a href="index.php?page=recurso_eliminar&id_recurso={$recurso->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
+          <a href="index.php?page=recurso_eliminar&id={$recurso->id}"><i class="fa fa-trash-o"></i></a> 
         </td>
       </tr>
     {/foreach}
   </table>
-  <section><a href="index.php?page=recurso_crear" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Recurso</a></section>
+  <section><a href="index.php?page=recurso_editar" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Recurso</a></section>
 </div>
 

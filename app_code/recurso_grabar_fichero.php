@@ -11,11 +11,18 @@ global $usuario;
 // Comprueba que el usuario tiene permisos para crear un nuevo recurso
 
 $id_recurso = sanitize($_POST['id_recurso'], INT);
-$storeFolder = "public/upload/recurso/$id_recurso/"; 
-$nombre = isset($_POST['nombre'])?sanitize($_POST['nombre'],SQL):NULL;
+$titulo = isset($_POST['titulo'])?sanitize($_POST['titulo'],SQL):NULL;
 $descripcion = isset($_POST['descripcion'])?sanitize($_POST['descripcion'],SQL):NULL;
-//TODO: Crear la carpeta si no existe
+if(isset($_POST['es_imagen_principal'] && $_POST['es_imagen_principal'] == true)
+{
+  $es_imagen_principal = 1;
+}
+else
+{
+  $es_imagen_principal = 0;
+}
 
+$storeFolder = "public/upload/recurso/$id_recurso/"; 
 $tempFile = $_FILES['fichero1']['tmp_name'];
 $targetPath = CC_DIR_BASE . $storeFolder;
 if (!is_file($targetPath) && !is_dir($targetPath))
@@ -24,11 +31,12 @@ if (!is_file($targetPath) && !is_dir($targetPath))
   chmod($targetPath, 0777);
 }
 $targetFile =  $targetPath . $_FILES['fichero1']['name'];
+
 if(move_uploaded_file($tempFile, $targetFile))
 {
   $fichero = new fichero();
   $fichero->url = $targetFile;
-  $fichero->nombre = $nombre;
+  $fichero->titulo = $titulo;
   $fichero->descripcion = $descripcion;
   $fichero->id_recurso = $id_recurso;
   $fichero->fecha_alta = date("Y-m-d");

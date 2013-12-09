@@ -1,36 +1,27 @@
 <h1 class="ficha">{$recurso->nombre}</h1>
+
   <div class="span7">
     <div class="caja">
       <a href="{$recurso->imagen_principal->url}"><img class="img-polaroid" 
-        src="{$recurso->imagen_principal->url}" alt="{$recurso->imagen_principal->nombre}" width="600px" /></a>
+        src="thumb/timthumb.php?src={$recurso->imagen_principal->url}&w=600" alt="{$recurso->imagen_principal->titulo}"></a>
     </div>
 
     <div class="caja">
       <ul class="thumbnails">
+        {foreach $recurso->ficheros as $fichero}
         <li class="span2">
           <div class="thumbnail">
-            <img src="img/thumb_140.png" alt="">
-            <p>Miniatura foto 1</p>
+            <img src="thumb/timthumb.php?h=140&w=140&src={$fichero->url}" alt="{$fichero->titulo}">
+            <p>{$fichero->titulo}</p>
           </div>
         </li>
-        <li class="span2">
-          <div class="thumbnail">
-            <img src="img/thumb_140.png" alt="">
-            <p>Miniatura foto 2</p>
-          </div>
-        </li>
-        <li class="span2">
-          <div class="thumbnail">
-            <img src="img/thumb_140.png" alt="">
-            <p>Miniatura foto 3</p>
-          </div>
-        </li>
+        {/foreach}
       </ul>
     </div>
-  </div>
+  </div><!-- .span7 -->
+
 
   <div class="span5">
-
     <div class="caja">
       <div class="well">
         <p>{$recurso->descripcion}</p>
@@ -43,4 +34,4 @@
         <tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>
       </table>
     </div>
-  </div>
+  </div><!-- .span5 -->
