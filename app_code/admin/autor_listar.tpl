@@ -11,7 +11,7 @@
           <a href="index.php?page=admin/autor_editar&id={$autor->id}"><i class="fa fa-pencil"></i> Editar</a> 
         </td>
         <td>
-          <a href="index.php?page=admin/autor_eliminar&id={$autor->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
+          <a href="index.php?page=admin/autor_borrar&id={$autor->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
         </td>
       </tr>
     {/foreach}

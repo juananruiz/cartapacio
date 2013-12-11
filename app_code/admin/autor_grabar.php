@@ -21,6 +21,7 @@ if (isset($_REQUEST['nombre']))
   $autor->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
 
   // Estos no vienen del formulario
+  $autor->activo = 1;
   $autor->fecha_alta = date("Y-m-d H:m:i");
   $autor->id_usuario = $usuario->id;
  

@@ -10,8 +10,10 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.css">
     <link rel="stylesheet" href="css/jquery.dataTables.css">
+    <link rel="stylesheet" href="css/bootstrap-wysihtml5.css">
     <link rel="stylesheet" href="css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <!--<link rel="stylesheet" href="css/dropzone.css">-->
     <link rel="stylesheet" href="css/anunciacion.css">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -25,7 +27,9 @@
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/jquery.dataTables.js"></script>
     <script src="js/DT_bootstrap.js"></script>
-    <script src="js/bootstrap.file-input.js"></script>
+    <script src="js/wysihtml5.js"></script>
+    <script src="js/bootstrap-wysihtml5.js"></script>
+    <!-- 4dic2013 <script src="js/bootstrap.file-input.js"></script> -->
 
     <!-- Imágenes para el favicon y para el touch icon de los móviles -->
     <link rel="shortcut icon" href="ico/favicon.ico">
@@ -52,11 +56,15 @@
     <div class="container-fluid">
 
       <!-- Mensajes de aviso y error -->
-      {if isset($smarty.get.mensaje) AND isset($smarty.get.mensaje_tipo)}
-        <div class="alert alert-{$smarty.get.mensaje_tipo} se-desvanece">
-          <h4>{$smarty.get.mensaje_tipo}</h4>
-          {$smarty.get.mensaje}
-        </div>
+      {if $smarty.get.aviso}
+        <p class='alert alert-success seva' style="margin-top:30px;"><i class="fa fa-info-circle"></i>
+        {$smarty.get.aviso}</p>
+
+      {/if}
+
+      {if $smarty.get.error}
+        <p class='alert alert-error seva' style="margin-top:30px;"><i class="fa fa-warning"></i>
+        {$smarty.get.error}</p>
       {/if}
 
       <!-- La plantilla secundaria es la que lleva la manteca -->
@@ -70,6 +78,8 @@
         <ul class="footer-links">
           <li><a href="http://cicus.us.es">Centro de Iniciativas Culturales</a></li>
           <li class="muted">&middot;</li>
+          <li><a href="#">Laboratorio de Arte</a></li>
+          <li class="muted">&middot;</li>
           <li><a href="http://www.us.es">Universidad de Sevilla</a></li>
         </ul>
 
@@ -78,15 +88,15 @@
         <ul class="footer-links">
           <li><a href="#">Blog</a></li>
           <li class="muted">&middot;</li>
-          <li><a href="#">Issues</a></li>
+          <li><a href="#">Acerca del proyecto</a></li>
           <li class="muted">&middot;</li>
-          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Contactar</a></li>
         </ul>
       </div>
     </footer>
 
     <script>
-      $(".se-desvanece").delay(2500).hide(1000,function(){
+      $(".seva").delay(4500).hide(2000,function(){
         $(this).remove();
       });
     </script>

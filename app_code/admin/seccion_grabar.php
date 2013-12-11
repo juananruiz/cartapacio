@@ -19,6 +19,8 @@ if (isset($_REQUEST['nombre']))
   $seccion->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
 
   // Estos no vienen del formulario
+  //TODO: grabar usuario que la crea
+  $seccion->activo = 1;
   $seccion->fecha_alta = date("Y-m-d H:m:i");
   $seccion->id_usuario = $usuario->id;
  

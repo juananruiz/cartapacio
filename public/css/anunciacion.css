@@ -19,11 +19,6 @@ h3 code {
   font-weight: normal;
 }
 
-.container-fluid {
-  padding: 0;
-}
-
-
 /* Tweak navbar brand link to be super sleek
 -------------------------------------------------- */
 
@@ -102,8 +97,6 @@ a:focus {
   border-bottom-color: maroon;
 }
 
-
-
 /* Sections
 -------------------------------------------------- */
 
@@ -135,6 +128,15 @@ hr.soften {
   border: 0;
 }
 
+h1.ficha {
+  margin:25px 10px 5px 25px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 24px;
+  font-weight:400;
+  padding-left: 10px;
+  font-size: 24px;
+  line-height: 24px;
+}
 
 
 /* Jumbotrons
@@ -145,22 +147,11 @@ hr.soften {
 .jumbotron {
   position: relative;
   padding: 40px 0;
+  margin: 0 -20px;
   color: #fff;
   text-align: center;
   text-shadow: 0 1px 3px rgba(0,0,0,.4), 0 0 30px rgba(0,0,0,.075);
   background: #020031; /* Old browsers */
-  /*
-  background: -moz-linear-gradient(45deg,  #020031 0%, #6d3353 100%); 
-  background: -webkit-gradient(linear, left bottom, right top, color-stop(0%,#020031), color-stop(100%,#6d3353)); 
-  background: -webkit-linear-gradient(45deg,  #020031 0%,#6d3353 100%); 
-  background: -o-linear-gradient(45deg,  #020031 0%,#6d3353 100%); 
-  background: -ms-linear-gradient(45deg,  #020031 0%,#6d3353 100%); 
-  background: linear-gradient(45deg,  #020031 0%,#6d3353 100%); 
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#020031', endColorstr='#6d3353',GradientType=1 ); 
-  -webkit-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-     -moz-box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-          box-shadow: inset 0 3px 7px rgba(0,0,0,.2), inset 0 -3px 7px rgba(0,0,0,.2);
-  */
 }
 .jumbotron h1 {
   font-size: 80px;
@@ -323,6 +314,18 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
   border-top: 1px solid #ccc;
 }
 
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #800000;
+}
+
+.help-block, .help-inline {
+  color: #AAA;
+  font-weight: 200;
+}
+
 /* Footer
 -------------------------------------------------- */
 
@@ -364,86 +367,6 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 }
 
 
-
-/* Special grid styles
--------------------------------------------------- */
-
-.show-grid {
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-.show-grid [class*="span"] {
-  background-color: #eee;
-  text-align: center;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
-  min-height: 40px;
-  line-height: 40px;
-}
-.show-grid [class*="span"]:hover {
-  background-color: #ddd;
-}
-.show-grid .show-grid {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-.show-grid .show-grid [class*="span"] {
-  margin-top: 5px;
-}
-.show-grid [class*="span"] [class*="span"] {
-  background-color: #ccc;
-}
-.show-grid [class*="span"] [class*="span"] [class*="span"] {
-  background-color: #999;
-}
-
-
-
-/* Mini layout previews
--------------------------------------------------- */
-.mini-layout {
-  border: 1px solid #ddd;
-  -webkit-border-radius: 6px;
-     -moz-border-radius: 6px;
-          border-radius: 6px;
-  -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.075);
-     -moz-box-shadow: 0 1px 2px rgba(0,0,0,.075);
-          box-shadow: 0 1px 2px rgba(0,0,0,.075);
-}
-.mini-layout,
-.mini-layout .mini-layout-body,
-.mini-layout.fluid .mini-layout-sidebar {
-  height: 300px;
-}
-.mini-layout {
-  margin-bottom: 20px;
-  padding: 9px;
-}
-.mini-layout div {
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
-}
-.mini-layout .mini-layout-body {
-  background-color: #dceaf4;
-  margin: 0 auto;
-  width: 70%;
-}
-.mini-layout.fluid .mini-layout-sidebar,
-.mini-layout.fluid .mini-layout-header,
-.mini-layout.fluid .mini-layout-body {
-  float: left;
-}
-.mini-layout.fluid .mini-layout-sidebar {
-  background-color: #bbd8e9;
-  width: 20%;
-}
-.mini-layout.fluid .mini-layout-body {
-  width: 77.5%;
-  margin-left: 2.5%;
-}
-
 /* Misc
 -------------------------------------------------- */
 
@@ -455,76 +378,25 @@ h2 + .row {
   margin-top: 5px;
 }
 
-
-
-/* Responsive docs
+/* Recuadritos
 -------------------------------------------------- */
-
-/* Utility classes table
-------------------------- */
-.responsive-utilities th small {
-  display: block;
-  font-weight: normal;
-  color: #999;
-}
-.responsive-utilities tbody th {
-  font-weight: normal;
-}
-.responsive-utilities td {
-  text-align: center;
-}
-.responsive-utilities td.is-visible {
-  color: #468847;
-  background-color: #dff0d8 !important;
-}
-.responsive-utilities td.is-hidden {
-  color: #ccc;
-  background-color: #f9f9f9 !important;
-}
-
-/* Responsive tests
-------------------------- */
-.responsive-utilities-test {
-  margin-top: 5px;
-  margin-left: 0;
-  list-style: none;
-  overflow: hidden; /* clear floats */
-}
-.responsive-utilities-test li {
+.caja-borde {
   position: relative;
-  float: left;
-  width: 25%;
-  height: 43px;
-  font-size: 14px;
-  font-weight: bold;
-  line-height: 43px;
-  color: #999;
-  text-align: center;
-  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px 10px 8px;
+  background-color: #FFF;
+  border: 1px solid #DDD;
   -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
-}
-.responsive-utilities-test li + li {
-  margin-left: 10px;
-}
-.responsive-utilities-test span {
-  position: absolute;
-  top:    -1px;
-  left:   -1px;
-  right:  -1px;
-  bottom: -1px;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
-}
-.responsive-utilities-test span {
-  color: #468847;
-  background-color: #dff0d8;
-  border: 1px solid #d6e9c6;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
 }
 
-
+.caja {
+  position: relative;
+  margin: 10px 0;
+  padding: 10px 10px 8px;
+  background-color: #FFF;
+}
 
 /* Sidenav for Docs
 -------------------------------------------------- */
@@ -597,7 +469,6 @@ h2 + .row {
 
 
 
-
 /* Responsive
 -------------------------------------------------- */
 
@@ -613,6 +484,16 @@ h2 + .row {
   .bs-docs-sidenav > li > a {
     width: 230px \9; /* Override the previous IE8-9 hack */
   }
+  h1.ficha {
+    margin-top:25px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 24px;
+    font-weight:400;
+    padding-left: 10px;
+    font-size: 24px;
+    line-height: 24px;
+  }
+
 }
 
 /* Desktop
@@ -639,6 +520,12 @@ h2 + .row {
     margin-top: 30px;
     margin-right: 0;
   }
+  h1.ficha {
+    margin-top:10px;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 22px;
+  }
 }
 
 /* Tablet to desktop
@@ -647,6 +534,10 @@ h2 + .row {
   /* Remove any padding from the body */
   body {
     padding-top: 0;
+  }
+
+  .navbar-fixed-top {
+    margin-bottom: 0px;
   }
   /* Widen masthead and social buttons to fill body padding */
   .jumbotron {
@@ -660,6 +551,13 @@ h2 + .row {
   .bs-docs-sidenav.affix {
     top: 0;
   }
+  h1.ficha {
+    margin-top:10px;
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 22px;
+  }
+
 }
 
 /* Tablet
@@ -670,10 +568,18 @@ h2 + .row {
     padding-top: 0;
   }
 
-  /* Widen masthead and social buttons to fill body padding */
+  .navbar-fixed-top {
+    margin-bottom: 0px;
+  }
+
+  h1.ficha {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  /* 
   .jumbotron {
     padding: 40px 20px;
-    margin-top:   -20px; /* Offset bottom margin on .navbar */
+    margin-top:   -20px;
     margin-right: -20px;
     margin-left:  -20px;
   }
@@ -691,12 +597,10 @@ h2 + .row {
     margin: 0 -20px;
   }
 
-  /* Space out the show-grid examples */
   .show-grid [class*="span"] {
     margin-bottom: 5px;
   }
 
-  /* Sidenav */
   .bs-docs-sidenav {
     width: auto;
     margin-bottom: 20px;
@@ -707,7 +611,6 @@ h2 + .row {
     top: 0;
   }
 
-  /* Unfloat the back to top link in footer */
   .footer {
     margin-left: -20px;
     margin-right: -20px;
@@ -717,6 +620,7 @@ h2 + .row {
   .footer p {
     margin-bottom: 9px;
   }
+  */
 }
 
 /* Landscape phones
@@ -727,15 +631,31 @@ h2 + .row {
     padding-top: 0;
   }
 
-  /* Change up some type stuff */
-  h2 small {
-    display: block;
+  .navbar-fixed-top {
+    margin-bottom: 0px;
+  }
+  
+  h1.ficha {
+    font-size: 16px;
+    line-height: 16px;
   }
 
   /* Downsize the jumbotrons */
   .jumbotron h1 {
     font-size: 45px;
   }
+
+  /* Tighten up footer */
+  .footer {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+  /*
+  h2 small {
+    display: block;
+  }
+
   .jumbotron p,
   .jumbotron .btn {
     font-size: 18px;
@@ -745,73 +665,10 @@ h2 + .row {
     margin: 0 auto;
   }
 
-  /* center align subhead text like the masthead */
   .subhead h1,
   .subhead p {
     text-align: center;
   }
 
-  /* Marketing on home */
-  .marketing h1 {
-    font-size: 30px;
-  }
-  .marketing-byline {
-    font-size: 18px;
-  }
-
-  /* center example sites */
-  .example-sites {
-    margin-left: 0;
-  }
-  .example-sites > li {
-    float: none;
-    display: block;
-    max-width: 280px;
-    margin: 0 auto 18px;
-    text-align: center;
-  }
-  .example-sites .thumbnail > img {
-    max-width: 270px;
-  }
-
-  /* Do our best to make tables work in narrow viewports */
-  table code {
-    white-space: normal;
-    word-wrap: break-word;
-    word-break: break-all;
-  }
-
-  /* Examples: dropdowns */
-  .bs-docs-example-submenus > .pull-left {
-    float: none;
-    clear: both;
-  }
-  .bs-docs-example-submenus > .pull-left,
-  .bs-docs-example-submenus > .pull-left + .pull-left {
-    margin-left: 0;
-  }
-  .bs-docs-example-submenus p {
-    margin-bottom: 0;
-  }
-  .bs-docs-example-submenus .dropup > .dropdown-menu,
-  .bs-docs-example-submenus .dropdown > .dropdown-menu {
-    margin-bottom: 10px;
-    float: none;
-    max-width: 180px;
-  }
-
-  /* Examples: modal */
-  .modal-example .modal {
-    position: relative;
-    top: auto;
-    right: auto;
-    bottom: auto;
-    left: auto;
-  }
-
-  /* Tighten up footer */
-  .footer {
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
+  */
 }
