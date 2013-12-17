@@ -4,12 +4,12 @@
 
 <div class="row-fluid">
 <div class="span8">
-  <!--<form action="index.php?page=recurso_grabar" method="POST">-->
-    <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
+  <form action="index.php?page=recurso_grabar" method="POST" data-registro-id="{$recurso->id}">
+    <input type="hidden" id="id_recurso" name="registro_id" value="{$recurso->id}">
     <div class="control-group">
       <label class="control-label" for="id_tipo">Tipo</label>
       <div class="controls">
-        <select class="ajax" name="id_tipo" id="id_tipo">
+        <select class="autosave" name="id_tipo" id="id_tipo">
           <option value=""></option>
           {foreach $tipos as $tipo}
             <option value="{$tipo->id}" {if $recurso->id_tipo == $tipo->id}selected="selected"{/if}>{$tipo->nombre}</option>
@@ -21,26 +21,27 @@
     <div class="control-group">
       <label class="control-label" for="nombre">Nombre</label>
       <div class="controls">
-        <input class="ajax input-xxlarge" type="text" name="nombre" id="nombre" placeholder="Nombre del recurso" value="{$recurso->nombre}">
+        <input class="autosave input-xxlarge" type="text" name="nombre" id="nombre" placeholder="Nombre del recurso" value="{$recurso->nombre}">
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label" for="id_autor">Autor</label>
       <div class="controls">
-        <select class="ajax input-xxlarge" name="id_autor" id="id_autor">
+        <select class="autosave input-xxlarge" name="id_autor" id="id_autor">
           <option value=""></option>
           {foreach $autores as $autor}
             <option value="{$autor->id}" {if $recurso->id_autor == $autor->id}selected="selected"{/if}>{$autor->apellidos}, {$autor->nombre}</option>
           {/foreach}
         </select>
+        <a href="#modalGlobal" role="button" class="btn" data-toggle="modal" data-href="index.php?page=admin/autor_crear"><i class="fa fa-plus"></i></a>
       </div>
     </div>
 
     <div class="control-group">
       <label class="control-label" for="fecha_original">Fecha obra</label>
       <div class="controls">
-        <input class="ajax input-normal" type="text" name="fecha_original" id="fecha_original" value="{$recurso->fecha_original}">
+        <input class="autosave input-normal" type="text" name="fecha_original" id="fecha_original" value="{$recurso->fecha_original}">
         <span class="help-inline">Indique el año en que está datada la obra o documento</span>
       </div>
     </div>
@@ -48,7 +49,7 @@
     <div class="control-group">
       <label class="control-label" for="descripcion">Descripción</label>
       <div class="controls">
-        <textarea class="ajax input-xxlarge" name="descripcion"  id="descripcion" rows="5">{$recurso->descripcion}</textarea>
+        <textarea class="autosave input-xxlarge" name="descripcion"  id="descripcion" rows="5">{$recurso->descripcion}</textarea>
         <span class="help-inline">Descripción detallada del recurso</span>
       </div>
     </div>
@@ -56,7 +57,7 @@
     <div class="control-group">
       <label class="control-label" for="id_seccion">Sección</label>
       <div class="controls">
-        <select class="ajax input-xxlarge" name="id_seccion" id="id_seccion">
+        <select class="autosave input-xxlarge" name="id_seccion" id="id_seccion">
           <option value=""></option>
           {foreach $secciones as $seccion}
             <option value="{$seccion->id}" {if $recurso->id_seccion == $seccion->id}selected="selected"{/if}>{$seccion->nombre}</option>
@@ -68,7 +69,7 @@
     <div class="control-group">
       <label class="control-label" for="id_coleccion">Colección</label>
       <div class="controls">
-        <select class="ajax input-xxlarge" name="id_coleccion" id="id_coleccion">
+        <select class="autosave input-xxlarge" name="id_coleccion" id="id_coleccion">
           <option value=""></option>
           {foreach $colecciones as $coleccion}
             <option value="{$coleccion->id}" {if $recurso->id_coleccion == $coleccion->id}selected="selected"{/if}>{$coleccion->nombre}</option>
@@ -80,7 +81,7 @@
     <div class="control-group">
       <label class="control-label" for="notas">Notas</label>
       <div class="controls">
-        <textarea class="ajax input-xxlarge" name="notas" id="notas" rows="5">{$recurso->notas}</textarea>
+        <textarea class="autosave input-xxlarge" name="notas" id="notas" rows="5">{$recurso->notas}</textarea>
         <span class="help-inline">Notas sobre el recurso no disponibles al público</span>
       </div>
     </div>
@@ -88,7 +89,7 @@
     <div class="control-group">
       <label class="control-label" for="id_estado">Estado</label>
       <div class="controls">
-        <select class="ajax input-medium" name="id_estado" id="id_estado">
+        <select class="autosave input-medium" name="id_estado" id="id_estado">
           <option value=""></option>
           {foreach $estados as $estado}
             <option value="{$estado->id}" {if $recurso->id_estado == $estado->id}selected="selected"{/if}>{$estado->nombre}</option>
@@ -97,13 +98,11 @@
       </div>
     </div>
 
-    <!--
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary">Guardar cambios</button>
-      <button type="button" class="btn">Cancelar</button>
+      <button type="submit" class="btn btn-primary" name="grabar" value="salir">Grabar</button>
+      <!--<button type="button" class="btn">Cancelar</button>-->
     </div>
-    -->
-<!--  </form> -->
+  </form>
 
 </div> <!-- .span8 -->
 <div class="span4" style="padding-left:20px;border-left:1px solid #dedede;">
@@ -159,7 +158,7 @@
   <p class="alert alert-info"><strong>IMPORTANTE:</strong> el nombre de los ficheros no debe contener caracteres como ñ, acentos o espacios en blanco. Renombra tu archivo antes de subirlo para que sea clarificador de su contenido.</p>
   
   <form id="form-fichero" enctype="multipart/form-data">
-    <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
+    <input type="hidden" id="id_recurso" name="registro_id" value="{$recurso->id}">
     <div class="control-group">
       <label class="control-label" for="fichero1">Añadir nuevo fichero</label>
       <div class="controls">
@@ -193,8 +192,10 @@
 
 {literal}
 <script type="text/javascript">
-    var id_recurso = $('#id_recurso').val();
-    console.log(id_recurso);
+  modalsHandler();
+  formHandler();
+  autosave();
+
   // ---------- Falso input file ------------
   // http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/ 
   // Cuando se pulsa el falso manda el click al autentico
@@ -207,30 +208,6 @@
     $(this).next().find('input').val($(this).val());
   });
 
-  // ---------- Petición ajax modificar campos ----------
-  $('.ajax').on('change', function(evento){ 
-    var campo = $(this).attr('name');
-    var valor = $(this).val();
-    var campoValor = {};
-    campoValor[campo] = valor;
-    var id_recurso = $('#id_recurso').val();
-    console.log(campoValor);
-
-    $.ajax(
-    {
-      type: 'POST',
-      url: 'index.php?page=recurso_grabar&ajax=true&id_recurso='+id_recurso,
-      data: campoValor ,
-      success: function(datos) {  
-        // Lanza la respuesta a consola para depurar
-        console.log(datos)
-      },                    
-      error: function (xhr, ajaxOptions, thrownError) {
-        console.log(xhr.status);
-        console.log(thrownError);
-      }
-    });    
-  });
   // ---------- Petición ajax subir fichero --------
   $('#btn-subir').on('click', function(evento){
     evento.preventDefault();

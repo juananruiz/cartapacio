@@ -4,33 +4,30 @@
 // Archivo: recurso_grabar.php
 //--------------------------------------------------------------------------
 // Graba los datos del recurso en la base de datos 
-//--------------------------------------------------------------------------
+//------------------------------------------------------------
 
 global $smarty;
 global $usuario;
-
 // Comprueba que el usuario tiene permisos para crear o editar un recurso
 // TODO
 
 $recurso = new recurso();
-// El id_recurso viene por GET y el campo con su valor por POST
-if (isset($_GET["id_recurso"]))
+if (isset($_REQUEST["registro_id"]))
 {
   //Cargamos el registro actual en memoria
-  $id_recurso = sanitize($_REQUEST['id_recurso'], INT);
-  $recurso->load("id = $id_recurso");
+  $registro_id = sanitize($_REQUEST['registro_id'], INT);
+  $recurso->load("id = $registro_id");
   $recurso->fecha_ultima_edicion = date("Y-m-d H:m:i");
-  print_r($_POST);
   foreach ($_POST as $campo => $valor)
   {
-    $campo = sanitize($campo, PARANOID);
+    $campo = sanitize($campo, SQL);
     $valor = sanitize($valor, SQL);
     $recurso->$campo = $valor;
   }
 
   if ($recurso->save())
   {
-    $mensaje = "Se ha grabado el campo $campo con el valor $valor"; 
+    $mensaje = "index.php?page=recurso_listar&aviso=Se ha grabado el registro correctamente"; 
   }
   else
   {

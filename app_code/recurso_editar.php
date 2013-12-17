@@ -31,6 +31,7 @@ if (isset($_REQUEST['id']))
   }
   else
   {
+    // Si el identificador no existe lanza un error
     $error = "No existe ningún recurso con el identificador $id";
     header("location:index.php?page=recurso_listar&error=$error");
     exit();
@@ -38,11 +39,9 @@ if (isset($_REQUEST['id']))
 }
 else
 {
-  // Si no viene el id entendemos que quiere crear un nuevo recurso
-  // Grabo alguna información por defecto
-  $recurso->fecha_alta = date("Y-m-d H:m:i");
-  $recurso->id_usuario = $usuario->id;
-  $recurso->save();
+  // Si no viene el id lanza un error
+  $error = "Falta el identificador del recurso que se desea editar";
+  header("location:index.php?page=recurso_listar&error=$error");
 }
 $smarty->assign('recurso', $recurso);
 $smarty->assign('_nombre_pagina', 'Recurso id ' . $recurso->id);
