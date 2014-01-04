@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="css/bootstrap-wysihtml5.css">
     <link rel="stylesheet" href="css/dataTables.bootstrap.css">
     <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="freeow/style/freeow/freeow.css">
     <!--<link rel="stylesheet" href="css/dropzone.css">-->
     <link rel="stylesheet" href="css/anunciacion.css">
 
@@ -29,7 +30,9 @@
     <script src="js/DT_bootstrap.js"></script>
     <script src="js/wysihtml5.js"></script>
     <script src="js/bootstrap-wysihtml5.js"></script>
+    <script src="freeow/jquery.freeow.min.js"></script>
     <script src="js/cartapacio.js"></script>
+
     <!-- 4dic2013 <script src="js/bootstrap.file-input.js"></script> -->
 
     <!-- Imágenes para el favicon y para el touch icon de los móviles -->
@@ -59,11 +62,7 @@
     <!-- Barra de menú superior / Varía en función del perfil de usuario-->
     {$rol = $_usuario->id_rol}
     {$menu_rol = "menu_rol_$rol.tpl"}
-    {if file_exists("../app_code/$menu_rol")}
-      {include file=$menu_rol}
-    {else}
-      {include file="menu_rol_2.tpl"}
-    {/if}
+    {include file=$menu_rol}
 
     <div style="height:20px;">
     </div>
@@ -71,16 +70,24 @@
     <div class="container-fluid">
 
       <!-- Mensajes de aviso y error -->
-      {if $smarty.get.aviso}
-        <p class='alert alert-success seva' style="margin-top:30px;"><i class="fa fa-info-circle"></i>
-        {$smarty.get.aviso}</p>
-
-      {/if}
-
-      {if $smarty.get.error}
-        <p class='alert alert-error seva' style="margin-top:30px;"><i class="fa fa-warning"></i>
-        {$smarty.get.error}</p>
-      {/if}
+      <div id="freeow" class="freeow freeow-top-right"></div>
+      <script>
+        {if isset($smarty.get.aviso)}
+          $("#freeow").freeow("Información", "{$smarty.get.aviso}", {
+            classes: ["smokey", "slide"],
+            autoHide: true
+            });
+        {else if isset($smarty.get.error)}
+          $("#freeow").freeow("Error", "{$smarty.get.error}", {
+            classes: ["smokey", "slide"],
+            autoHide: false
+            });
+        {/if}
+      </script>
+      <!--
+        <p class='alert alert-success seva' style="margin-top:30px;"><i class="fa fa-info-circle"></i> {$smarty.get.aviso}</p>
+        <p class='alert alert-error seva' style="margin-top:30px;"><i class="fa fa-warning"></i>{$smarty.get.error}</p>
+      -->
 
       <!-- La plantilla secundaria es la que lleva la manteca -->
       {include file="$plantilla"}
