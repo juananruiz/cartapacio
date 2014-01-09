@@ -108,57 +108,33 @@
 <div class="span4" style="padding-left:20px;border-left:1px solid #dedede;">
   <h3><i class="fa fa-file"></i> Ficheros asociados al recurso</h3>
 
-  {if isset($archivos)}
-    <table class="table">
-    {foreach from=$archivos item=archivo }
-        {* Evitamos que se vean los directorios ".", ".." y cualquier archivo o directorio que empiece por "." *}
-        {if $archivo[0][0] == '.'}
-        {else}
-            <tr>
-            <td><a href="upload/{$directorio}/{$archivo[0]}"><i class="fa fa-star-o"</i> {$archivo[0]}</a></td>
-            <!--<td>{$archivo[1]}</td>-->
-            <td><a href="index.php?page=archivo_borrar&fichero={$archivo[0]}&dir={$directorio}" 
-                onclick="javascript: return confirm('Quieres borrar el archivo : {$archivo[0]}');"><i class="fa fa-trash-o"></i></a></td>
-            </tr>
-        {/if}
+  {if isset($ficheros)}
+    <div class="accordion" id="accordion">
+    {foreach from=$ficheros item=fichero }
+      <div class="accordion-group">
+        <div class="accordion-heading">
+          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{$fichero->id}"><i class="fa fa-star-o"></i> {$fichero->titulo}</a>
+        </div>
+        <div id="collapse{$fichero->id}" class="accordion-body collapse">
+          <div class="accordion-inner">
+            <a href="{$fichero->url}">{$fichero->url}</a>
+            <p>{$fichero->descripcion}</p>
+            <a href="index.php?page=recurso_borrar_fichero&id={$fichero->id}" 
+          onclick="javascript: return confirm('¿Quiéres borrar el fichero?');"><i class="fa fa-trash-o pull-right"></i></a>
+          </div>
+        </div>
+      </div>
     {/foreach}
-    </table>
-
-    <div class="accordion" id="accordion2">
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-            Collapsible Group Item #1
-          </a>
-        </div>
-        <div id="collapseOne" class="accordion-body collapse">
-          <div class="accordion-inner">
-            Anim pariatur cliche...
-          </div>
-        </div>
-      </div>
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-            Collapsible Group Item #2
-          </a>
-        </div>
-        <div id="collapseTwo" class="accordion-body collapse">
-          <div class="accordion-inner">
-            Anim pariatur cliche...
-          </div>
-        </div>
-      </div>
     </div>
 
   {else}
-    <p class="alert">No existen ficheros asociados con este recurso</p>
+    <p class="alert">No existen ficheros asociados a este recurso</p>
   {/if}
 
   <p class="alert alert-info"><strong>IMPORTANTE:</strong> el nombre de los ficheros no debe contener caracteres como ñ, acentos o espacios en blanco. Renombra tu archivo antes de subirlo para que sea clarificador de su contenido.</p>
   
   <form id="form-fichero" enctype="multipart/form-data">
-    <input type="hidden" id="id_recurso" name="registro_id" value="{$recurso->id}">
+    <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
     <div class="control-group">
       <label class="control-label" for="fichero1">Añadir nuevo fichero</label>
       <div class="controls">
@@ -192,6 +168,7 @@
 
 {literal}
 <script type="text/javascript">
+  // Estas tres funciones se cargan desde /js/cartapacio.js
   modalsHandler();
   formHandler();
   autosave();

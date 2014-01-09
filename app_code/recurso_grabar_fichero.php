@@ -13,7 +13,7 @@ global $usuario;
 $id_recurso = sanitize($_POST['id_recurso'], INT);
 $titulo = isset($_POST['titulo'])?sanitize($_POST['titulo'],SQL):NULL;
 $descripcion = isset($_POST['descripcion'])?sanitize($_POST['descripcion'],SQL):NULL;
-if(isset($_POST['es_imagen_principal'] && $_POST['es_imagen_principal'] == true)
+if(isset($_POST['es_imagen_principal']) && $_POST['es_imagen_principal'] == true)
 {
   $es_imagen_principal = 1;
 }
@@ -22,9 +22,9 @@ else
   $es_imagen_principal = 0;
 }
 
-$storeFolder = "public/upload/recurso/$id_recurso/"; 
+$storeFolder = "upload/recurso/$id_recurso/"; 
 $tempFile = $_FILES['fichero1']['tmp_name'];
-$targetPath = CC_DIR_BASE . $storeFolder;
+$targetPath = CC_DIR_BASE . 'public/' . $storeFolder;
 if (!is_file($targetPath) && !is_dir($targetPath))
 {
   mkdir($targetPath);
@@ -35,10 +35,11 @@ $targetFile =  $targetPath . $_FILES['fichero1']['name'];
 if(move_uploaded_file($tempFile, $targetFile))
 {
   $fichero = new fichero();
-  $fichero->url = $targetFile;
+  $fichero->url = $storeFolder . $_FILES['fichero1']['name'];
   $fichero->titulo = $titulo;
   $fichero->descripcion = $descripcion;
   $fichero->id_recurso = $id_recurso;
+  $fichero->es_imagen_principal = $es_imagen_principal;
   $fichero->fecha_alta = date("Y-m-d");
   $fichero->id_persona = 8;
   $fichero->save();

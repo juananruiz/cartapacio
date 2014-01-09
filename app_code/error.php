@@ -2,6 +2,6 @@
 global $smarty;
 global $plantilla;
 
-$smarty->assign('_nombre_pagina','Se ha producido un error');
+$smarty->assign('_nombre_pagina','Aviso de error');
 $plantilla = 'error.tpl';
 ?>

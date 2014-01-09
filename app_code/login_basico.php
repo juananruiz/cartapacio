@@ -27,7 +27,7 @@ if (isset($_REQUEST['acceso']))
 		}
 		else 
 		{
-			$error="Usuario o clave incorrectos.";
+			$error = "Usuario o clave incorrectos.";
 			$smarty->assign('error',$error);
 			$plantilla = 'login_basico.tpl';
 		}

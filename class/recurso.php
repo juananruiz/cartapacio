@@ -26,7 +26,7 @@ class recurso extends ADOdb_Active_Record
       $this->coleccion = new coleccion();
       $this->coleccion->load("id = $this->id_coleccion");
       $this->estado = new estado();
-      $this->estado->load("id = $recurso->id_estado");
+      $this->estado->load("id = $this->id_estado");
       $fichero = new fichero();
       $this->ficheros = $fichero->Find("id_recurso = $this->id");
       $this->imagen_principal = new fichero();

@@ -72,22 +72,18 @@
       <!-- Mensajes de aviso y error -->
       <div id="freeow" class="freeow freeow-top-right"></div>
       <script>
-        {if isset($smarty.get.aviso)}
-          $("#freeow").freeow("Información", "{$smarty.get.aviso}", {
-            classes: ["smokey", "slide"],
+        {if isset($aviso)}
+          $("#freeow").freeow("Información", "{$aviso}", {
+            classes: ["smokey"],
             autoHide: true
             });
-        {else if isset($smarty.get.error)}
-          $("#freeow").freeow("Error", "{$smarty.get.error}", {
-            classes: ["smokey", "slide"],
-            autoHide: false
+        {else if isset($error)}
+          $("#freeow").freeow("Error", "{$error}", {
+            classes: ["smokey", "error"],
+            autoHide: false,
             });
         {/if}
       </script>
-      <!--
-        <p class='alert alert-success seva' style="margin-top:30px;"><i class="fa fa-info-circle"></i> {$smarty.get.aviso}</p>
-        <p class='alert alert-error seva' style="margin-top:30px;"><i class="fa fa-warning"></i>{$smarty.get.error}</p>
-      -->
 
       <!-- La plantilla secundaria es la que lleva la manteca -->
       {include file="$plantilla"}
@@ -117,10 +113,5 @@
       </div>
     </footer>
 
-    <script>
-      $(".seva").delay(4500).hide(2000,function(){
-        $(this).remove();
-      });
-    </script>
   </body>
 </html>

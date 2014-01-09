@@ -1,4 +1,5 @@
-<h1 class="ficha">{$recurso->nombre}</h1>
+<h1 class="ficha">{$recurso->nombre} 
+  {if $_usuario->id_rol < 4}<i class="fa fa-pencil"></i>{/if}</h1>
 
   <div class="span7">
     <div class="caja">

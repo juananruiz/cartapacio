@@ -6,7 +6,7 @@
 //--------------------------------------------------------------------------
 // Descripcion: Esta es la página que carga a todas las demas en su seno maternal 
 //--------------------------------------------------------------------------
-// Esto es para que se vean los errores
+// Si necesito ver los errores y warnings
 //ini_set('display_errors', '1');
 //error_reporting(E_ALL);
 
@@ -51,8 +51,6 @@ if(!@session_id())
 {
     @ini_set('url_rewriter.tags', '');
     @ini_set('session.use_trans_sid', 0);
-	//@ini_set("session.cookie_lifetime", 10);
-	//@ini_set("session.gc_maxlifetime",10);
     @session_start();
 }
 
@@ -137,6 +135,17 @@ else
       $smarty->assign("auto_menu", "$subdirectorio/auto_menu.tpl");
     }
   }
+  // Avisos y errores
+  if (isset($_GET['aviso']))
+  {
+    $smarty->assign('aviso', $_GET['aviso']);
+  }
+  if (isset($_GET['error']))
+  {
+    $smarty->assign('error', $_GET['error']);
+  }
+  
+
 	$smarty->display('index.tpl'); 
 }
 ?>
