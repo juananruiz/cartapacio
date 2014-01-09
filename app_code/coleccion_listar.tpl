@@ -4,7 +4,7 @@
     {foreach $colecciones as $coleccion}
       <tr>
         <td>{$coleccion->id}</td>
-        <td>{$coleccion->nombre}</td>
+        <td><a href="index.php?page=coleccion_mostrar&id_coleccion={$coleccion->id}">{$coleccion->nombre}</a></td>
         <td>
           <a href="index.php?page=admin/coleccion_editar&id={$coleccion->id}"><i class="fa fa-pencil"></i> Editar</a> 
         </td>
