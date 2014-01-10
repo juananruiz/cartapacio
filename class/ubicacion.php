@@ -1,14 +1,13 @@
 <?php
 //---------------------------------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: seccion_listar.php
+// Archivo: class/ubicacion.php
 //---------------------------------------------------------------------------------------------------
-// Lista de secciones en la base de datos
+// Descripcion: gestiona las ubicaciones 
 //---------------------------------------------------------------------------------------------------
-global $smarty;
-global $usuario;
+class ubicacion extends ADOdb_Active_Record
+{
+	public $_table = 'ubicaciones';
 
-$seccion = new seccion();
-$secciones = $seccion->Find("true");
-$smarty->assign('secciones', $secciones);
+}
 ?>

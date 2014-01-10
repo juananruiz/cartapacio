@@ -19,7 +19,7 @@
                 <a href="index.php?page=admin/seccion_listar"><i class="fa fa-folder-open"></i> SECCIONES</a>
               </li>
               <li>
-                <a href="index.php?page=admin/coleccion_listar"><i class="fa fa-camera-retro"></i> COLECCIONES</a>
+                <a href="index.php?page=coleccion_listar"><i class="fa fa-camera-retro"></i> COLECCIONES</a>
               </li>
               <li>
                 <a href="index.php?page=usuario_perfil">{$usuario->nombre} {$usuario->apellidos}</a>

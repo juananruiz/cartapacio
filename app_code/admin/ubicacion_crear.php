@@ -1,12 +1,12 @@
 <?php
 //---------------------------------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: seccion_crear.php
+// Archivo: ubicacion_crear.php
 //---------------------------------------------------------------------------------------------------
-// Formulario para dar de alta una nueva seccion
+// Formulario para dar de alta una nueva ubicacion
 //---------------------------------------------------------------------------------------------------
 global $smarty;
 global $usuario;
 
-$smarty->assign('_nombre_pagina', 'Nueva seccion');
+$smarty->assign('_nombre_pagina', 'Nueva ubicacion');
 ?>

@@ -2,7 +2,7 @@
   <h1><i class="fa fa-male"></i> Editar Usuario</h1>
 
   <form class="form-horizontal" action="index.php?page=admin/usuario_grabar" method="POST">
-    <input type="hidden" name="id" value="{$perfil->id}">
+    <input type="hidden" name="registro_id" value="{$perfil->id}">
 
     <div class="control-group">
       <label class="control-label" for="id_rol">Rol</label>
@@ -73,6 +73,7 @@
     <h1><i class="fa fa-male"></i> Cambiar clave</h1>
 
     <form class="form-horizontal" action="index.php?page=admin/usuario_cambiar_clave" method="POST">
+      <input type="hidden" name="registro_id" value="{$perfil->id}">
       <div class="control-group">
         <label class="control-label" for="clave">Clave de acceso</label>
         <div class="controls">
@@ -88,4 +89,8 @@
   </div> <!-- .span8 -->
 {/if}
 
-
+<script type="text/javascript">
+  // Estas funciones se cargan desde /js/cartapacio.js
+  modalsHandler();
+  formHandler();
+</script>

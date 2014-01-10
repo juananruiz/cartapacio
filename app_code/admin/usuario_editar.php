@@ -26,7 +26,7 @@ if (isset($_REQUEST['id']))
   {
     // Si el identificador no existe lanza un error
     $error = "No existe ningún usuario con el identificador $id";
-    header("location:index.php?page=usuario_listar&error=$error");
+    header("location:index.php?page=admin/usuario_listar&error=$error");
     exit();
   }
 }
@@ -34,5 +34,5 @@ else
 {
   // Si no viene el id lanza un error
   $error = "Falta el identificador del usuario que se desea editar";
-  header("location:index.php?page=usuario_listar&error=$error");
+  header("location:index.php?page=admin/usuario_listar&error=$error");
 }

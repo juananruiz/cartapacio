@@ -9,7 +9,7 @@ class recurso extends ADOdb_Active_Record
 {
 	public $_table = 'recursos';
   public $autor;
-  public $seccion;
+  public $ubicacion;
   public $coleccion;
   public $estado;
   public $ficheros = array();
@@ -21,8 +21,8 @@ class recurso extends ADOdb_Active_Record
     {
       $this->autor = new autor();
       $this->autor->load("id = $this->id_autor");
-      $this->seccion = new seccion();
-      $this->seccion->load("id = $this->id_seccion");
+      $this->ubicacion = new ubicacion();
+      $this->ubicacion->load("id = $this->id_ubicacion");
       $this->coleccion = new coleccion();
       $this->coleccion->load("id = $this->id_coleccion");
       $this->estado = new estado();
@@ -48,8 +48,8 @@ class recurso extends ADOdb_Active_Record
       {
         $recurso->autor = new autor();
         $recurso->autor->load("id = $recurso->id_autor");
-        $recurso->seccion = new seccion();
-        $recurso->seccion->load("id = $recurso->id_seccion");
+        $recurso->ubicacion = new ubicacion();
+        $recurso->ubicacion->load("id = $recurso->id_ubicacion");
         $recurso->coleccion = new coleccion();
         $recurso->coleccion->load("id = $recurso->id_coleccion");
         $recurso->estado = new estado();

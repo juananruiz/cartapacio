@@ -1,6 +1,6 @@
 <div class="span8">
   <h1><i class="fa fa-folder-open"></i> Crear Sección</h1>
-  <form class="form-horizontal" action="index.php?page=admin/seccion_grabar" method="POST">
+  <form class="form-horizontal" action="index.php?page=admin/ubicacion_grabar" method="POST">
 
     <div class="control-group">
       <label class="control-label" for="nombre">Nombre</label>

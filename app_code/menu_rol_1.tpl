@@ -33,7 +33,7 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-camera-retro"></i> COLECCIONES<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="index.php?page=admin/coleccion_listar">Listar Colecciones</a></li>
+                  <li><a href="index.php?page=coleccion_listar">Listar Colecciones</a></li>
                   <li><a href="index.php?page=admin/coleccion_crear">Crear Colección</a></li>
                 </ul>
               </li>
