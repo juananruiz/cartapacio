@@ -9,8 +9,9 @@
 global $usuario;
 
 // TODO:comprobar permisos
+
 $recurso = new recurso();
-$recurso->id_usuario = 1;
+$recurso->id_usuario = $usuario->id;
 $recurso->fecha_alta = date("Y-m-d H:m:i");
 if ($recurso->save())
 {

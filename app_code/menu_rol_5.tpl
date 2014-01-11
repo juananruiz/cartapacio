@@ -16,7 +16,7 @@
                 <a href="index.php?page=admin/autor_listar"><i class="fa fa-male"></i> AUTORES</a>
               </li>
               <li>
-                <a href="index.php?page=admin/seccion_listar"><i class="fa fa-folder-open"></i> SECCIONES</a>
+                <a href="index.php?page=admin/ubicacion_listar"><i class="fa fa-folder-open"></i> UBICACIONES</a>
               </li>
               <li>
                 <a href="index.php?page=coleccion_listar"><i class="fa fa-camera-retro"></i> COLECCIONES</a>

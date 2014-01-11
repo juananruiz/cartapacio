@@ -22,6 +22,15 @@ else
   $es_imagen_principal = 0;
 }
 
+if(isset($_POST['es_publico']) && $_POST['es_publico'] == true)
+{
+  $es_publico = 1;
+}
+else
+{
+  $es_publico = 0;
+}
+
 $storeFolder = "upload/recurso/$id_recurso/"; 
 $tempFile = $_FILES['fichero1']['tmp_name'];
 $targetPath = CC_DIR_BASE . 'public/' . $storeFolder;
@@ -40,14 +49,13 @@ if(move_uploaded_file($tempFile, $targetFile))
   $fichero->descripcion = $descripcion;
   $fichero->id_recurso = $id_recurso;
   $fichero->es_imagen_principal = $es_imagen_principal;
+  $fichero->es_publico = $es_publico;
   $fichero->fecha_alta = date("Y-m-d");
   $fichero->id_persona = 8;
   $fichero->save();
   $aviso = "Operación realizada con éxito";
-  $plantilla = "inicio.tpl";
 }
 else
 {
   $error = "No se ha podido subir el archivo";
-  $plantilla = "error.tpl";
 }

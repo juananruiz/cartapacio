@@ -36,9 +36,9 @@ if (isset($_REQUEST['id']))
     $autores = $autor->Find("activo =  1 ORDER BY nombre");
     $smarty->assign('autores', $autores);
 
-    $seccion = new seccion();
-    $secciones = $seccion->Find("activo =  1 ORDER BY nombre");
-    $smarty->assign('secciones', $secciones);
+    $ubicacion = new ubicacion();
+    $ubicaciones = $ubicacion->Find("activo =  1 ORDER BY nombre");
+    $smarty->assign('ubicaciones', $ubicaciones);
 
     $estado = new estado();
     $estados = $estado->Find("true");

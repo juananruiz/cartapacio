@@ -8,7 +8,7 @@
 
 global $smarty;
 global $usuario;
-// Comprueba que el usuario tiene permisos para crear o editar un recurso
+// Comprueba que el usuario tiene permisos para editar recursos
 // TODO
 
 $recurso = new recurso();
@@ -31,7 +31,7 @@ if (isset($_REQUEST["registro_id"]))
   }
   else
   {
-    $mensaje = "No se ha podido grabar en la base de datos";
+    $mensaje = "index.php?page=recurso_listar&error=No se ha grabado el recurso"; 
   }
 }
 else

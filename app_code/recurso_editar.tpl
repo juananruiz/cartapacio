@@ -19,9 +19,21 @@
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="nombre">Nombre</label>
+      <label class="control-label" for="nombre">Denominación o título</label>
       <div class="controls">
         <input class="autosave input-xxlarge" type="text" name="nombre" id="nombre" placeholder="Nombre del recurso" value="{$recurso->nombre}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="id_ubicacion">Ubicación</label>
+      <div class="controls">
+        <select class="autosave input-xxlarge" name="id_ubicacion" id="id_ubicacion">
+          <option value=""></option>
+          {foreach $ubicaciones as $ubicacion}
+            <option value="{$ubicacion->id}" {if $recurso->id_ubicacion == $ubicacion->id}selected="selected"{/if}>{$ubicacion->nombre}</option>
+          {/foreach}
+        </select>
       </div>
     </div>
 
@@ -39,10 +51,11 @@
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="fecha_original">Fecha obra</label>
+      <label class="control-label" for="fecha_minima">Fecha obra</label>
       <div class="controls">
-        <input class="autosave input-normal" type="text" name="fecha_original" id="fecha_original" value="{$recurso->fecha_original}">
-        <span class="help-inline">Indique el año en que está datada la obra o documento</span>
+        <input class="autosave input-small" type="text" name="fecha_minima" id="fecha_minima" value="{$recurso->fecha_minima}"> - 
+        <input class="autosave input-small" type="text" name="fecha_maxima" id="fecha_maxima" value="{$recurso->fecha_maxima}">
+        <span class="help-inline">Indique los años en que está datada la obra o documento</span>
       </div>
     </div>
 
@@ -50,19 +63,48 @@
       <label class="control-label" for="descripcion">Descripción</label>
       <div class="controls">
         <textarea class="autosave input-xxlarge" name="descripcion"  id="descripcion" rows="5">{$recurso->descripcion}</textarea>
-        <span class="help-inline">Descripción detallada del recurso</span>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="id_seccion">Sección</label>
+      <label class="control-label" for="medidas">Medidas</label>
       <div class="controls">
-        <select class="autosave input-xxlarge" name="id_seccion" id="id_seccion">
-          <option value=""></option>
-          {foreach $secciones as $seccion}
-            <option value="{$seccion->id}" {if $recurso->id_seccion == $seccion->id}selected="selected"{/if}>{$seccion->nombre}</option>
-          {/foreach}
-        </select>
+        <input class="autosave input-xxlarge" type="text" name="medidas" id="medidas" placeholder="Medidas de la obra" value="{$recurso->medidas}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inscripcion_autor">URL externa</label>
+      <div class="controls">
+        <input class="autosave input-xxlarge" type="text" name="url_externa" id="url_externa" value="{$recurso->url_externa}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="historia">Historia</label>
+      <div class="controls">
+        <textarea class="autosave input-xxlarge" name="historia"  id="historia" rows="5">{$recurso->historia}</textarea>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="inscripcion_autor">Inscripciones de autoría</label>
+      <div class="controls">
+        <input class="autosave input-xxlarge" type="text" name="inscripcion_autor" id="inscripcion_autor" value="{$recurso->inscripcion_autor}">
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="alteraciones">Alteraciones</label>
+      <div class="controls">
+        <textarea class="autosave input-xxlarge" name="alteraciones"  id="alteraciones" rows="5">{$recurso->alteraciones}</textarea>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="historia">Restauraciones</label>
+      <div class="controls">
+        <textarea class="autosave input-xxlarge" name="restauraciones"  id="restauraciones" rows="5">{$recurso->restauraciones}</textarea>
       </div>
     </div>
 
@@ -79,15 +121,14 @@
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="notas">Notas</label>
+      <label class="control-label" for="notas">Notas internas</label>
       <div class="controls">
         <textarea class="autosave input-xxlarge" name="notas" id="notas" rows="5">{$recurso->notas}</textarea>
-        <span class="help-inline">Notas sobre el recurso no disponibles al público</span>
       </div>
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="id_estado">Estado</label>
+      <label class="control-label" for="id_estado">Estado de publicación en esta web</label>
       <div class="controls">
         <select class="autosave input-medium" name="id_estado" id="id_estado">
           <option value=""></option>
@@ -117,8 +158,9 @@
         </div>
         <div id="collapse{$fichero->id}" class="accordion-body collapse">
           <div class="accordion-inner">
-            <a href="{$fichero->url}">{$fichero->url}</a>
+            <p><a href="{$fichero->url}">Ver/descargar fichero</a></p>
             <p>{$fichero->descripcion}</p>
+            <p>{if $fichero->es_publico}Fichero público{else}Fichero privado{/if}</p>
             <a href="index.php?page=recurso_borrar_fichero&id={$fichero->id}" 
           onclick="javascript: return confirm('¿Quiéres borrar el fichero?');"><i class="fa fa-trash-o pull-right"></i></a>
           </div>
@@ -148,6 +190,11 @@
       <input class="input-xlarge" type="text" name="titulo" id="titulo">
       <label class="control-label" for="descripcion">Descripción</label>
       <textarea class="input-xlarge" name="descripcion" id="descripcion"></textarea>  
+      <label class="checkbox" for="es_publico">
+        <input type="checkbox" name="es_publico" id="es_publico">
+        Fichero público      
+      </label>
+
       <label class="checkbox" for="es_imagen_principal">
         <input type="checkbox" name="es_imagen_principal" id="es_imagen_principal">
         Imagen principal del recurso

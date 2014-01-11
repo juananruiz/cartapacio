@@ -24,10 +24,10 @@
                 </ul>
               </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-folder-open"></i> SECCIONES<b class="caret"></b></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-folder-open"></i> UBICACIONES<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="index.php?page=admin/seccion_listar">Listar Secciones</a></li>
-                  <li><a href="index.php?page=admin/seccion_crear">Crear Sección</a></li>
+                  <li><a href="index.php?page=admin/ubicacion_listar">Listar Ubicaciones</a></li>
+                  <li><a href="index.php?page=admin/ubicacion_crear">Crear Ubicación</a></li>
                 </ul>
               </li>
               <li class="dropdown">
