@@ -26,7 +26,7 @@ if (isset($_REQUEST['nombre']))
  
   if ($ubicacion->save())
   {
-    header("location:index.php?page=admin/ubicacion_listar");
+    header("location:index.php?page=ubicacion_listar");
   }
   else
   {

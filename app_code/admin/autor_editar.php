@@ -1,10 +1,10 @@
 <?php
-//---------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: autor_crear.php
-//---------------------------------------------------------------------------------------------------
-// Formulario para dar de alta un nuevo autor
-//---------------------------------------------------------------------------------------------------
+// Archivo: autor_editar.php
+//--------------------------------------------------------------------------
+// Formulario para editar los datos de un autor
+//--------------------------------------------------------------------------
 global $smarty;
 global $usuario;
 
@@ -14,11 +14,11 @@ if (isset($_REQUEST['id']))
   $autor = new autor();
   $autor->load("id = $id");
   $smarty->assign('autor', $autor);
-  $smarty->assign('_nombre_pagina', 'Nuevo Autor');
+  $smarty->assign('_nombre_pagina', 'Editar Autor');
 }
 else
 {
-  $error = 'Faltan datos para mostrar el recurso solicitado';
+  $error = 'Se necesita el id del autor para poder editarlo';
   header("location: index.php?page=admin/autor_listar&error=$error");
 }
 ?>

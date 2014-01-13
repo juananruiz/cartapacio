@@ -8,6 +8,7 @@
 class recurso extends ADOdb_Active_Record
 {
 	public $_table = 'recursos';
+  public $tipo;
   public $autor;
   public $ubicacion;
   public $coleccion;
@@ -19,6 +20,8 @@ class recurso extends ADOdb_Active_Record
   {
     if ($this->load($condicion))
     {
+      $this->tipo = new tipo();
+      $this->tipo->load("id = $this->id_tipo");
       $this->autor = new autor();
       $this->autor->load("id = $this->id_autor");
       $this->ubicacion = new ubicacion();

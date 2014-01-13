@@ -64,8 +64,7 @@
     {$menu_rol = "menu_rol_$rol.tpl"}
     {include file=$menu_rol}
 
-    <div style="height:20px;">
-    </div>
+    <div id="jumbo-space"></div>
 
     <div class="container-fluid">
 
@@ -75,12 +74,19 @@
         {if isset($aviso)}
           $("#freeow").freeow("Información", "{$aviso}", {
             classes: ["smokey"],
-            autoHide: true
+            autoHide: true,
+            autoHideDelay: 6000,
+            hideStyle: { opacity: 0, left: "400px" },
+            showStyle: { opacity: 1, left: "1px" },
+            showDuration: 900,
             });
         {else if isset($error)}
           $("#freeow").freeow("Error", "{$error}", {
             classes: ["smokey", "error"],
             autoHide: false,
+            hideStyle: { opacity: 0, left: "400px" },
+            showStyle: { opacity: 1, left: "1px" },
+            showDuration: 900,
             });
         {/if}
       </script>
@@ -94,22 +100,26 @@
       <div class="container">
         <h1>Proyecto Anunciación</h1>
         <ul class="footer-links">
-          <li><a href="http://cicus.us.es">Centro de Iniciativas Culturales</a></li>
+          <li><a href="#">Acerca del Proyecto</a></li>
           <li class="muted">&middot;</li>
-          <li><a href="#">Laboratorio de Arte</a></li>
+          <li><a href="index.php?page=historia">Historia</a></li>
           <li class="muted">&middot;</li>
+          <li><a href="index.php?page=visita">Visita Virtual</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="index.php?page=contacto">Contactar</a></li>
+        </ul>
+        
+        <p>
+          <img src="img/logo_us_200.png" alt="logo us" width="120px" style="margin:10px;"> 
+          <img src="img/logo_cicus.png" alt="logo cicus" style="margin:10px;">
+        </p>
+
+        <ul class="footer-links">
           <li><a href="http://www.us.es">Universidad de Sevilla</a></li>
+          <li class="muted">&middot;</li>
+          <li><a href="http://cicus.us.es">Centro de Iniciativas Culturales</a></li>
         </ul>
 
-        <p>Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>, documentation under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <p><a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <ul class="footer-links">
-          <li><a href="#">Blog</a></li>
-          <li class="muted">&middot;</li>
-          <li><a href="#">Acerca del proyecto</a></li>
-          <li class="muted">&middot;</li>
-          <li><a href="#">Contactar</a></li>
-        </ul>
       </div>
     </footer>
 

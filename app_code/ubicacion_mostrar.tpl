@@ -1,5 +1,5 @@
 <div class="span12">
-  <h1><i class="fa fa-camera-retro"></i> {$coleccion->nombre}</h1>
+  <h1><i class="fa fa-map-marker"></i> {$ubicacion->nombre}</h1>
   {if $recursos}
     <table class="table table-striped table-bordered">
       {foreach $recursos as $recurso}
@@ -23,7 +23,5 @@
   {else}
     <h4>No hay ningún recurso asociado a esta ubicación</h4>
   {/if}
-
 </div>
-
 

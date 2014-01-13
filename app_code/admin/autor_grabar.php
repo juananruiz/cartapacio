@@ -1,33 +1,45 @@
 <?php
-//---------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 // Proyecto: Cartapacio
 // Archivo: autor_grabar.php
-//---------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 // Graba un nuevo autor en la base de datos 
-//---------------------------------------------------------------------------------------------------
+//--------------------------------------------------------------------------
 global $smarty;
 global $usuario;
 
-// Comprueba que el usuario tiene permisos para crear un nuevo autor
 // TODO
-
-if (isset($_REQUEST['nombre']))
+// Comprueba que el usuario tiene permisos para crear un nuevo autor
+if (true)
 {
   $autor = new autor();
-  $autor->nombre = sanitize($_REQUEST['nombre'], SQL);
-  $autor->apellidos = isset($_REQUEST['apellidos'])?sanitize($_REQUEST['apellidos'], SQL):NULL;
-  $autor->fecha_nacimiento = isset($_REQUEST['fecha_nacimiento'])?sanitize($_REQUEST['fecha_nacimiento'], SQL):NULL;
-  $autor->descripcion = isset($_REQUEST['descripcion'])?sanitize($_REQUEST['descripcion'], SQL):NULL;
-  $autor->notas = isset($_REQUEST['notas'])?sanitize($_REQUEST['notas'], SQL):NULL;
 
-  // Estos no vienen del formulario
-  $autor->activo = 1;
-  $autor->fecha_alta = date("Y-m-d H:m:i");
-  $autor->id_usuario = $usuario->id;
- 
+  if (isset($_POST['id']))
+  {
+    $id = sanitize($_POST['id'], INT);
+    $autor->load("id = $id");
+    $aviso = "Se han modificado correctamente los datos del autor";
+  }
+  else
+  {
+    $autor->activo = 1;
+    $autor->fecha_alta = date("Y-m-d H:m:i");
+    $autor->id_usuario = 1;
+    $aviso = "Se ha agregado un nuevo autor";
+  }
+
+  foreach ($_POST as $campo => $valor)
+  {
+    if (!$valor)
+    {
+      $valor = NULL;
+    }
+    $autor->$campo = $valor;
+  }
+
   if ($autor->save())
   {
-    header("location:index.php?page=admin/autor_listar");
+    header("location:index.php?page=autor_listar&aviso=$aviso");
   }
   else
   {
@@ -37,7 +49,6 @@ if (isset($_REQUEST['nombre']))
 }
 else
 {
-  $error = "Faltan datos para crear un nuevo autor";
-  header("location:index.php?page=admin/autor_crear&error=$error");
+  $error = "No tiene permisos para crear o editar autores en esta aplicación";
+  header("location:index.php?page=autor_listar&error=$error");
 }
-?>

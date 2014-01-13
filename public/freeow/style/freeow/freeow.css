@@ -29,12 +29,12 @@ member of the options object when calling freeow().
 /* Outermost Container */
 .freeow {
     position: fixed;
-    width: 300px;
+    width: 400px;
     z-index: 9999;
 }
 .freeow-top-right {
-    top: 70px;
-    right: 10px;
+    top: 75px;
+    right: 5px;
 }
 .freeow-bottom-right {
     bottom: 10px;
@@ -120,7 +120,7 @@ member of the options object when calling freeow().
     padding-top: 8px;
     font-family: Helvetica, arial, sans-serif;
     font-weight: normal;
-    font-size: 14px;
+    font-size: 12px;
     line-height: 16px;
 }
 

@@ -5,14 +5,20 @@
       <tr>
         <td>{$coleccion->id}</td>
         <td><a href="index.php?page=coleccion_mostrar&id_coleccion={$coleccion->id}">{$coleccion->nombre}</a></td>
-        <td>
-          <a href="index.php?page=admin/coleccion_editar&id={$coleccion->id}"><i class="fa fa-pencil"></i> Editar</a> 
-        </td>
-        <td>
-          <a href="index.php?page=admin/coleccion_eliminar&id={$coleccion->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
-        </td>
+        {if $_usuario->id_rol < 4}
+          <td>
+            <a href="index.php?page=admin/coleccion_editar&id={$coleccion->id}"><i class="fa fa-pencil"></i> Editar</a> 
+          </td>
+          <td>
+            <a href="index.php?page=admin/coleccion_eliminar&id={$coleccion->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
+          </td>
+        {/if}
       </tr>
     {/foreach}
   </table>
-  <section><a class="btn btn-inverse" href="index.php?page=admin/coleccion_crear"><i class="fa fa-plus-circle"></i> Crear colección</a></section>
+  {if $_usuario->id_rol < 3}
+    <section>
+      <a class="btn btn-inverse" href="index.php?page=admin/coleccion_crear"><i class="fa fa-plus-circle"></i> Crear colección</a>
+    </section>
+  {/if}
 </div>

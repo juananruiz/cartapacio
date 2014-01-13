@@ -20,8 +20,10 @@ if (isset($_REQUEST["registro_id"]))
   $recurso->fecha_ultima_edicion = date("Y-m-d H:m:i");
   foreach ($_POST as $campo => $valor)
   {
-    $campo = sanitize($campo, SQL);
-    $valor = sanitize($valor, SQL);
+    if (!$valor)
+    {
+      $valor = NULL;
+    }
     $recurso->$campo = $valor;
   }
 

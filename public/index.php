@@ -59,7 +59,7 @@ if(!@session_id())
 $usuario = new usuario();
 if (!isset($_SESSION['usuario']) OR !isset($usuario->id_rol)) 
 {
-  $usuario->id_rol = 5;
+  $usuario->id_rol = 1;
   $_SESSION['usuario'] = $usuario;
 }
 $usuario = $_SESSION['usuario'];

@@ -5,13 +5,12 @@
     {foreach $autores as $autor}
       <tr>
         <td>{$autor->id}</td>
-        <td>{$autor->nombre}</td>
-        <td>{$autor->apellidos}</td>
+        <td><a href="index.php?page=autor_mostrar&id={$autor->id}">{$autor->apellidos}, {$autor->nombre}</a></td>
         <td>
-          <a href="index.php?page=admin/autor_editar&id={$autor->id}"><i class="fa fa-pencil"></i> Editar</a> 
+          <a href="index.php?page=admin/autor_editar&id={$autor->id}"><i class="fa fa-pencil"></i></a> 
         </td>
         <td>
-          <a href="index.php?page=admin/autor_borrar&id={$autor->id}"><i class="fa fa-trash-o"></i> Eliminar</a> 
+          <a href="index.php?page=admin/autor_borrar&id={$autor->id}"><i class="fa fa-trash-o"></i></a> 
         </td>
       </tr>
     {/foreach}

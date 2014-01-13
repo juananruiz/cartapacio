@@ -1,5 +1,5 @@
 <div class="span8">
-  <h1><i class="fa fa-male"></i> Editar Autor</h1>
+  <h1><i class="fa fa-male"></i> {$_nombre_pagina}</h1>
 
   <form class="form-horizontal" action="index.php?page=admin/autor_grabar" method="POST">
     <input type="hidden" name="id" value="{$autor->id}">

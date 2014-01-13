@@ -33,7 +33,7 @@ else
 
 $storeFolder = "upload/recurso/$id_recurso/"; 
 $tempFile = $_FILES['fichero1']['tmp_name'];
-$targetPath = CC_DIR_BASE . 'public/' . $storeFolder;
+$targetPath = CC_DIR_BASE . '/' . $storeFolder;
 if (!is_file($targetPath) && !is_dir($targetPath))
 {
   mkdir($targetPath);
@@ -57,5 +57,5 @@ if(move_uploaded_file($tempFile, $targetFile))
 }
 else
 {
-  $error = "No se ha podido subir el archivo";
+  $error = "No se ha podido subir el archivo a $targetPath";
 }
