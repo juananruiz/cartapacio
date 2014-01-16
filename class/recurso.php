@@ -44,7 +44,6 @@ class recurso extends ADOdb_Active_Record
 
   public function Find_joined($condicion)
   {
-    $recursos = array();
     if ($recursos = $this->Find($condicion))
     {
       foreach($recursos as& $recurso)
@@ -67,4 +66,3 @@ class recurso extends ADOdb_Active_Record
   }
 
 }
-?>

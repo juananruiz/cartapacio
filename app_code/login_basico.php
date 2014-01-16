@@ -15,15 +15,16 @@ $smarty->assign('_nombre_pagina' , 'Inicio de sesión');
 if (isset($_REQUEST['acceso']))
 {
 	// Comprueba que vengan los datos
-	if (isset($_REQUEST["correo"], $_POST["clave"]))
+	if (isset($_POST["correo"], $_POST["clave"]))
 	{
-		$correo = sanitize($_POST["correo"],2);
+		$correo = sanitize($_POST["correo"], SQL);
 		$clave = md5($_POST["clave"]);
 		$usuario = new usuario();
 		if ($usuario->load_joined("correo = '$correo' AND clave = '$clave'")) 
 		{
 			$_SESSION['usuario'] = $usuario;
-			header("location:index.php");
+      $aviso = "Hola $usuario->nombre bienvenido a este proyecto";
+			header("location:index.php?aviso=$aviso");
 		}
 		else 
 		{

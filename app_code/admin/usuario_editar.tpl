@@ -53,6 +53,14 @@
       </div>
 
       <div class="control-group">
+        <label class="control-label" for="activo">Activo</label>
+        <div class="controls">
+          <input type="checkbox" id="activo" 
+            {if $perfil->activo}checked="checked"{/if} value="{$perfil->activo}">
+        </div>
+      </div>
+
+      <div class="control-group">
         <label class="control-label" for="ultimo_acceso">Último acceso registrado</label>
         <div class="controls">
           <input class="input-medium" type="text" disabled="disabled" id="ultimo_acceso" value="{$perfil->ultimo_acceso}">

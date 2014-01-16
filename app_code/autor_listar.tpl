@@ -5,17 +5,20 @@
     {foreach $autores as $autor}
       <tr>
         <td>{$autor->id}</td>
-        <td><a href="index.php?page=autor_mostrar&id={$autor->id}">{$autor->apellidos}, {$autor->nombre}</a></td>
-        <td>
-          <a href="index.php?page=admin/autor_editar&id={$autor->id}"><i class="fa fa-pencil"></i></a> 
-        </td>
-        <td>
-          <a href="index.php?page=admin/autor_borrar&id={$autor->id}"><i class="fa fa-trash-o"></i></a> 
-        </td>
+        <td><a href="index.php?page=autor_mostrar&id_autor={$autor->id}">{$autor->apellidos}, {$autor->nombre}</a></td>
+        {if $_usuario->rol < 3}
+          <td>
+            <a href="index.php?page=admin/autor_editar&id={$autor->id}"><i class="fa fa-pencil"></i></a> 
+          </td>
+          <td>
+            <a href="index.php?page=admin/autor_borrar&id={$autor->id}"><i class="fa fa-trash-o"></i></a> 
+          </td>
+        {/if}
       </tr>
     {/foreach}
   </table>
 
-  <section><a href="index.php?page=admin/autor_crear" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Autor</a></section>
-  
+  {if $_usuario->rol < 3}
+    <section><a href="index.php?page=admin/autor_crear" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Autor</a></section>
+  {/if}
 </div>

@@ -6,6 +6,7 @@
         <td>{$usuario->id}</td>
         <td>{$usuario->apellidos}, {$usuario->nombre}</td>
         <td><a href="mailto:{$usuario->correo}">{$usuario->correo}</a></td>
+        <td>{$usuario->rol->nombre}</td>
         <td>{$usuario->fecha_alta}</td>
         <td>
           <a href="index.php?page=admin/usuario_editar&id={$usuario->id}"><i class="fa fa-pencil"></i> Editar</a> 
