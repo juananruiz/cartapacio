@@ -41,6 +41,7 @@ ADOdb_Active_Record::SetDatabaseAdapter($adodb);
 $adodb->EXECUTE("set names utf8");
 
 date_default_timezone_set('Europe/Madrid');
+setlocale(LC_ALL, 'es-ES');
 
 // Crea una sesión con un identificador encriptado para evitar ataques
 $session_key = substr(md5(CC_DIR_BASE), 0, 8);
@@ -57,9 +58,14 @@ if(!@session_id())
 // Carga el usuario desde la sesión o dalo de alta como anónimo
 // Para hacer login tendrá que ir al menú
 $usuario = new usuario();
-if (!isset($_SESSION['usuario']) OR !isset($usuario->id_rol)) 
+if (!isset($_SESSION['usuario'])) 
 {
-  $usuario->id_rol = 1;
+  $usuario->nombre = "Usuario";
+  $usuario->apellidos = "Anónimo";
+  $usuario->id_rol = 5;
+  $usuario->rol = new rol();
+  $usuario->rol->load("id = 5");
+  $usuario->inicio_sesion = date("H:i");
   $_SESSION['usuario'] = $usuario;
 }
 $usuario = $_SESSION['usuario'];

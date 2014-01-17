@@ -3,8 +3,8 @@
 // Proyecto: Cartapacio
 // Archivo: login_basico.php
 //--------------------------------------------------------------------------
-// Permite iniciar sesión al usuario en el sistema, lo lleva a la página que 
-// haya pedido o a la página por defecto
+// Permite iniciar sesión al usuario en el sistema y 
+// lo redirecciona a la página de inicio
 //--------------------------------------------------------------------------
 global $smarty;
 global $usuario;
@@ -22,9 +22,27 @@ if (isset($_REQUEST['acceso']))
 		$usuario = new usuario();
 		if ($usuario->load_joined("correo = '$correo' AND clave = '$clave'")) 
 		{
-			$_SESSION['usuario'] = $usuario;
-      $aviso = "Hola $usuario->nombre bienvenido a este proyecto";
-			header("location:index.php?aviso=$aviso");
+      if ($usuario->activo == 1)
+      {
+        $aviso = "Hola $usuario->nombre bienvenido al proyecto. ";
+        if (isset($usuario->ultimo_acceso))
+        {
+          $ultimo_dia = date("j M Y", strtotime($usuario->$ultimo_acceso));
+          $aviso .= "Te hemos echado de menos desde que accediste el $ultimo_dia";
+        }
+        $usuario->ultimo_acceso = date("Y-m-d H:i:s");
+        $usuario->save();
+        // Esto es solo para la sesion y no se graba en la BD
+        $usuario->inicio_sesion = date("H:i");
+        $_SESSION['usuario'] = $usuario;
+        header("location:index.php?aviso=$aviso");
+      }
+      else
+      {
+        $error = "Usuario bloqueado, contacte con un administrador";
+        $smarty->assign('error',$error);
+        $plantilla = 'login_basico.tpl';
+      }
 		}
 		else 
 		{
@@ -41,14 +59,8 @@ if (isset($_REQUEST['acceso']))
 		$plantilla = 'login_basico.tpl';
 	}
 }
-else if(isset($_REQUEST["logout"]))
-{	
-	// Si ha solicitado logout cerramos sesión y enviamos a inicio
-	session_unset();
-  header("location:index.php");
-}
 else
 {
-  // Si no viene del formulario, ni de logout, mostramos el formulario
+  // Si no viene del formulario mostramos el formulario
   $plantilla = "login_basico.tpl";
 }

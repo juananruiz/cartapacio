@@ -6,7 +6,7 @@
       <tr>
         <td>{$autor->id}</td>
         <td><a href="index.php?page=autor_mostrar&id_autor={$autor->id}">{$autor->apellidos}, {$autor->nombre}</a></td>
-        {if $_usuario->rol < 3}
+        {if $_usuario->id_rol < 3}
           <td>
             <a href="index.php?page=admin/autor_editar&id={$autor->id}"><i class="fa fa-pencil"></i></a> 
           </td>
@@ -18,7 +18,7 @@
     {/foreach}
   </table>
 
-  {if $_usuario->rol < 3}
+  {if $_usuario->id_rol < 3}
     <section><a href="index.php?page=admin/autor_crear" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Autor</a></section>
   {/if}
 </div>

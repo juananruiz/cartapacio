@@ -43,6 +43,9 @@
                 <ul class="dropdown-menu">
                   <li><a href="index.php?page=admin/usuario_listar">Listar Usuarios</a></li>
                   <li><a href="index.php?page=admin/usuario_crear">Crear Usuario</a></li>
+              <li>
+                <a href="index.php?page=login_out"><i class="fa fa-key"></i> Cerrar sesión</a>
+              </li>
                 </ul>
               </li>
             </ul>

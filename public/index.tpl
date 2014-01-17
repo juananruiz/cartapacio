@@ -98,6 +98,7 @@
     
     <footer class="footer">
       <div class="container">
+        <div class="span5">
         <h1>Proyecto Anunciación</h1>
         <ul class="footer-links">
           <li><a href="#">Acerca del Proyecto</a></li>
@@ -119,7 +120,16 @@
           <li class="muted">&middot;</li>
           <li><a href="http://cicus.us.es">Centro de Iniciativas Culturales</a></li>
         </ul>
-
+      </div>
+      <div class="span4" style="padding:15px;">
+        <p><i class="fa fa-list-alt"></i> {$_usuario->nombre} {$_usuario->apellidos}
+        <br>Perfil: {$_usuario->rol->nombre}
+        <br>Inicio de sesión: {$_usuario->inicio_sesion}
+        </p>
+        {if $_usuario->id_rol != 5}
+          <p><a href="index.php?page=login_out"><i class="fa fa-key"></i> Cerrar sesión</a></p>
+        {/if}
+      </div>
       </div>
     </footer>
 

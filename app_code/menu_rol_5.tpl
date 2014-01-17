@@ -24,6 +24,7 @@
               </li>
               <li>
                 <a href="index.php?page=login_basico"><i class="fa fa-key"></i> Iniciar sesión</a>
+              </li>
             </ul>
           </div>
         </div>
