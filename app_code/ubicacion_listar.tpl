@@ -5,7 +5,7 @@
       <tr>
         <td>{$ubicacion->id}</td>
         <td><a href="index.php?page=ubicacion_mostrar&id_ubicacion={$ubicacion->id}">{$ubicacion->nombre}</a></td>
-        {if $_usuario->id_rol < 4}
+        {if $_usuario->id_rol < 3}
           <td>
             <a href="index.php?page=admin/ubicacion_editar&id={$ubicacion->id}"><i class="fa fa-pencil"></i> Editar</a> 
           </td>

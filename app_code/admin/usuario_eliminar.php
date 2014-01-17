@@ -1,11 +1,10 @@
 <?php
 //--------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: usuario_editar.php
+// Archivo: usuario_eliminar.php
 //--------------------------------------------------------------------------
-// Formulario para editar un usuario
+// Formulario para desacrtivar un usuario
 //--------------------------------------------------------------------------
-global $smarty;
 global $usuario;
 
 if ($usuario->id_rol == 1)
@@ -18,29 +17,27 @@ if ($usuario->id_rol == 1)
     $id = sanitize($_REQUEST['id'], INT);
     if ($perfil->load("id = $id"))
     {
-      $smarty->assign('perfil', $perfil);
-      
-      $rol = new rol();
-      $roles = $rol->Find("true");
-      $smarty->assign('roles', $roles);
+      $perfil->activo = 0;
+      $perfil->save();
+      $aviso = "Se ha deshabilitado al usuario $perfil->nombre $perfil->apellidos";
+      header("location:index.php?page=admin/usuario_listar&aviso=$aviso");
     }
     else
     {
       // Si el identificador no existe lanza un error
       $error = "No existe ningún usuario con el identificador $id";
       header("location:index.php?page=admin/usuario_listar&error=$error");
-      exit();
     }
   }
   else
   {
     // Si no viene el id lanza un error
-    $error = "Falta el identificador del usuario que se desea editar";
+    $error = "Falta el identificador del usuario que se desea eliminar";
     header("location:index.php?page=admin/usuario_listar&error=$error");
   }
 }
 else
 {
-  $error = "No tiene permisos para editar usuarios";
+  $error = "No tiene permisos para eliminar usuarios";
   header("location:index.php?page=error&error=$error");
 }

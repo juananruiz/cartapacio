@@ -6,6 +6,8 @@
       <tr>
         <td>{$autor->id}</td>
         <td><a href="index.php?page=autor_mostrar&id_autor={$autor->id}">{$autor->apellidos}, {$autor->nombre}</a></td>
+        <td>{$autor->fecha_nacimiento} - {$autor->fecha_defuncion}</td>
+        <td>{$autor->oficio->nombre}</td>
         {if $_usuario->id_rol < 3}
           <td>
             <a href="index.php?page=admin/autor_editar&id={$autor->id}"><i class="fa fa-pencil"></i></a> 

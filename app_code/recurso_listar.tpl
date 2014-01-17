@@ -8,15 +8,19 @@
         <td>{$recurso->fecha_minima} {if $recurso->fecha_maxima > $recurso->fecha_minima}- {$recurso->fecha_maxima}{/if}</td>
         <td>{$recurso->ubicacion->nombre}</td>
         <td>{$recurso->estado->nombre}</td>
-        <td>
-          <a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i></a> 
-        </td>
-        <td>
-          <a href="index.php?page=recurso_borrar&id={$recurso->id}"><i class="fa fa-trash-o"></i></a> 
-        </td>
+        {if $_usuario->id_rol < 4}
+          <td>
+            <a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i></a> 
+          </td>
+          <td>
+            <a href="index.php?page=recurso_borrar&id={$recurso->id}"><i class="fa fa-trash-o"></i></a> 
+          </td>
+        {/if}
       </tr>
     {/foreach}
   </table>
-  <section><a href="index.php?page=recurso_crear" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Recurso</a></section>
+  {if $_usuario->id_rol < 4}
+    <section><a href="index.php?page=recurso_crear" class="btn btn-inverse"><i class="fa fa-plus-circle"></i> Crear Recurso</a></section>
+  {/if}
 </div>
 

@@ -7,7 +7,7 @@
 //--------------------------------------------------------------------------
 global $usuario;
 
-if ($usuario->rol == 1)
+if ($usuario->id_rol == 1)
 {
 	$nuevo_usuario = new usuario();
   $nuevo_usuario->id_padrino = $usuario->id;
@@ -15,7 +15,7 @@ if ($usuario->rol == 1)
   $nuevo_usuario->activo = 1;
   if ($nuevo_usuario->save())
   {
-    header("location:index.php?page=usuario_editar&id=$nuevo_usuario->id");
+    header("location:index.php?page=admin/usuario_editar&id=$nuevo_usuario->id");
     exit();
   }
   else

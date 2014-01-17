@@ -27,7 +27,7 @@ if (isset($_REQUEST['acceso']))
         $aviso = "Hola $usuario->nombre bienvenido al proyecto. ";
         if (isset($usuario->ultimo_acceso))
         {
-          $ultimo_dia = date("j M Y", strtotime($usuario->$ultimo_acceso));
+          $ultimo_dia = date("j M Y", strtotime($usuario->ultimo_acceso));
           $aviso .= "Te hemos echado de menos desde que accediste el $ultimo_dia";
         }
         $usuario->ultimo_acceso = date("Y-m-d H:i:s");

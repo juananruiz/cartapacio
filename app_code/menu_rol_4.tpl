@@ -22,9 +22,7 @@
               <li>
                 <a href="index.php?page=coleccion_listar"><i class="fa fa-camera-retro"></i> COLECCIONES</a>
               </li>
-              <li>
-                <a href="index.php?page=usuario_perfil">{$usuario->nombre} {$usuario->apellidos}</a>
-              </li>
+              <li><a href="index.php?page=login_out"><i class="fa fa-key"></i> Cerrar sesión</a></li>
             </ul>
           </div>
         </div>
