@@ -8,11 +8,11 @@
 global $smarty;
 global $usuario;
 
-if (isset($_GET['id_autor']))
+if (isset($_GET['id']))
 {
   $autor = new autor();
 
-  $id_autor = sanitize($_GET['id_autor'], INT);
+  $id_autor = sanitize($_GET['id'], INT);
   
   if ($autor->rol < 4) 
   {

@@ -14,8 +14,8 @@ function modalsHandler()
             type: "GET",
     
             success: function(response) {
-                $('#modal').html(response);
-                $('#modal').modal('show');
+                $('#modalGlobal').html(response);
+                $('#modalGlobal').modal('show');
             },
 
             error: function (xhr, ajaxOptions, thrownError) {

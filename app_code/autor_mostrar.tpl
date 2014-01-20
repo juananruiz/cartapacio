@@ -1,5 +1,5 @@
 <div class="span12">
-  <h1><i class="fa fa-camera-retro"></i> {$autor->nombre}</h1>
+  <h1><i class="fa fa-camera-retro"></i>  {$autor->nombre} {$autor->apellidos}</h1>
   {if $recursos}
     <table class="table table-striped table-bordered">
       {foreach $recursos as $recurso}

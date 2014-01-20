@@ -1,4 +1,4 @@
-<div class="span12">
+<div class="span12" style="margin-left:0;">
 <h1><i class="fa fa-archive"></i> {$_nombre_pagina}</h1>
 </div>
 
@@ -161,7 +161,7 @@
             <p><a href="{$fichero->url}">Ver/descargar fichero</a></p>
             <p>{$fichero->descripcion}</p>
             <p>{if $fichero->es_publico}Fichero público{else}Fichero privado{/if}</p>
-            <a href="index.php?page=recurso_borrar_fichero&id={$fichero->id}" 
+            <p><a href="index.php?page=recurso_editar_fichero&id={$fichero->id}"><i class="fa fa-pencil" data-toggle="modal"></i></a> <a href="index.php?page=recurso_borrar_fichero&id={$fichero->id}" 
           onclick="javascript: return confirm('¿Quiéres borrar el fichero?');"><i class="fa fa-trash-o pull-right"></i></a>
           </div>
         </div>
@@ -177,6 +177,7 @@
   
   <form id="form-fichero" enctype="multipart/form-data">
     <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
+    <input type="hidden" name="MAX_FILE_SIZE" value="50000000">
     <div class="control-group">
       <label class="control-label" for="fichero1">Añadir nuevo fichero</label>
       <div class="controls">
@@ -240,7 +241,7 @@
     $.ajax(
     {
       type: 'POST',
-      url: 'index.php?page=recurso_grabar_fichero',
+      url: 'index.php?page=recurso_grabar_fichero&ajax=true',
       xhr: function() {  // Custom XMLHttpRequest
         var myXhr = $.ajaxSettings.xhr();
         if(myXhr.upload){ // Check if upload property exists
