@@ -95,6 +95,11 @@ a:focus {
   border-bottom-color: maroon;
 }
 
+/* A little more width to modal for xxlarge form's inputs */
+.modal {
+  width:580px;
+}
+
 /* Sections
 -------------------------------------------------- */
 
@@ -385,6 +390,11 @@ h2 + .row {
   background-color: #FFF;
 }
 
+.thumbnails > li {
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
 /* Sidenav for Docs
 -------------------------------------------------- */
 
@@ -483,6 +493,11 @@ h2 + .row {
     margin-top: 30px;
   }
 
+  .thumbnails > li {
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
 }
 
 /* Desktop
@@ -522,6 +537,11 @@ h2 + .row {
 
   .container-fluid {
     margin-top: 20px;
+  }
+
+  .thumbnails > li {
+    margin-left: 10px;
+    margin-bottom: 10px;
   }
 
 }
@@ -599,6 +619,12 @@ h2 + .row {
 
   .footer p {
     margin-bottom: 9px;
+  }
+
+  .thumbnails > li {
+    margin-left: 10px;
+    margin-bottom: 10px;
+    float: left;
   }
 
 }

@@ -1,7 +1,29 @@
 <h1 class="ficha">{$recurso->nombre} 
   {if $_usuario->id_rol < 4}<a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i></a>{/if}</h1>
 
+  <div class="span7">
+    {if isset($recurso->imagen_principal)}
+      <div class="caja" id="imagen-principal">
+        <a href="{$recurso->imagen_principal->url}"><img class="img-polaroid" 
+          src="thumb/timthumb.php?src={$recurso->imagen_principal->url}&w=700" alt="{$recurso->imagen_principal->titulo}"></a>
+        <p>{$recurso->imagen_principal->titulo}</p>
+      </div>
+    {/if}
+  </div><!-- .span7 -->
+
   <div class="span5">
+    <div class="caja">
+    <ul class="thumbnails">
+      {foreach $recurso->ficheros as $fichero}
+      <li>
+        <div class="thumbnail" id="{$fichero->id}">
+          <a href="{$fichero->url}" title="{$fichero->titulo}"> <img src="thumb/timthumb.php?h=100&w=100&src={$fichero->url}" alt="{$fichero->titulo}"></a>
+        </div>
+      </li>
+      {/foreach}
+    </ul>
+    </div>
+
     <div class="caja">
       <div class="well">
         <p>{$recurso->descripcion}</p>
@@ -20,33 +42,9 @@
     </div>
   </div><!-- .span5 -->
 
-  <div class="span7">
-    <div class="caja">
-      <ul class="thumbnails">
-        {foreach $recurso->ficheros as $fichero}
-        <li class="span2" style="width:initial;">
-          <div class="thumbnail" id="{$fichero->id}" data-url="{$fichero->url}">
-            <a href="#"><img src="thumb/timthumb.php?h=140&w=140&src={$fichero->url}" alt="{$fichero->titulo}"></a>
-          </div>
-          <p>{$fichero->titulo}</p>
-        </li>
-        {/foreach}
-      </ul>
-    </div>
-
-    {if isset($recurso->imagen_principal)}
-      <div class="caja" id="imagen-principal">
-        <a href="{$recurso->imagen_principal->url}"><img class="img-polaroid" 
-          src="thumb/timthumb.php?src={$recurso->imagen_principal->url}&w=500" alt="{$recurso->imagen_principal->titulo}"></a>
-        <p>{$recurso->imagen_principal->titulo}</p>
-      </div>
-    {/if}
-  </div><!-- .span7 -->
-
-  
   <script>
-    $(".thumbnail").on("click", function(e){
-      var newHtml = "<a href='" + $(this).attr('data-url') + "'><img class='img-polaroid' src='thumb/timthumb.php?src=" + $(this).attr('data-url') + "&w=500' alt=''></a>";
+    $(".thumbnail a").on("click", function(e){
+      var newHtml = "<a href='" + $(this).attr('href') + "'><img class='img-polaroid' src='thumb/timthumb.php?src=" + $(this).attr('href') + "&w=700' alt=''></a><p>" + $(this).attr('title') + "</p>";
       $("#imagen-principal").html(newHtml);
       e.preventDefault();
     });

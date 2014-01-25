@@ -7,10 +7,11 @@ function modalsHandler()
 {
 	//Modals Window Handler 
     $('body').on('click','a[data-toggle="modal"]',function(e){
-        var action = $(this).attr('data-href');
-        console.log(action);
+        var action = $(this).attr('href');
         $.ajax({
-            url : action,
+            //Le añado ajax=true para que el controlador principal no cargue
+            //la plantilla principal
+            url : action + "&ajax=true",
             type: "GET",
     
             success: function(response) {
@@ -21,7 +22,7 @@ function modalsHandler()
             error: function (xhr, ajaxOptions, thrownError) {
              console.log(xhr.status);
              console.log(thrownError);
-             notification ('Error', thrownError, 'error', true);
+             //notification ('Error', thrownError, 'error', true);
             }
         });
         e.preventDefault();
@@ -89,21 +90,14 @@ function ldAjax (url, div, refresh)
                 }
                 var stateObj = { foo: "bar" };
                 history.pushState(stateObj, "page 2", pathname);
-
-                //Check notification & trophy alerts
-                //checkNotifications(false);
-
-                //App.init(); // Init layout and core plugins
-                Plugins.init(); // Init all plugins
-                FormComponents.init(); // Init all form-specific plugins
             }
         },                    
 
         error: function (xhr, ajaxOptions, thrownError) {
          $('#'+div).removeClass("loading");
-         console.log(xhr.status);
-         console.log(thrownError);
-         notification ('Error', thrownError, 'error', true);
+         //console.log(xhr.status);
+         //console.log(thrownError);
+         //notification ('Error', thrownError, 'error', true);
         }
     });    
 }

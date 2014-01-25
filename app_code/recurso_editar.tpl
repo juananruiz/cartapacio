@@ -147,31 +147,33 @@
 
 </div> <!-- .span8 -->
 <div class="span4" style="padding-left:20px;border-left:1px solid #dedede;">
-  <h3><i class="fa fa-file"></i> Ficheros asociados al recurso</h3>
+  <div id="lista-ficheros">
+    <h3><i class="fa fa-file"></i> Ficheros asociados al recurso</h3>
 
-  {if isset($ficheros)}
-    <div class="accordion" id="accordion">
-    {foreach from=$ficheros item=fichero }
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{$fichero->id}"><i class="fa fa-star-o"></i> {$fichero->titulo}</a>
-        </div>
-        <div id="collapse{$fichero->id}" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <p><a href="{$fichero->url}">Ver/descargar fichero</a></p>
-            <p>{$fichero->descripcion}</p>
-            <p>{if $fichero->es_publico}Fichero público{else}Fichero privado{/if}</p>
-            <p><a href="index.php?page=recurso_editar_fichero&id={$fichero->id}"><i class="fa fa-pencil" data-toggle="modal"></i></a> <a href="index.php?page=recurso_borrar_fichero&id={$fichero->id}" 
-          onclick="javascript: return confirm('¿Quiéres borrar el fichero?');"><i class="fa fa-trash-o pull-right"></i></a>
+    {if isset($ficheros)}
+      <div class="accordion" id="accordion">
+      {foreach from=$ficheros item=fichero }
+        <div class="accordion-group" id="fichero{$fichero->id}">
+          <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{$fichero->id}"><i class="fa fa-star-o"></i> {$fichero->titulo}</a>
+          </div>
+          <div id="collapse{$fichero->id}" class="accordion-body collapse">
+            <div class="accordion-inner">
+
+              <p><a href="{$fichero->url}"><img src="thumb/timthumb.php?h=50&w=50&src={$fichero->url}" style="float:left;margin:0 10px 10px 0;"></a></p>
+              <p>{$fichero->descripcion}</p>
+              <p>{if $fichero->es_publico}<i class="fa fa-world"></i> Fichero público{else}<i class="fa fa-door"></i> Fichero privado{/if} - <a href="{$fichero->url}">Ver/descargar fichero</a></p>
+              <p><a href="index.php?page=recurso_editar_fichero&id={$fichero->id}" data-toggle="modal"><i class="fa fa-pencil"></i></a> <a href="index.php?page=recurso_borrar_fichero&id={$fichero->id}" data-fichero-id="{$fichero->id}" class="borrar-fichero" ><i class="fa fa-trash-o pull-right"></i></a>
+            </div>
           </div>
         </div>
+      {/foreach}
       </div>
-    {/foreach}
-    </div>
 
-  {else}
-    <p class="alert">No existen ficheros asociados a este recurso</p>
-  {/if}
+    {else}
+      <p class="alert">No existen ficheros asociados a este recurso</p>
+    {/if}
+  </div>
 
   <p class="alert alert-info"><strong>IMPORTANTE:</strong> el nombre de los ficheros no debe contener caracteres como ñ, acentos o espacios en blanco. Renombra tu archivo antes de subirlo para que sea clarificador de su contenido.</p>
   
@@ -216,10 +218,27 @@
 
 {literal}
 <script type="text/javascript">
-  // Estas tres funciones se cargan desde /js/cartapacio.js
+  // ---------- Estas tres funciones se cargan desde /js/cartapacio.js
   modalsHandler();
   formHandler();
   autosave();
+
+  // ---------- Borrar fichero --------------
+  $('.borrar-fichero').on('click', function(e) {
+    e.preventDefault();
+    var id = $(this).attr("data-fichero-id"); 
+    if (confirm('¿Quiéres borrar el fichero?'))
+    {
+      $.ajax(
+      {
+        type: "GET",
+        url: $(this).attr('href'),
+        success: function(data) {
+          $("#fichero" + id).remove();   
+        }
+      });
+    }
+  });
 
   // ---------- Falso input file ------------
   // http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/ 
@@ -229,13 +248,13 @@
   });
 
   // Cuando el autentico cambia hace cambiar al falso
-  $('input[type=file]').on('change', function(evento){
+  $('input[type=file]').on('change', function(e){
     $(this).next().find('input').val($(this).val());
   });
 
   // ---------- Petición ajax subir fichero --------
-  $('#btn-subir').on('click', function(evento){
-    evento.preventDefault();
+  $('#btn-subir').on('click', function(e){
+    e.preventDefault();
     var formDatos = new FormData($('#form-fichero')[0]);
     console.log(formDatos);
     $.ajax(
@@ -257,12 +276,11 @@
       contentType: false,
       processData: false,
       success: function(datos) {  
-        // Lanza la respuesta a consola para depurar
-        console.log(datos)
+        //Recarga el div#lista-ficheros
       },                    
       error: function (xhr, ajaxOptions, thrownError) {
-        console.log(xhr.status);
-        console.log(thrownError);
+        //console.log(xhr.status);
+        //console.log(thrownError);
       }
     });    
   });

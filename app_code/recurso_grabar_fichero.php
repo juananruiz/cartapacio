@@ -55,17 +55,17 @@ if ($usuario->id_rol < 4)
     $fichero->fecha_alta = date("Y-m-d");
     $fichero->id_persona = 8;
     $fichero->save();
-    $aviso = "Operación realizada con éxito". print_r($fichero_form);
+    $resultado = "Operación realizada con éxito". print_r($fichero_form);
   }
   else
   {
-    $aviso = "No se ha podido subir el archivo a $targetPath";
+    $resultado = "No se ha podido subir el archivo a $targetPath";
   }
 }
 else
 {
-  $aviso = "No tiene permisos para subir ficheros al servidor";
+  $resultado = "No tiene permisos para subir ficheros al servidor";
 }
 
-$smarty->assign("aviso", $aviso);
-$plantilla = "recurso_grabar_fichero.tpl";
+$smarty->assign("resultado", $resultado);
+$plantilla = "resultado_ajax.tpl";
