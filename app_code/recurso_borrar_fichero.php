@@ -16,14 +16,14 @@ if ($usuario->id_rol < 3)
     $id = sanitize($_REQUEST['id'],INT);
     $fichero->load("id = $id");
     //Delete the real file
-    $ruta_fichero = CC_DIR_BASE . $fichero->url;
+    $ruta_fichero = CC_DIR_BASE . '/' . $fichero->url;
     if (is_file($ruta_fichero))
     {
       unlink($ruta_fichero);
     }
     $fichero->delete();
 
-    $resultado = "El fichero $id se ha borrado de la base de datos y del servidor";
+    $resultado = "El fichero $id se ha borrado de la base de datos y del servidor.<br><a href='index.php?page=recurso_mostrar&id=$id'>Volver al recurso</a>";
   }
   else
   {

@@ -19,6 +19,9 @@ h3 code {
   font-weight: normal;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-weight:200;
+}
 /* Tweak navbar brand link to be super sleek
 -------------------------------------------------- */
 
@@ -135,7 +138,6 @@ h1.ficha {
   margin:25px 10px 15px 25px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-size: 24px;
-  font-weight:400;
   padding-left: 10px;
   font-size: 24px;
   line-height: 24px;

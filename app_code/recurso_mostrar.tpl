@@ -4,9 +4,9 @@
   <div class="span7">
     {if isset($recurso->imagen_principal)}
       <div class="caja" id="imagen-principal">
+      <p class="muted">{$recurso->imagen_principal->titulo}</p>
         <a href="{$recurso->imagen_principal->url}"><img class="img-polaroid" 
           src="thumb/timthumb.php?src={$recurso->imagen_principal->url}&w=700" alt="{$recurso->imagen_principal->titulo}"></a>
-        <p>{$recurso->imagen_principal->titulo}</p>
       </div>
     {/if}
   </div><!-- .span7 -->
@@ -25,10 +25,6 @@
     </div>
 
     <div class="caja">
-      <div class="well">
-        <p>{$recurso->descripcion}</p>
-      </div>
-
       <table class="table table-condensed">
         <tr><th>Tipo</th><td>{$recurso->tipo->nombre}</td></tr>
         <tr><th>Autor</th><td><a href="index.php?page=autor_mostrar&id={$recurso->autor->id}">{$recurso->autor->nombre} {$recurso->autor->apellidos}</a></td></tr>
@@ -40,11 +36,35 @@
         {if isset($recurso->medidas)}<tr><th>Medidas</th><td>{$recurso->medidas}</td></tr>{/if}
       </table>
     </div>
+
+    <div class="caja">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#descripcion" data-toggle="tab">Descripción</a></li>
+        <li><a href="#historia" data-toggle="tab">Historia</a></li>
+        <li><a href="#alteraciones" data-toggle="tab">Alteraciones</a></li>
+        <li><a href="#restauraciones" data-toggle="tab">Restauraciones</a></li>
+      </ul>
+      <div class="tab-content">
+        <div class="tab-pane active" id="descripcion">
+          {$recurso->descripcion}
+        </div>
+        <div class="tab-pane" id="historia">
+          {$recurso->historia}
+        </div>
+        <div class="tab-pane" id="alteraciones">
+          {$recurso->alteraciones}
+        </div>
+        <div class="tab-pane" id="restauraciones">
+          {$recurso->restauraciones}
+        </div>
+      </div>
+
+    </div>
   </div><!-- .span5 -->
 
   <script>
     $(".thumbnail a").on("click", function(e){
-      var newHtml = "<a href='" + $(this).attr('href') + "'><img class='img-polaroid' src='thumb/timthumb.php?src=" + $(this).attr('href') + "&w=700' alt=''></a><p>" + $(this).attr('title') + "</p>";
+      var newHtml = "<p class='muted'>" + $(this).attr('title') + "</p><a href='" + $(this).attr('href') + "'><img class='img-polaroid' src='thumb/timthumb.php?src=" + $(this).attr('href') + "&w=700' alt=''></a>";
       $("#imagen-principal").html(newHtml);
       e.preventDefault();
     });

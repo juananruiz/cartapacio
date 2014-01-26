@@ -34,6 +34,7 @@ if ($usuario->id_rol < 4)
 
   $storeFolder = "upload/recurso/$id_recurso/"; 
   $tempFile = $fichero_form['tmp_name'];
+
   $targetPath = CC_DIR_BASE . '/' . $storeFolder;
   if (!is_file($targetPath) && !is_dir($targetPath))
   {
@@ -42,8 +43,26 @@ if ($usuario->id_rol < 4)
   }
   $targetFile =  $targetPath . $fichero_form['name'];
 
-  if(move_uploaded_file($tempFile, $targetFile))
+    $image = imagecreatefromstring(file_get_contents($tempFile));
+    $exif = exif_read_data($tempFile);
+    if(!empty($exif['Orientation'])) {
+        switch($exif['Orientation']) {
+            case 8:
+                $image = imagerotate($image,90,0);
+                break;
+            case 3:
+                $image = imagerotate($image,180,0);
+                break;
+            case 6:
+                $image = imagerotate($image,-90,0);
+                break;
+        }
+    }
+    
+  //if(move_uploaded_file($image, $targetFile))
+  if(imagejpeg($image, $targetFile))
   {
+
     $fichero = new fichero();
     $fichero->url = $storeFolder . $fichero_form['name'];
     $fichero->titulo = $titulo;
@@ -55,17 +74,20 @@ if ($usuario->id_rol < 4)
     $fichero->fecha_alta = date("Y-m-d");
     $fichero->id_persona = 8;
     $fichero->save();
-    $resultado = "Operación realizada con éxito". print_r($fichero_form);
+    $smarty->assign("fichero",$fichero);
+    $aviso = "Se ha subido un nuevo fichero al recurso";
+    $smarty->assign("aviso", $aviso);
   }
   else
   {
-    $resultado = "No se ha podido subir el archivo a $targetPath";
+    $error = "No se ha podido subir el archivo a $targetPath";
+    $smarty->assign("error", $error);
   }
 }
 else
 {
-  $resultado = "No tiene permisos para subir ficheros al servidor";
+  $error = "No tiene permisos para subir ficheros al servidor";
+  $smarty->assign("error", $error);
 }
 
-$smarty->assign("resultado", $resultado);
-$plantilla = "resultado_ajax.tpl";
+$plantilla = "recurso_fichero_acordeon.tpl";

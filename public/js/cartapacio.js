@@ -20,8 +20,8 @@ function modalsHandler()
             },
 
             error: function (xhr, ajaxOptions, thrownError) {
-             console.log(xhr.status);
-             console.log(thrownError);
+             //console.log(xhr.status);
+             //console.log(thrownError);
              //notification ('Error', thrownError, 'error', true);
             }
         });
@@ -126,9 +126,9 @@ function formHandler()
       },
 
       error: function (xhr, ajaxOptions, thrownError) {
-        console.log(xhr.status);
-        console.log(thrownError);
-        notification ('Error', thrownError, 'error', true);
+        //console.log(xhr.status);
+        //console.log(thrownError);
+        //notification ('Error', thrownError, 'error', true);
       }
     });
   });
@@ -160,8 +160,8 @@ function autosave()
         console.log(datos)
       },                    
       error: function (xhr, ajaxOptions, thrownError) {
-        console.log(xhr.status);
-        console.log(thrownError);
+        //console.log(xhr.status);
+        //console.log(thrownError);
       }
     });    
   });

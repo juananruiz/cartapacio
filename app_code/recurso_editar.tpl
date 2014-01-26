@@ -1,11 +1,26 @@
 <div class="span12" style="margin-left:0;">
-<h1><i class="fa fa-archive"></i> {$_nombre_pagina}</h1>
+<h1><i class="fa fa-archive"></i> {$_nombre_pagina} </h1>
 </div>
 
 <div class="row-fluid">
 <div class="span8">
+  <p class="pull-right"><a href="index.php?page=recurso_mostrar&id={$recurso->id}"><i class="fa fa-eye"></i> Mostrar recurso</a></p>
   <form action="index.php?page=recurso_grabar" method="POST" data-registro-id="{$recurso->id}">
+
     <input type="hidden" id="id_recurso" name="registro_id" value="{$recurso->id}">
+
+    <div class="control-group">
+      <label class="control-label" for="id_estado">Estado de publicación en esta web</label>
+      <div class="controls">
+        <select class="autosave input-medium" name="id_estado" id="id_estado">
+          <option value=""></option>
+          {foreach $estados as $estado}
+            <option value="{$estado->id}" {if $recurso->id_estado == $estado->id}selected="selected"{/if}>{$estado->nombre}</option>
+          {/foreach}
+        </select>
+      </div>
+    </div>
+
     <div class="control-group">
       <label class="control-label" for="id_tipo">Tipo</label>
       <div class="controls">
@@ -60,13 +75,6 @@
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="descripcion">Descripción</label>
-      <div class="controls">
-        <textarea class="autosave input-xxlarge" name="descripcion"  id="descripcion" rows="5">{$recurso->descripcion}</textarea>
-      </div>
-    </div>
-
-    <div class="control-group">
       <label class="control-label" for="medidas">Medidas</label>
       <div class="controls">
         <input class="autosave input-xxlarge" type="text" name="medidas" id="medidas" placeholder="Medidas de la obra" value="{$recurso->medidas}">
@@ -81,30 +89,9 @@
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="historia">Historia</label>
-      <div class="controls">
-        <textarea class="autosave input-xxlarge" name="historia"  id="historia" rows="5">{$recurso->historia}</textarea>
-      </div>
-    </div>
-
-    <div class="control-group">
       <label class="control-label" for="inscripcion_autor">Inscripciones de autoría</label>
       <div class="controls">
         <input class="autosave input-xxlarge" type="text" name="inscripcion_autor" id="inscripcion_autor" value="{$recurso->inscripcion_autor}">
-      </div>
-    </div>
-
-    <div class="control-group">
-      <label class="control-label" for="alteraciones">Alteraciones</label>
-      <div class="controls">
-        <textarea class="autosave input-xxlarge" name="alteraciones"  id="alteraciones" rows="5">{$recurso->alteraciones}</textarea>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <label class="control-label" for="historia">Restauraciones</label>
-      <div class="controls">
-        <textarea class="autosave input-xxlarge" name="restauraciones"  id="restauraciones" rows="5">{$recurso->restauraciones}</textarea>
       </div>
     </div>
 
@@ -121,21 +108,32 @@
     </div>
 
     <div class="control-group">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#descripcion" data-toggle="tab">Descripción</a></li>
+      <li><a href="#historia" data-toggle="tab">Historia</a></li>
+      <li><a href="#alteraciones" data-toggle="tab">Alteraciones</a></li>
+      <li><a href="#restauraciones" data-toggle="tab">Restauraciones</a></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="descripcion">
+        <textarea class="autosave input-xxlarge" name="descripcion"  id="descripcion" rows="5">{$recurso->descripcion}</textarea>
+      </div>
+      <div class="tab-pane" id="historia">
+        <textarea class="autosave input-xxlarge" name="historia"  id="historia" rows="5">{$recurso->historia}</textarea>
+      </div>
+      <div class="tab-pane" id="alteraciones">
+        <textarea class="autosave input-xxlarge" name="alteraciones"  id="alteraciones" rows="5">{$recurso->alteraciones}</textarea>
+      </div>
+      <div class="tab-pane" id="restauraciones">
+        <textarea class="autosave input-xxlarge" name="restauraciones"  id="restauraciones" rows="5">{$recurso->restauraciones}</textarea>
+      </div>
+    </div>
+    </div>
+<hr>
+    <div class="control-group">
       <label class="control-label" for="notas">Notas internas</label>
       <div class="controls">
         <textarea class="autosave input-xxlarge" name="notas" id="notas" rows="5">{$recurso->notas}</textarea>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <label class="control-label" for="id_estado">Estado de publicación en esta web</label>
-      <div class="controls">
-        <select class="autosave input-medium" name="id_estado" id="id_estado">
-          <option value=""></option>
-          {foreach $estados as $estado}
-            <option value="{$estado->id}" {if $recurso->id_estado == $estado->id}selected="selected"{/if}>{$estado->nombre}</option>
-          {/foreach}
-        </select>
       </div>
     </div>
 
@@ -148,25 +146,12 @@
 </div> <!-- .span8 -->
 <div class="span4" style="padding-left:20px;border-left:1px solid #dedede;">
   <div id="lista-ficheros">
-    <h3><i class="fa fa-file"></i> Ficheros asociados al recurso</h3>
+    <h3><i class="fa fa-paperclip"></i> Ficheros asociados al recurso</h3>
 
     {if isset($ficheros)}
       <div class="accordion" id="accordion">
       {foreach from=$ficheros item=fichero }
-        <div class="accordion-group" id="fichero{$fichero->id}">
-          <div class="accordion-heading">
-            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse{$fichero->id}"><i class="fa fa-star-o"></i> {$fichero->titulo}</a>
-          </div>
-          <div id="collapse{$fichero->id}" class="accordion-body collapse">
-            <div class="accordion-inner">
-
-              <p><a href="{$fichero->url}"><img src="thumb/timthumb.php?h=50&w=50&src={$fichero->url}" style="float:left;margin:0 10px 10px 0;"></a></p>
-              <p>{$fichero->descripcion}</p>
-              <p>{if $fichero->es_publico}<i class="fa fa-world"></i> Fichero público{else}<i class="fa fa-door"></i> Fichero privado{/if} - <a href="{$fichero->url}">Ver/descargar fichero</a></p>
-              <p><a href="index.php?page=recurso_editar_fichero&id={$fichero->id}" data-toggle="modal"><i class="fa fa-pencil"></i></a> <a href="index.php?page=recurso_borrar_fichero&id={$fichero->id}" data-fichero-id="{$fichero->id}" class="borrar-fichero" ><i class="fa fa-trash-o pull-right"></i></a>
-            </div>
-          </div>
-        </div>
+        {include file="recurso_fichero_acordeon.tpl" fichero=$fichero}
       {/foreach}
       </div>
 
@@ -177,7 +162,7 @@
 
   <p class="alert alert-info"><strong>IMPORTANTE:</strong> el nombre de los ficheros no debe contener caracteres como ñ, acentos o espacios en blanco. Renombra tu archivo antes de subirlo para que sea clarificador de su contenido.</p>
   
-  <form id="form-fichero" enctype="multipart/form-data">
+  <form id="form-fichero" enctype="multipart/form-data" action="index.php?page=recurso_grabar_fichero">
     <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
     <input type="hidden" name="MAX_FILE_SIZE" value="50000000">
     <div class="control-group">
@@ -189,10 +174,13 @@
           <a class="btn btn-file"><i class="fa fa-folder-open-o"></i> Seleccionar</a>
         </div>
       </div>
+
       <label class="control-label" for="titulo">Título</label>
       <input class="input-xlarge" type="text" name="titulo" id="titulo">
+
       <label class="control-label" for="descripcion">Descripción</label>
       <textarea class="input-xlarge" name="descripcion" id="descripcion"></textarea>  
+
       <label class="checkbox" for="es_publico">
         <input type="checkbox" name="es_publico" id="es_publico">
         Fichero público      
@@ -203,13 +191,9 @@
         Imagen principal del recurso
       </label>
     </div>
-    <progress></progress>
-    <div id="progress" class="progress progress-danger progress-striped">
-      <div class="bar" id="barra"></div>
-    </div>
     <div class="form-actions">
       <button type="button" id="btn-subir" class="btn btn-primary">Subir fichero</button>
-      <button type="button" class="btn">Cancelar</button>
+      <button type="reset" class="btn">Cancelar</button>
     </div>
   </form>
 
@@ -223,8 +207,24 @@
   formHandler();
   autosave();
 
-  // ---------- Borrar fichero --------------
-  $('.borrar-fichero').on('click', function(e) {
+  // ---------- Función Borrar fichero --------------
+  function borrarFichero(e) {
+    e.preventDefault();
+    var id = $(this).attr("data-fichero-id"); 
+    if (confirm('¿Quiéres borrar el fichero?'))
+    {
+      $.ajax(
+      {
+        type: "GET",
+        url: $(this).attr('href'),
+        success: function(data) {
+          $("#fichero" + id).remove();   
+        }
+      });
+    }
+  }
+
+  $('.borrar-fichero').on('click', function(e){
     e.preventDefault();
     var id = $(this).attr("data-fichero-id"); 
     if (confirm('¿Quiéres borrar el fichero?'))
@@ -246,7 +246,6 @@
   $('.btn-file').on('click', function(){
     $(this).parent().prev().click();
   });
-
   // Cuando el autentico cambia hace cambiar al falso
   $('input[type=file]').on('change', function(e){
     $(this).next().find('input').val($(this).val());
@@ -256,39 +255,43 @@
   $('#btn-subir').on('click', function(e){
     e.preventDefault();
     var formDatos = new FormData($('#form-fichero')[0]);
-    console.log(formDatos);
+
     $.ajax(
     {
       type: 'POST',
-      url: 'index.php?page=recurso_grabar_fichero&ajax=true',
-      xhr: function() {  // Custom XMLHttpRequest
-        var myXhr = $.ajaxSettings.xhr();
-        if(myXhr.upload){ // Check if upload property exists
-          // For handling the progress of the upload
-          myXhr.upload.addEventListener('progress',progressFunction, false); 
-        }
-        return myXhr;
-      },
-      // Form data
+      url: $('#form-fichero').attr('action') + '&ajax=true',
       data: formDatos,
       //Options to tell jQuery not to process data or worry about content-type.
       cache: false,
       contentType: false,
       processData: false,
+      beforeSend : function (data) {
+        $('#btn-subir').html('Subiendo...').attr('disabled','disabled');
+      },
       success: function(datos) {  
-        //Recarga el div#lista-ficheros
+        // Recarga el div#lista-ficheros con el resultado de 
+        // procesar recurso_grabar_fichero.php, que llama a recurso_fichero_acordeon.tpl
+        $('#accordion').append(datos);
+        $('.borrar-fichero').bind('click', function(e) {
+          e.preventDefault();
+          var id = $(this).attr("data-fichero-id"); 
+          if (confirm('¿Quiéres borrar el fichero?'))
+          {
+            $.ajax(
+            {
+              type: "GET",
+              url: $(this).attr('href'),
+              success: function(data) {
+                $("#fichero" + id).remove();   
+              }
+            });
+          }
+        });
+        $('#form-fichero')[0].reset();
+        $('#btn-subir').html('Subir fichero').css('background','#04c').prop('disabled',false);
       },                    
-      error: function (xhr, ajaxOptions, thrownError) {
-        //console.log(xhr.status);
-        //console.log(thrownError);
-      }
     });    
   });
 
-  function progressFunction(e){
-    if(e.lengthComputable){
-      $('progress').attr({value:e.loaded,max:e.total});
-    }
-  }
 </script>
 {/literal}
