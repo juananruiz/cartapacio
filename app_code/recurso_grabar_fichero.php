@@ -10,69 +10,77 @@ global $usuario;
 // Comprueba que el usuario tiene permisos para crear un nuevo recurso
 if ($usuario->id_rol < 4)
 {
-  $fichero_form = $_FILES['fichero1'];
   $id_recurso = sanitize($_POST['id_recurso'], INT);
-  $titulo = isset($_POST['titulo'])?sanitize($_POST['titulo'],SQL):NULL;
-  $descripcion = isset($_POST['descripcion'])?sanitize($_POST['descripcion'],SQL):NULL;
-  if(isset($_POST['es_imagen_principal']) && $_POST['es_imagen_principal'] == true)
+  $fichero_form = $_FILES['fichero1'];
+  $ruta_relativa = "upload/recurso/$id_recurso/"; 
+  $fichero_original = $fichero_form['tmp_name'];
+  $fichero_nombre_sano = preg_replace('/[^\w\._]+/','',$fichero_form['name']);
+  $ruta_absoluta = CC_DIR_BASE . '/' . $ruta_relativa;
+  if (!is_file($ruta_absoluta) && !is_dir($ruta_absoluta))
   {
-    $es_imagen_principal = 1;
+    mkdir($ruta_absoluta);
+    chmod($ruta_absoluta, 0744);
   }
-  else
+  $fichero_final =  $ruta_absoluta . $fichero_nombre_sano;
+  
+  if ($tipo_imagen = exif_imagetype($fichero_original))
   {
-    $es_imagen_principal = 0;
-  }
-
-  if(isset($_POST['es_publico']) && $_POST['es_publico'] == true)
-  {
-    $es_publico = 1;
-  }
-  else
-  {
-    $es_publico = 0;
-  }
-
-  $storeFolder = "upload/recurso/$id_recurso/"; 
-  $tempFile = $fichero_form['tmp_name'];
-
-  $targetPath = CC_DIR_BASE . '/' . $storeFolder;
-  if (!is_file($targetPath) && !is_dir($targetPath))
-  {
-    mkdir($targetPath);
-    chmod($targetPath, 0744);
-  }
-  $targetFile =  $targetPath . $fichero_form['name'];
-
-    $image = imagecreatefromstring(file_get_contents($tempFile));
-    $exif = exif_read_data($tempFile);
-    if(!empty($exif['Orientation'])) {
+    $imagen = imagecreatefromstring(file_get_contents($fichero_original));
+    if($tipo_imagen == IMAGETYPE_JPEG)
+    {
+      $exif = exif_read_data($fichero_original);
+      if(!empty($exif['Orientation'])) {
         switch($exif['Orientation']) {
-            case 8:
-                $image = imagerotate($image,90,0);
-                break;
-            case 3:
-                $image = imagerotate($image,180,0);
-                break;
-            case 6:
-                $image = imagerotate($image,-90,0);
-                break;
+          case 8:
+            $imagen = imagerotate($imagen,90,0);
+            break;
+          case 3:
+            $imagen = imagerotate($imagen,180,0);
+            break;
+          case 6:
+            $imagen = imagerotate($imagen,-90,0);
+            break;
         }
+      }
+      $subida_correcta = imagejpeg($imagen, $fichero_final);
     }
-    
-  //if(move_uploaded_file($image, $targetFile))
-  if(imagejpeg($image, $targetFile))
+    else
+    {
+      $subida_correcta = move_uploaded_file($fichero_original, $fichero_final);
+    }
+  }  
+  else
   {
+    // TODO: Insertar miniatura para ficheros que no son imagen
+    $subida_correcta = move_uploaded_file($fichero_original, $fichero_final);
+  }
 
+  if($subida_correcta)
+  {
     $fichero = new fichero();
-    $fichero->url = $storeFolder . $fichero_form['name'];
-    $fichero->titulo = $titulo;
-    $fichero->descripcion = $descripcion;
-    $fichero->id_recurso = $id_recurso;
+    $fichero->url = $ruta_relativa . $fichero_nombre_sano;
+    $fichero->titulo = isset($_POST['titulo'])?sanitize($_POST['titulo'],SQL):'';
+    $fichero->descripcion = isset($_POST['descripcion'])?sanitize($_POST['descripcion'],SQL):'';
     $fichero->tipo = $fichero_form['type'];
-    $fichero->es_imagen_principal = $es_imagen_principal;
-    $fichero->es_publico = $es_publico;
+    $fichero->id_recurso = $id_recurso;
+    if(isset($_POST['es_imagen_principal']) && $_POST['es_imagen_principal'] == true)
+    {
+      $fichero->es_imagen_principal = 1;
+    }
+    else
+    {
+      $fichero->es_imagen_principal = 0;
+    }
+    if(isset($_POST['es_publico']) && $_POST['es_publico'] == true)
+    {
+      $fichero->es_publico = 1;
+    }
+    else
+    {
+      $fichero->es_publico = 0;
+    }
     $fichero->fecha_alta = date("Y-m-d");
-    $fichero->id_persona = 8;
+    $fichero->id_persona = $usuario->id;
     $fichero->save();
     $smarty->assign("fichero",$fichero);
     $aviso = "Se ha subido un nuevo fichero al recurso";
