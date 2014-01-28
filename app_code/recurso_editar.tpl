@@ -164,7 +164,7 @@
   <p class="alert alert-info"><strong>IMPORTANTE:</strong> el nombre de los ficheros no debe contener caracteres como ñ, acentos o espacios en blanco. Renombra tu archivo antes de subirlo para que sea clarificador de su contenido.</p>
   -->
 
-  <form id="form-fichero" enctype="multipart/form-data" action="index.php?page=recurso_grabar_fichero">
+  <form id="form-fichero" enctype="multipart/form-data" action="index.php?page=recurso_subir_fichero">
     <input type="hidden" id="id_recurso" name="id_recurso" value="{$recurso->id}">
     <input type="hidden" name="MAX_FILE_SIZE" value="50000000">
     <div class="control-group">

@@ -103,6 +103,14 @@ a:focus {
   width:580px;
 }
 
+.modal-header {
+  background: goldenrod;
+}
+
+.accordion-heading .accordion-toggle {
+background: #f9f9f9;
+}
+
 /* Sections
 -------------------------------------------------- */
 

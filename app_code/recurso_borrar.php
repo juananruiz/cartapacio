@@ -8,29 +8,33 @@
 global $smarty;
 global $usuario;
 
-// Comprueba que el usuario tiene permisos para editar un recurso
-// TODO
-
-if (isset($_REQUEST["id"]))
+if ($usuario->id_rol < 3)
 {
-  $recurso = new recurso();
-  $id = sanitize($_REQUEST["id"], INT);
-  if ($recurso->load("id = $id"))
+  if (isset($_REQUEST["id"]))
   {
-    $recurso->id_estado = 4;
-    $recurso->save();
-    $aviso = "Se ha marcado como eliminado el recurso '$recurso->nombre'";
-    header("location:index.php?page=recurso_listar&aviso=$aviso");
+    $recurso = new recurso();
+    $id = sanitize($_REQUEST["id"], INT);
+    if ($recurso->load("id = $id"))
+    {
+      $recurso->id_estado = 4;
+      $recurso->save();
+      $aviso = "Se ha marcado como eliminado el recurso '$recurso->nombre'";
+      header("location:index.php?page=recurso_listar&aviso=$aviso");
+    }
+    else
+    { 
+      $error = "No existe ningún recurso con el identificador $id";
+      header("location:index.php?page=recurso_listar&error=$error");
+    }
   }
   else
   { 
-    $error = "No existe ningún recurso con el identificador $id";
+    $error = "No se ha especificado el identificador del recurso a eliminar";
     header("location:index.php?page=recurso_listar&error=$error");
   }
 }
 else
 { 
-  $error = "No se ha especificado el identificador del recurso a eliminar";
+  $error = "No tiene permisos suficientes para borrar un recurso";
   header("location:index.php?page=recurso_listar&error=$error");
 }
-
