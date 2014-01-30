@@ -103,7 +103,6 @@ function ldAjax (url, div, refresh)
     });    
 }
 
-
 //--------------------------------------------------------------------------------
 //
 // Ajax Form handler
@@ -111,9 +110,13 @@ function ldAjax (url, div, refresh)
 //--------------------------------------------------------------------------------
 function formHandler()
 {
-  $( 'form' ).on( 'submit', function( event ) {
-    var form = $(this);
+  $('form').on( 'submit', function( event ) {
+    alert($(this));
     event.preventDefault();
+    var form = $(this);
+    var div = form.attr('data-div');
+    var undef;
+
     $.ajax(
     {
       type: form.attr('method'),
@@ -123,7 +126,14 @@ function formHandler()
       success: function(data){
         $('#modal').modal('hide');
         console.log(data);
-        window.location.href = data;
+        if (div)
+        {
+          $('#'+div).html(data);
+        }
+        else
+        {
+          window.location.href = data;
+        }
       },
 
       error: function (xhr, ajaxOptions, thrownError) {

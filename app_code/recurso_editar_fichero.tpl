@@ -3,7 +3,7 @@
   <h4>Modificar datos fichero</h4>
 </div>
 <div class="modal-body">
-  <form name="editor_fichero" action="index.php?page=recurso_grabar_fichero" method="post">
+  <form name="editor_fichero" action="index.php?page=recurso_grabar_fichero" method="post" data-div="fichero{$fichero->id}">
     <input type="hidden" name="id" value="{$fichero->id}">
     <label class="control-label" for="url">URL</label>
     <input class="input-xxlarge" type="text" name="url" id="url" value="{$fichero->url}" disabled="disabled">

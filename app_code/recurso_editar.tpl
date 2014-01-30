@@ -138,8 +138,7 @@
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary" name="grabar" value="salir">Grabar</button>
-      <!--<button type="button" class="btn">Cancelar</button>-->
+      <button type="submit" class="btn btn-primary" name="grabar">Grabar</button>
     </div>
   </form>
 

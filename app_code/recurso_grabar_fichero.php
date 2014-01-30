@@ -6,6 +6,7 @@
 // Graba los datos de un fichero tras ser editado
 //--------------------------------------------------------------------------
 global $usuario;
+global $plantilla;
 
 // Comprueba que el usuario tiene el rol adecuado 
 if ($usuario->id_rol < 4)
@@ -37,8 +38,10 @@ if ($usuario->id_rol < 4)
     $smarty->assign("fichero",$fichero);
     $aviso = "Se han modicado los datos del fichero";
     $smarty->assign("aviso", $aviso);
-    $resultado = "index.php?page=recurso_editar&id={$fichero->id_recurso}";
-    $smarty->assign("resultado", $resultado);
+    $smarty->assign("fichero", $fichero);
+    $plantilla = "recurso_fichero_acordeon.tpl";
+    //$resultado = "index.php?page=recurso_editar&id={$fichero->id_recurso}";
+    //$smarty->assign("resultado", $resultado);
   }
   else
   {
