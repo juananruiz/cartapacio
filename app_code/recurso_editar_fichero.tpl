@@ -25,4 +25,32 @@
     </div>
   </form>
 </div>
+<script>
+  $('form').bind( 'submit', function( event ) {
+    event.preventDefault();
+    var form = $(this);
+    var div = form.attr('data-div');
+    var undef;
+
+    $.ajax(
+    {
+      type: form.attr('method'),
+      url: form.attr('action') + '&ajax=true',
+      data: form.serialize(),
+
+      success: function(data){
+        $('.modal').modal('hide');
+        console.log(data);
+        if (div)
+        {
+          $('#'+div).replaceWith(data);
+        }
+        else
+        {
+          window.location.href = data;
+        }
+      },
+    });
+  });
+</script>
 

@@ -108,10 +108,10 @@ function ldAjax (url, div, refresh)
 // Ajax Form handler
 //
 //--------------------------------------------------------------------------------
+
 function formHandler()
 {
   $('form').on( 'submit', function( event ) {
-    alert($(this));
     event.preventDefault();
     var form = $(this);
     var div = form.attr('data-div');
@@ -129,6 +129,7 @@ function formHandler()
         if (div)
         {
           $('#'+div).html(data);
+          //$('#'+div).replaceWith(data);
         }
         else
         {
