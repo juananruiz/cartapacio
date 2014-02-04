@@ -32,6 +32,7 @@
   $("table").on("click","td.editable span",function(e) {
     var value = $(this).text();
     $(this).replaceWith("<input type='text' name='nombre' value='" + value + "'>").focus();
+    //TODO: pillar enfoque
   });
 
   $("table").on("blur","td.editable input",function(e) {

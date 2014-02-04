@@ -111,10 +111,12 @@ function ldAjax (url, div, refresh)
 
 function formHandler()
 {
-  $('form').on( 'submit', function( event ) {
+  //$('body').on('submit', 'form[data-toggle="form-ajax"]', function(event) {
+  $('body').on('submit', 'form', function(event) {
     event.preventDefault();
     var form = $(this);
     var div = form.attr('data-div');
+    var dataInsert = form.attr('data-insert');
     var undef;
 
     $.ajax(
@@ -124,12 +126,23 @@ function formHandler()
       data: form.serialize(),
 
       success: function(data){
-        $('#modal').modal('hide');
+        $('.modal').modal('hide');
         console.log(data);
-        if (div)
+        if (dataInsert == "replace")
+        {
+          $('#'+div).replaceWith(data);
+        }
+        else if (dataInsert == "inside")
         {
           $('#'+div).html(data);
-          //$('#'+div).replaceWith(data);
+        }
+        else if (dataInsert == "prepend")
+        {
+          $('#'+div).prepend(data);
+        }
+        else if (dataInsert == "append")
+        {
+          $('#'+div).append(data);
         }
         else
         {

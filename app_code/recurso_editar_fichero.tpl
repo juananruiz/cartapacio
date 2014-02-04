@@ -3,7 +3,7 @@
   <h4>Modificar datos fichero</h4>
 </div>
 <div class="modal-body">
-  <form name="editor_fichero" action="index.php?page=recurso_grabar_fichero" method="post" data-div="fichero{$fichero->id}">
+  <form name="editor_fichero" action="index.php?page=recurso_grabar_fichero" method="post" data-div="fichero{$fichero->id}" data-insert="replace">
     <input type="hidden" name="id" value="{$fichero->id}">
     <label class="control-label" for="url">URL</label>
     <input class="input-xxlarge" type="text" name="url" id="url" value="{$fichero->url}" disabled="disabled">
@@ -25,32 +25,3 @@
     </div>
   </form>
 </div>
-<script>
-  $('form').bind( 'submit', function( event ) {
-    event.preventDefault();
-    var form = $(this);
-    var div = form.attr('data-div');
-    var undef;
-
-    $.ajax(
-    {
-      type: form.attr('method'),
-      url: form.attr('action') + '&ajax=true',
-      data: form.serialize(),
-
-      success: function(data){
-        $('.modal').modal('hide');
-        console.log(data);
-        if (div)
-        {
-          $('#'+div).replaceWith(data);
-        }
-        else
-        {
-          window.location.href = data;
-        }
-      },
-    });
-  });
-</script>
-

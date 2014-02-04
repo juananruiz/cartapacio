@@ -1,5 +1,10 @@
 <div class="span12">
-  <h1><i class="fa fa-camera-retro"></i> Usuarios registrados</h1>
+  <h1><i class="fa fa-camera-retro"></i> Usuarios registrados
+  {if $_usuario->id_rol == 1}
+    <a class="btn pull-right" href="index.php?page=admin/usuario_crear"><i class="fa fa-plus-circle"></i> Crear usuario</a>
+  {/if}
+  </h1>
+
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
@@ -35,7 +40,4 @@
       {/foreach}
     </tbody>
   </table>
-  {if $_usuario->id_rol == 1}
-    <section><a class="btn btn-inverse" href="index.php?page=admin/usuario_crear"><i class="fa fa-plus-circle"></i> Crear usuario</a></section>
-  {/if}
 </div>
