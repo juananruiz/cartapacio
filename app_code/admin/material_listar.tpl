@@ -1,5 +1,5 @@
 <div class="span8">
-  <h1><i class="fa fa-camera-retro"></i> Materiales
+  <h1><i class="fa fa-glass"></i> Materiales
   {if $_usuario->id_rol < 3}
     <a class="btn pull-right" href="index.php?page=admin/material_crear"><i class="fa fa-plus-circle"></i> Crear material</a>
   {/if}

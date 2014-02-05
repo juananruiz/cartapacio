@@ -111,6 +111,15 @@ a:focus {
 background: #f9f9f9;
 }
 
+
+#materiales-encontrados {
+  width: 400px; 
+}
+
+#materiales-encontrados li{
+  list-style: none;
+}
+
 /* Sections
 -------------------------------------------------- */
 

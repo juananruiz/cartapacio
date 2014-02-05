@@ -73,7 +73,21 @@
         <span class="help-inline">Indique los años en que está datada la obra o documento</span>
       </div>
     </div>
-
+    
+    <div class="control-group">
+      <label class="control-label" for="materiales">Materiales</label>
+      <div class="controls">
+        <input class="autosearch input-xxlarge" type="text" id="buscador-materiales" placeholder="Empiece a escribir el nombre de un material">
+        <ul id="materiales-encontrados">
+        </ul>
+      </div>
+      <div class="materiales">
+        {foreach $recurso->materiales as $material}
+          <a href="#" class="material-quitar" data-id="{$material->id}"><i class="fa fa-times-circle"></i></a>
+          <span>{$material->nombre}</span> &nbsp; &nbsp;
+        {/foreach}
+      </div>
+    </div>
     <div class="control-group">
       <label class="control-label" for="medidas">Medidas</label>
       <div class="controls">
@@ -293,6 +307,22 @@
       },                    
     });    
   });
+  
+  /* Gestión de materiales asociados al recurso */
+  $("#buscador-materiales").on("keypress", function(e){
+    var value = $(this).val();
+    var select = $(this);
+    $.ajax(
+    {
+      type: 'POST',
+      url: "index.php?page=admin/material_buscar&ajax=true",
+      data: {'q': value},
+      success: function(datos) {
+        $("#materiales-encontrados").html(datos);
+      }
+    });
+  });
 
+  $("#xxxbuscador-materiales").autocomplete("index.php?page=admin/material_buscar&ajax=true");
 </script>
 {/literal}

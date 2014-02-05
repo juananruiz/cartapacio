@@ -1,5 +1,5 @@
 <div class="span12">
-  <h1><i class="fa fa-camera-retro"></i> Usuarios registrados
+  <h1><i class="fa fa-user"></i> Usuarios registrados
   {if $_usuario->id_rol == 1}
     <a class="btn pull-right" href="index.php?page=admin/usuario_crear"><i class="fa fa-plus-circle"></i> Crear usuario</a>
   {/if}

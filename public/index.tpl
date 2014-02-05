@@ -31,6 +31,7 @@
     <script src="js/wysihtml5.js"></script>
     <script src="js/bootstrap-wysihtml5.js"></script>
     <script src="freeow/jquery.freeow.min.js"></script>
+    <script src="js/jquery-autocomplete.js"></script>
     <script src="js/cartapacio.js"></script>
 
     <!-- 4dic2013 <script src="js/bootstrap.file-input.js"></script> -->

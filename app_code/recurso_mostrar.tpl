@@ -34,6 +34,7 @@
         <tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>
         {if isset($recurso->cantidad)}<tr><th>Cantidad</th><td>{$recurso->cantidad}</td></tr>{/if}
         {if isset($recurso->medidas)}<tr><th>Medidas</th><td>{$recurso->medidas}</td></tr>{/if}
+        {if isset($recurso->materiales)}<tr><th>Materiales</th><td>{foreach $materiales as $material}{if $row@iteration == 1}{$material->nombre|capitalize}{else},{$material->nombre}{/if}{/foreach}</td></tr>{/if}
       </table>
     </div>
 
