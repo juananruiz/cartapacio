@@ -16,7 +16,7 @@ if ($usuario->id_rol < 4)
   if (isset($_REQUEST['id']))
   {
     $id = sanitize($_REQUEST['id'], INT);
-    if ($recurso->load("id = $id"))
+    if ($recurso->load_joined("id = $id"))
     {
       // Buscamos los ficheros asociados a este recurso
       $fichero = new fichero();

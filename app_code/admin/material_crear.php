@@ -6,23 +6,24 @@
 // Crea un nuevo material en la aplicación 
 //--------------------------------------------------------------------------
 global $usuario;
+global $plantilla;
 
 if ($usuario->id_rol == 1)
 {
 	$material = new material();
   if ($material->save())
   {
-    header("location:index.php?page=admin/material_editar&id=$material->id");
-    exit();
+    $smarty->assign("material", $material);
+    $plantilla="admin/material_crear.tpl";
   }
   else
   {
     $error = "No se ha podido crear el material por error de la base de datos";
-    header("location:index.php?page=error&error=$error");
+    $smarty->assign("error", $error);
   }
 }
 else
 {
   $error = "No tiene permisos para crear materiales";
-  header("location:index.php?page=error&error=$error");
+  $smarty->assign("error", $error);
 }

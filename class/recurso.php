@@ -15,6 +15,7 @@ class recurso extends ADOdb_Active_Record
   public $estado;
   public $ficheros = array();
   public $imagen_principal;
+  public $materiales = array();
 
   public function load_joined($condicion)
   {
@@ -34,6 +35,8 @@ class recurso extends ADOdb_Active_Record
       $this->ficheros = $fichero->Find("id_recurso = $this->id");
       $this->imagen_principal = new fichero();
       $this->imagen_principal->load("id_recurso = $this->id AND es_imagen_principal = 1");
+      $material_recurso = new material_recurso();
+      $this->materiales = $material_recurso->Find_with_materiales("id_recurso = $this->id ORDER BY es_principal DESC");
       return $this;
     }
     else

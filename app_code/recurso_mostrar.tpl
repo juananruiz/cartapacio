@@ -34,7 +34,7 @@
         <tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>
         {if isset($recurso->cantidad)}<tr><th>Cantidad</th><td>{$recurso->cantidad}</td></tr>{/if}
         {if isset($recurso->medidas)}<tr><th>Medidas</th><td>{$recurso->medidas}</td></tr>{/if}
-        {if isset($recurso->materiales)}<tr><th>Materiales</th><td>{foreach $materiales as $material}{if $row@iteration == 1}{$material->nombre|capitalize}{else},{$material->nombre}{/if}{/foreach}</td></tr>{/if}
+        {if isset($recurso->materiales)}<tr><th>Materiales</th><td>{foreach $recurso->materiales as $material}{$material->material->nombre}{if !$material@last}, {/if} {/foreach}</td></tr>{/if}
       </table>
     </div>
 
@@ -63,10 +63,10 @@
     </div>
   </div><!-- .span5 -->
 
-  <script>
-    $(".thumbnail a").on("click", function(e){
-      var newHtml = "<p class='muted'>" + $(this).attr('title') + "</p><a href='" + $(this).attr('href') + "'><img class='img-polaroid' src='thumb/timthumb.php?src=" + $(this).attr('href') + "&w=700' alt=''></a>";
-      $("#imagen-principal").html(newHtml);
-      e.preventDefault();
-    });
-  </script>
+<script>
+  $(".thumbnail a").on("click", function(e){
+    var newHtml = "<p class='muted'>" + $(this).attr('title') + "</p><a href='" + $(this).attr('href') + "'><img class='img-polaroid' src='thumb/timthumb.php?src=" + $(this).attr('href') + "&w=700' alt=''></a>";
+    $("#imagen-principal").html(newHtml);
+    e.preventDefault();
+  });
+</script>

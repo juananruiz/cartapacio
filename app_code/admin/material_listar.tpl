@@ -1,7 +1,7 @@
 <div class="span8">
   <h1><i class="fa fa-glass"></i> Materiales
   {if $_usuario->id_rol < 3}
-    <a class="btn pull-right" href="index.php?page=admin/material_crear"><i class="fa fa-plus-circle"></i> Crear material</a>
+    <a class="btn pull-right" data-toggle="modal" href="index.php?page=admin/material_crear" data-url="index.php?page=admin/material_crear"><i class="fa fa-plus-circle"></i> Crear material</a>
   {/if}
   </h1>
 
@@ -28,6 +28,9 @@
   </table>
 </div>
 <script>
+modalsHandler();
+formHandler();
+
 {literal}
   $("table").on("click","td.editable span",function(e) {
     var value = $(this).text();

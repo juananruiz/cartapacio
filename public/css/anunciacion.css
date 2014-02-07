@@ -92,6 +92,10 @@ a:focus {
   color: maroon;
 }
 
+.bg-danger {
+background-color: #f2dede;
+}
+
 .nav .dropdown-toggle:hover .caret,
 .nav .dropdown-toggle:focus .caret {
   border-top-color: maroon;
@@ -112,12 +116,34 @@ background: #f9f9f9;
 }
 
 
-#materiales-encontrados {
-  width: 400px; 
+#materiales-asociados{
+  padding-bottom:10px;
 }
 
-#materiales-encontrados li{
+.pseudoselect {
+  display: none;
+  width: 400px; 
+  position: relative;
+  top: -10px;
+  left: 0;
+  z-index: 1000;
+  min-width: 160px;
+  padding: 5px 6px;
+  margin: 2px 0 0;
   list-style: none;
+  font-size: 14px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0,0,0,.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  box-shadow: 0 6px 12px rgba(0,0,0,.175);
+  background-clip: padding-box;
+}
+.pseudoselect>li>a:hover, .pseudoselect>li>a:focus {
+  text-decoration: none;
+  color: #262626;
+  background-color: #f5f5f5;
 }
 
 /* Sections

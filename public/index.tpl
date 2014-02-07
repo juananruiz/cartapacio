@@ -23,7 +23,7 @@
     <![endif]-->
 
     <!-- Cuando sea posible deben estar al final para que la carga sea más rápida -->
-    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/jquery-1.11.0.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/jquery.validate.min.js"></script>
     <script src="js/jquery.dataTables.js"></script>

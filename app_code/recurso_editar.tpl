@@ -76,16 +76,17 @@
     
     <div class="control-group">
       <label class="control-label" for="materiales">Materiales</label>
+      <div id="materiales-asociados">
+        {if is_array($recurso->materiales)}
+          {foreach $recurso->materiales as $material}
+            <a href="index.php?page=admin/material_disociar&id_material={$material->material->id}&id_recurso={$recurso->id}" class="material-disociar"><i class="fa fa-times-circle"></i></a> <span>{$material->material->nombre}</span> &nbsp; 
+          {/foreach}
+        {/if}
+      </div>
       <div class="controls">
         <input class="autosearch input-xxlarge" type="text" id="buscador-materiales" placeholder="Empiece a escribir el nombre de un material">
-        <ul id="materiales-encontrados">
+        <ul id="materiales-encontrados" class="pseudoselect">
         </ul>
-      </div>
-      <div class="materiales">
-        {foreach $recurso->materiales as $material}
-          <a href="#" class="material-quitar" data-id="{$material->id}"><i class="fa fa-times-circle"></i></a>
-          <span>{$material->nombre}</span> &nbsp; &nbsp;
-        {/foreach}
       </div>
     </div>
     <div class="control-group">
@@ -287,7 +288,7 @@
         // Recarga el div#lista-ficheros con el resultado de 
         // procesar recurso_grabar_fichero.php, que llama a recurso_fichero_acordeon.tpl
         $('#accordion').append(datos);
-        $('.borrar-fichero').bind('click', function(e) {
+        $('body').on('click', '.borrar-fichero', function(e) {
           e.preventDefault();
           var id = $(this).attr("data-fichero-id"); 
           if (confirm('¿Quiéres borrar el fichero?'))
@@ -309,20 +310,51 @@
   });
   
   /* Gestión de materiales asociados al recurso */
-  $("#buscador-materiales").on("keypress", function(e){
+  $("#buscador-materiales").on("keyup", function(e){
     var value = $(this).val();
-    var select = $(this);
     $.ajax(
     {
       type: 'POST',
       url: "index.php?page=admin/material_buscar&ajax=true",
       data: {'q': value},
       success: function(datos) {
-        $("#materiales-encontrados").html(datos);
+        $("#materiales-encontrados").html(datos).css("display", "block");
       }
     });
   });
 
-  $("#xxxbuscador-materiales").autocomplete("index.php?page=admin/material_buscar&ajax=true");
+  $("#materiales-encontrados").on("click", "a", function(e){
+    console.log($(this).attr("data-id"));
+    console.log($("#id_recurso").val());
+    var id_recurso = $("#id_recurso").val();
+    var id_material = $(this).attr("data-id");
+    $.ajax(
+    {
+      type: "POST",
+      url: "index.php?page=admin/material_asociar&ajax=true",
+      data: {'id_recurso': id_recurso, 'id_material': id_material},
+      success: function(response){
+        console.log(response);
+        $("#materiales-asociados").append(response);
+        $("#materiales-encontrados").html("").css("display","none");
+        $("#buscador-materiales").val("");
+      }
+    });
+    e.preventDefault();
+  });
+
+  $("#materiales-asociados").on("click",".material-disociar", function(e) {
+    var material = $(this);
+    $.ajax(
+    {
+      type: "POST",
+      url: material.attr("href") + "&ajax=true",
+      success: function(){
+        material.next().remove();
+        material.remove();
+      }
+    });
+    e.preventDefault();
+  });
 </script>
 {/literal}

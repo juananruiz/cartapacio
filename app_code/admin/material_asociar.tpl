@@ -1,0 +1,1 @@
+  <a href="index.php?page=admin/material_disociar&id_material={$material->id}&id_recurso={$id_recurso}" class="material-disociar"><i class="fa fa-times-circle"></i></a> <span>{$material->nombre}</span> &nbsp; 

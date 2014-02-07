@@ -3,15 +3,14 @@
 // Proyecto: Cartapacio
 // Archivo: material_grabar.php
 //--------------------------------------------------------------------------
-// Graba los datos de un material tras ser editado
+// Graba un nuevo material en la base de datos
 //--------------------------------------------------------------------------
 global $usuario;
-global $plantilla;
 
 // Comprueba que el usuario tiene el rol adecuado 
 if ($usuario->id_rol < 3)
 {
-  if ($_POST['id'])
+  if (isset($_POST['id']))
   {
     $id = sanitize($_POST['id'], INT);
     $material = new material();
