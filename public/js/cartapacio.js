@@ -7,13 +7,10 @@ function modalsHandler()
 {
 	//Modals Window Handler 
   $('body').on('click','a[data-toggle="modal"]',function(e){
-    e.preventDefault();
-    //var action = $(this).attr('href');
     var action = $(this).attr('data-url');
     $.ajax({
-      //Le añado ajax=true para que el controlador principal no cargue
-      //la plantilla principal
       type: 'GET',
+      //Le añado ajax=true para que no cargue la plantilla principal
       url: action + '&ajax=true',
 
       success: function(response) {
@@ -24,9 +21,9 @@ function modalsHandler()
       error: function (xhr, ajaxOptions, thrownError) {
        //console.log(xhr.status);
        //console.log(thrownError);
-       //notification ('Error', thrownError, 'error', true);
       }
     });
+    e.preventDefault();
   });
 }
 

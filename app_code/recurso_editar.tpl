@@ -79,7 +79,7 @@
       <div id="materiales-asociados">
         {if is_array($recurso->materiales)}
           {foreach $recurso->materiales as $material}
-            <a href="index.php?page=admin/material_disociar&id_material={$material->material->id}&id_recurso={$recurso->id}" class="material-disociar"><i class="fa fa-times-circle"></i></a> <span>{$material->material->nombre}</span> &nbsp; 
+            <a href="index.php?page=admin/material_disociar&id_material={$material->id_material}&id_recurso={$recurso->id}" class="material-disociar"><i class="fa fa-times-circle"></i></a> <span>{$material->material->nombre}</span> &nbsp; 
           {/foreach}
         {/if}
       </div>
@@ -223,6 +223,7 @@
   formHandler();
   autosave();
 
+  /*
   // ---------- Función Borrar fichero --------------
   function borrarFichero(e) {
     e.preventDefault();
@@ -239,6 +240,7 @@
       });
     }
   }
+  */
 
   $('.borrar-fichero').on('click', function(e){
     e.preventDefault();

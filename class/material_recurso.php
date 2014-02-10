@@ -27,4 +27,18 @@ class material_recurso extends ADOdb_Active_Record
     }
   }
 
+  public function Delete_many($condicion)
+  {
+    $adodb = $this->DB();
+    $query = "DELETE FROM materiales_recursos WHERE $condicion";
+    if ($adodb->Execute($query))
+    {
+      return true;
+    }
+    else
+    {
+      return false;
+    }
+  }
+
 }

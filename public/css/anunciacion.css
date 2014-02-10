@@ -534,13 +534,21 @@ h2 + .row {
     padding-left: 10px;
     line-height: 24px;
   }
+
   .container-fluid {
-    margin-top: 30px;
+    margin-top: 40px;
   }
 
   .thumbnails > li {
     margin-left: 10px;
     margin-bottom: 10px;
+  }
+
+}
+@media (min-width: 980px) and (max-width: 1200px) {
+
+  .container-fluid {
+    margin-top: 40px;
   }
 
 }

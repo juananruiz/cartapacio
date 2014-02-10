@@ -17,8 +17,7 @@ if ($usuario->id_rol < 3)
     $material->load("id = $id"); 
     $material->nombre = isset($_POST['nombre'])?sanitize($_POST['nombre'],SQL):'';
     $material->save();
-    $aviso = "Se han modicado el nombre del material";
-    $smarty->assign("aviso", $aviso);
+    $smarty->assign("material", $material);
     $plantilla = "admin/material_grabar.tpl";
   }
   else

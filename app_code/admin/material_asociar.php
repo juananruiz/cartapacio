@@ -20,6 +20,7 @@ if ($usuario->id_rol < 4)
     $material = new material();
     $material->load("id = $material_recurso->id_material");
     $smarty->assign("material", $material);
+    $smarty->assign("id_recurso", $material_recurso->id_recurso);
     $plantilla = "admin/material_asociar.tpl";
   }
   else
