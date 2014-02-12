@@ -104,6 +104,14 @@
     </div>
 
     <div class="control-group">
+      <label class="control-label" for="id_iconografia">URL externa</label>
+      <div class="controls">
+        <input class="autosave input-xxlarge" type="text" name="url_externa" id="url_externa" value="{$recurso->url_externa}">
+      </div>
+    </div>
+
+
+    <div class="control-group">
       <label class="control-label" for="inscripcion_autor">Inscripciones de autoría</label>
       <div class="controls">
         <input class="autosave input-xxlarge" type="text" name="inscripcion_autor" id="inscripcion_autor" value="{$recurso->inscripcion_autor}">

@@ -37,7 +37,9 @@
     
     $("table").on("click","td.editable span",function(e) {
       var value = $(this).text();
-      $(this).replaceWith("<input type='text' name='nombre' value='" + value + "'>").focus();
+      $(this).replaceWith("<input type='text' name='nombre' value='" + value + "'>");
+      $("table input").focus();
+      console.log($(this).children("input"));
       //TODO: pillar enfoque
     });
 
@@ -57,7 +59,7 @@
       $(this).replaceWith("<span>" + value + "</span");
     });
 
-    $('.eliminar-material').on('click', function(e){
+    $("table").on('click',".eliminar-material", function(e){
       var fila_actual = $(this).closest("tr");
       var usos = $(this).parent().prev().text();
       var mensaje;

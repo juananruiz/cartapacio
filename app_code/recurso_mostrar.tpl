@@ -34,6 +34,7 @@
         {if isset($recurso->coleccion->id)}<tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>{/if}
         {if isset($recurso->cantidad)}<tr><th>Cantidad</th><td>{$recurso->cantidad}</td></tr>{/if}
         {if isset($recurso->medidas)}<tr><th>Medidas</th><td>{$recurso->medidas}</td></tr>{/if}
+        {if isset($recurso->iconografia)}<tr><th>Iconografía</th><td>{$recurso->iconografia->nombre}</td></tr>{/if}
         {if is_array($recurso->materiales)}<tr><th>Materiales</th><td>{foreach $recurso->materiales as $material}{$material->material->nombre}{if !$material@last}, {/if} {/foreach}</td></tr>{/if}
       </table>
     </div>

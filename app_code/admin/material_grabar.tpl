@@ -3,7 +3,7 @@
       <td>0</td>
       {if $_usuario->id_rol < 3}
         <td>
-            <a href="index.php?page=admin/material_eliminar&id={$material->id}"><i class="fa fa-trash-o"></i></a> 
+            <a href="index.php?page=admin/material_eliminar&id={$material->id}" class="eliminar-material"><i class="fa fa-trash-o"></i></a> 
         </td>
       {/if}
     </tr>

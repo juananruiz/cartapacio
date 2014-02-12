@@ -1,9 +1,9 @@
 <?php
 //--------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: material_grabar.php
+// Archivo: iconografia_grabar.php
 //--------------------------------------------------------------------------
-// Graba un nuevo material en la base de datos
+// Graba un nuevo iconografia en la base de datos
 //--------------------------------------------------------------------------
 global $usuario;
 
@@ -13,21 +13,21 @@ if ($usuario->id_rol < 3)
   if (isset($_POST['id']))
   {
     $id = sanitize($_POST['id'], INT);
-    $material = new material();
-    $material->load("id = $id"); 
-    $material->nombre = isset($_POST['nombre'])?sanitize($_POST['nombre'],SQL):'';
-    $material->save();
-    $smarty->assign("material", $material);
-    $plantilla = "admin/material_grabar.tpl";
+    $iconografia = new iconografia();
+    $iconografia->load("id = $id"); 
+    $iconografia->nombre = isset($_POST['nombre'])?sanitize($_POST['nombre'],SQL):'';
+    $iconografia->save();
+    $smarty->assign("iconografia", $iconografia);
+    $plantilla = "admin/iconografia_grabar.tpl";
   }
   else
   {
-    $error = "Falta el identificador del material a editar";
+    $error = "Falta el identificador del iconografia a editar";
     $smarty->assign("error", $error);
   }
 }
 else
 {
-  $error = "No tiene permisos para editar materiales";
+  $error = "No tiene permisos para editar iconografias";
   $smarty->assign("error", $error);
 }
