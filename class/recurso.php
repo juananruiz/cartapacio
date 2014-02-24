@@ -13,6 +13,8 @@ class recurso extends ADOdb_Active_Record
   public $ubicacion;
   public $coleccion;
   public $estado;
+  public $estilo;
+  public $iconografia;
   public $ficheros = array();
   public $imagen_principal;
   public $materiales = array();
@@ -31,6 +33,16 @@ class recurso extends ADOdb_Active_Record
       $this->coleccion->load("id = $this->id_coleccion");
       $this->estado = new estado();
       $this->estado->load("id = $this->id_estado");
+      if ($this->id_estilo > 0)
+      {
+        $this->estilo = new estilo();
+        $this->estilo->load("id = $this->id_estilo");
+      }
+      if ($this->id_iconografia > 0)
+      {
+        $this->iconografia = new iconografia();
+        $this->iconografia->load("id = $this->id_iconografia");
+      }
       $fichero = new fichero();
       $this->ficheros = $fichero->Find("id_recurso = $this->id");
       $this->imagen_principal = new fichero();

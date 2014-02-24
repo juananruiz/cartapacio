@@ -36,11 +36,10 @@
   {literal}
     
     $("table").on("click","td.editable span",function(e) {
+      var filaActual = $(this).closest("tr");
       var value = $(this).text();
       $(this).replaceWith("<input type='text' name='nombre' value='" + value + "'>");
-      $("table input").focus();
-      console.log($(this).children("input"));
-      //TODO: pillar enfoque
+      filaActual.find("input").focus();
     });
 
     $("table").on("blur","td.editable input",function(e) {
@@ -60,7 +59,7 @@
     });
 
     $("table").on('click',".eliminar-material", function(e){
-      var fila_actual = $(this).closest("tr");
+      var filaActual = $(this).closest("tr");
       var usos = $(this).parent().prev().text();
       var mensaje;
       if (usos > 0)
@@ -79,7 +78,7 @@
           type: "GET",
           url: $(this).attr('href') + "&ajax=true",
           success: function(data) {
-            fila_actual.remove();   
+            filaActual.remove();   
           }
         });
       }

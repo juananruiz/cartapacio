@@ -14,13 +14,13 @@ function modalsHandler()
       url: action + '&ajax=true',
 
       success: function(response) {
-          $('#modalGlobal').html(response);
-          $('#modalGlobal').modal('show');
+        $('#modalGlobal').html(response);
+        $('#modalGlobal').modal('show');
       },
 
       error: function (xhr, ajaxOptions, thrownError) {
-       //console.log(xhr.status);
-       //console.log(thrownError);
+        //console.log(xhr.status);
+        //console.log(thrownError);
       }
     });
     e.preventDefault();

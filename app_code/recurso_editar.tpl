@@ -85,8 +85,7 @@
       </div>
       <div class="controls">
         <input class="autosearch input-xxlarge" type="text" id="buscador-materiales" placeholder="Empiece a escribir el nombre de un material">
-        <ul id="materiales-encontrados" class="pseudoselect">
-        </ul>
+        <ul id="materiales-encontrados" class="pseudoselect"></ul>
       </div>
     </div>
     <div class="control-group">
@@ -104,9 +103,10 @@
     </div>
 
     <div class="control-group">
-      <label class="control-label" for="id_iconografia">URL externa</label>
+      <label class="control-label" for="busca-iconografia">Iconografía</label>
       <div class="controls">
-        <input class="autosave input-xxlarge" type="text" name="url_externa" id="url_externa" value="{$recurso->url_externa}">
+        <input class="autosearch input-xxlarge" type="text" name="busca-iconografia" id="busca-iconografia" value="{if isset($recurso->iconografia)}{$recurso->iconografia->nombre}{/if}">
+        <ul id="iconografias-encontradas" class="pseudoselect"></ul>
       </div>
     </div>
 
@@ -161,7 +161,7 @@
     </div>
 
     <div class="form-actions">
-      <button type="submit" class="btn btn-primary" name="grabar">Grabar</button>
+      <a href="index.php?page=recurso_mostrar&id={$recurso->id}" class="button">Mostrar recurso</a>
     </div>
   </form>
 
@@ -318,8 +318,39 @@
       },                    
     });    
   });
-  
-  /* Gestión de materiales asociados al recurso */
+
+  /* ----- Gestión de iconografias asociados al recurso ----- */
+  $("#busca-iconografia").on("keyup", function(e){
+    var value = $(this).val();
+    $.ajax(
+    {
+      type: 'POST',
+      url: "index.php?page=admin/iconografia_buscar&ajax=true",
+      data: {'busqueda': value},
+      success: function(datos) {
+        $("#iconografias-encontradas").html(datos).css("display", "block");
+      }
+    });
+  });  
+
+  $("#iconografias-encontradas").on("click", "a", function(e){
+    var id_recurso = $("#id_recurso").val();
+    var id_iconografia = $(this).attr("data-id");
+    $.ajax(
+    {
+      type: "POST",
+      url: "index.php?page=admin/iconografia_asociar&ajax=true",
+      data: {'id_recurso': id_recurso, 'id_iconografia': id_iconografia},
+      success: function(response){
+        $("#busca-iconografia").val(response);
+        $("#iconografias-encontradas").html("").css("display","none");
+      }
+    });
+    e.preventDefault();
+  });
+
+
+  /* ----- Gestión de materiales asociados al recurso ----- */
   $("#buscador-materiales").on("keyup", function(e){
     var value = $(this).val();
     $.ajax(
@@ -334,8 +365,6 @@
   });
 
   $("#materiales-encontrados").on("click", "a", function(e){
-    console.log($(this).attr("data-id"));
-    console.log($("#id_recurso").val());
     var id_recurso = $("#id_recurso").val();
     var id_material = $(this).attr("data-id");
     $.ajax(
@@ -344,7 +373,6 @@
       url: "index.php?page=admin/material_asociar&ajax=true",
       data: {'id_recurso': id_recurso, 'id_material': id_material},
       success: function(response){
-        console.log(response);
         $("#materiales-asociados").append(response);
         $("#materiales-encontrados").html("").css("display","none");
         $("#buscador-materiales").val("");

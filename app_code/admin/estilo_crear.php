@@ -1,29 +1,29 @@
 <?php
 //--------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: iconografia_crear.php
+// Archivo: estilo_crear.php
 //--------------------------------------------------------------------------
-// Crea una nueva iconografia en la aplicación 
+// Crea un nuevo estilo en la aplicación 
 //--------------------------------------------------------------------------
 global $usuario;
 global $plantilla;
 
 if ($usuario->id_rol == 1)
 {
-	$iconografia = new iconografia();
-  if ($iconografia->save())
+	$estilo = new estilo();
+  if ($estilo->save())
   {
-    $smarty->assign("iconografia", $iconografia);
-    $plantilla="admin/iconografia_crear.tpl";
+    $smarty->assign("estilo", $estilo);
+    $plantilla="admin/estilo_crear.tpl";
   }
   else
   {
-    $error = "No se ha podido crear la iconografia por error de la base de datos";
+    $error = "No se ha podido crear el estilo por error de la base de datos";
     $smarty->assign("error", $error);
   }
 }
 else
 {
-  $error = "No tiene permisos para crear iconografias";
+  $error = "No tiene permisos para crear estilos";
   $smarty->assign("error", $error);
 }
