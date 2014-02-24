@@ -1,16 +1,6 @@
 <h1 class="ficha">{$recurso->nombre} 
   {if $_usuario->id_rol < 4}<a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i></a>{/if}</h1>
 
-  <div class="span7">
-    {if isset($recurso->imagen_principal)}
-      <div class="caja" id="imagen-principal">
-      <p class="muted">{$recurso->imagen_principal->titulo}</p>
-        <a href="{$recurso->imagen_principal->url}"><img class="img-polaroid" 
-          src="thumb/timthumb.php?src={$recurso->imagen_principal->url}&w=700" alt="{$recurso->imagen_principal->titulo}"></a>
-      </div>
-    {/if}
-  </div><!-- .span7 -->
-
   <div class="span5">
     <div class="caja">
     <ul class="thumbnails">
@@ -62,12 +52,55 @@
       </div>
 
     </div>
-  </div><!-- .span5 -->
+  </div><!-- panel info -->
 
-<script>
-  $(".thumbnail a").on("click", function(e){
-    var newHtml = "<p class='muted'>" + $(this).attr('title') + "</p><a href='" + $(this).attr('href') + "'><img class='img-polaroid' src='thumb/timthumb.php?src=" + $(this).attr('href') + "&w=700' alt=''></a>";
-    $("#imagen-principal").html(newHtml);
-    e.preventDefault();
+  <div class="span7">
+    {if isset($recurso->imagen_principal)}
+      <div class="caja" id="imagen-principal" data-path="{$smarty.const.CC_URL_BASE}thumb/timthumb.php?w=700&src={$recurso->imagen_principal->url}">
+      </div>
+
+      <div id="pie-visor">
+        <p class="muted">{$recurso->imagen_principal->titulo}</p>
+        {if $recurso->imagen_principal->es_publico == 1}
+          <p><a href="{$recurso->imagen_principal->url}"><i class="fa fa-expand"></i> Ver a pantalla completa</a></p>
+        {/if}
+      </div>
+    {/if}
+  </div><!-- panel visor -->
+
+{literal}
+<link rel="stylesheet" href="documentViewer/css/style.css">
+<script type="text/javascript" src="documentViewer/libs/yepnope.1.5.3-min.js"></script>
+<script type="text/javascript" src="documentViewer/ttw-document-viewer.min.js"></script>
+￼ 
+<script type="text/javascript">
+  $(function() {
+    var currentDocument = $("#imagen-principal").attr("data-path"), 
+        currentWidth = 650;
+        documentViewer = $("#imagen-principal").documentViewer();
+
+    documentViewer.load(currentDocument, {width:currentWidth});
+    
+    $(".thumbnail a").on("click", function(e){
+      var path = $(this).attr('href');
+      var title = $(this).attr('title');
+      var htmlPieVisor = "<p class='muted'>" + title + "</p>" + "<p><a href='" + path + "'><i class='fa fa-expand'></i> Ver a pantalla completa</a></p>";
+
+      documentViewer.load(path, {width:currentWidth});
+      $("#pie-visor").html(htmlPieVisor);
+      e.preventDefault();
+    });
+
+    /* No funciona ni patrás
+    $("#size").on("change", function(e){
+      currentWidth = $(this).val();
+      console.log(currentWidth);
+      console.log(currentDocument);
+      if(currentDocument) {
+        documentViewer.load(currentDocument, {width:currentWidth});
+      }
+    });
+    */ 
   });
 </script>
+{/literal}
