@@ -3,8 +3,7 @@
 // Proyecto: Cartapacio
 // Archivo: class/estilo.php
 //--------------------------------------------------------------------------
-// Descripcion: gestiona los estilos ('virgen con niño", "inmaculada", 
-// "martirio de cristo", etc)
+// Descripcion: gestiona los estilos ('barroco', 'neoclásico', 'plateresco', etc)
 //--------------------------------------------------------------------------
 class estilo extends ADOdb_Active_Record
 {
@@ -18,8 +17,7 @@ class estilo extends ADOdb_Active_Record
       foreach ($estilos as& $estilo)
       {
         $adodb = $this->DB();
-        $query = "SELECT count(id) as usos FROM recursos
-                  WHERE id_estilo = $estilo->id GROUP BY id_estilo";
+        $query = "SELECT count(id) as usos FROM recursos WHERE id_estilo = $estilo->id GROUP BY id_estilo";
         $resultset = $adodb->Execute($query);
         $estilo->usos = $resultset->fields['usos'] > 0 ? $resultset->fields['usos'] : 0;
       }

@@ -1,21 +1,21 @@
 <?php
 //--------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: iconografia_listar.php
+// Archivo: estilo_listar.php
 //--------------------------------------------------------------------------
-// Lista de iconografias en la base de datos
+// Lista de estilos en la base de datos
 //--------------------------------------------------------------------------
 global $smarty;
 global $usuario;
 
-if ($usuario->id_rol < 2)
+if ($usuario->id_rol < 3)
 {
-  $iconografia = new iconografia();
-  $iconografias = $iconografia->Find_con_usos("true");
-  $smarty->assign('iconografias', $iconografias);
+  $estilo = new estilo();
+  $estilos = $estilo->Find_con_usos("true");
+  $smarty->assign('estilos', $estilos);
 }
 else
 {
-  $error = "No tiene permisos suficientes para listar iconografías";
+  $error = "No tiene permisos suficientes para listar estilos";
   header("location:index.php?error=$error");
 }

@@ -34,10 +34,11 @@
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i> ADMINISTRACIÓN<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="index.php?page=admin/usuario_listar"><i class="fa fa-cog fa-fw"></i> Usuarios</a></li>
                   <li><a href="index.php?page=ubicacion_listar"><i class="fa fa-map-marker fa-fw"></i> Ubicaciones</a></li>
                   <li><a href="index.php?page=admin/material_listar"><i class="fa fa-glass fa-fw"></i> Materiales</a></li>
                   <li><a href="index.php?page=admin/iconografia_listar"><i class="fa fa-picture-o fa-fw"></i> Iconografía</a></li>
+                  <li><a href="index.php?page=admin/estilo_listar"><i class="fa fa-compass fa-fw"></i> Estilos</a></li>
+                  <li><a href="index.php?page=admin/usuario_listar"><i class="fa fa-group fa-fw"></i> Usuarios</a></li>
                   <li><a href="index.php?page=login_out"><i class="fa fa-key fa-fw"></i> Cerrar sesión</a></li>
                 </ul>
               </li>

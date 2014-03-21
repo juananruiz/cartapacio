@@ -226,173 +226,163 @@
 
 {literal}
 <script type="text/javascript">
-  // ---------- Estas tres funciones se cargan desde /js/cartapacio.js
-  modalsHandler();
-  formHandler();
-  autosave();
+// ---------- Estas tres funciones se cargan desde /js/cartapacio.js
+modalsHandler();
+formHandler();
+autosave();
 
-  /*
-  // ---------- Función Borrar fichero --------------
-  function borrarFichero(e) {
-    e.preventDefault();
-    var id = $(this).attr("data-fichero-id"); 
-    if (confirm('¿Quiéres borrar el fichero?'))
+/*
+// ---------- Función Borrar fichero --------------
+function borrarFichero(e) {
+  e.preventDefault();
+  var id = $(this).attr("data-fichero-id"); 
+  if (confirm('¿Quiéres borrar el fichero?'))
+  {
+    $.ajax(
     {
-      $.ajax(
-      {
-        type: "GET",
-        url: $(this).attr('href'),
-        success: function(data) {
-          $("#fichero" + id).remove();   
-        }
-      });
-    }
+      type: "GET",
+      url: $(this).attr('href'),
+      success: function(data) {
+        $("#fichero" + id).remove();   
+      }
+    });
   }
-  */
+}
+*/
+$('.borrar-fichero').on('click', function (e) {
+  e.preventDefault();
+  var id = $(this).attr("data-fichero-id"); 
+  if (confirm('¿Quiéres borrar el fichero?')) {
+    $.ajax({
+      type: "GET",
+      url: $(this).attr('href'),
+      success: function () {
+        $("#fichero" + id).remove();   
+      }
+    });
+  }
+});
 
-  $('.borrar-fichero').on('click', function(e){
-    e.preventDefault();
-    var id = $(this).attr("data-fichero-id"); 
-    if (confirm('¿Quiéres borrar el fichero?'))
-    {
-      $.ajax(
-      {
-        type: "GET",
-        url: $(this).attr('href'),
-        success: function(data) {
-          $("#fichero" + id).remove();   
+// ---------- Falso input file ------------
+// http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/ 
+// Cuando se pulsa el falso manda el click al autentico
+$('.btn-file').on('click', function () {
+  $(this).parent().prev().click();
+});
+
+// Cuando el autentico cambia hace cambiar al falso
+$('input[type=file]').on('change', function () {
+  $(this).next().find('input').val($(this).val());
+});
+
+// ---------- Petición ajax subir fichero --------
+$('#btn-subir').on('click', function (e) {
+  e.preventDefault();
+  var formDatos = new FormData($('#form-fichero')[0]);
+
+  $.ajax({
+    type: 'POST',
+    url: $('#form-fichero').attr('action') + '&ajax=true',
+    data: formDatos,
+    //Options to tell jQuery not to process data or worry about content-type.
+    cache: false,
+    contentType: false,
+    processData: false,
+    beforeSend : function (data) {
+      $('#btn-subir').html('Subiendo...').attr('disabled', 'disabled');
+    },
+    success: function (datos) {  
+      // Recarga el div#lista-ficheros con el resultado de 
+      // procesar recurso_grabar_fichero.php, que llama a recurso_fichero_acordeon.tpl
+      $('#accordion').append(datos);
+      $('body').on('click', '.borrar-fichero', function (e) {
+        e.preventDefault();
+        var id = $(this).attr("data-fichero-id"); 
+        if (confirm('¿Quiéres borrar el fichero?')) {
+          $.ajax( {
+            type: "GET",
+            url: $(this).attr('href'),
+            success: function () {
+              $("#fichero" + id).remove();   
+            }
+          });
         }
       });
+      $('#form-fichero')[0].reset();
+      $('#btn-subir').html('Subir fichero').css('background','#04c').prop('disabled', false);
+    },                    
+  });    
+});
+
+/* ----- Gestión de iconografias asociados al recurso ----- */
+$("#busca-iconografia").on("keyup", function (e) {
+  var value = $(this).val();
+  $.ajax({
+    type: 'POST',
+    url: "index.php?page=admin/iconografia_buscar&ajax=true",
+    data: {'busqueda': value},
+    success: function (datos) {
+      $("#iconografias-encontradas").html(datos).css("display", "block");
     }
   });
+});  
 
-  // ---------- Falso input file ------------
-  // http://duckranger.com/2012/06/pretty-file-input-field-in-bootstrap/ 
-  // Cuando se pulsa el falso manda el click al autentico
-  $('.btn-file').on('click', function(){
-    $(this).parent().prev().click();
+$("#iconografias-encontradas").on("click", "a", function (e) {
+  var id_recurso = $("#id_recurso").val();
+  var id_iconografia = $(this).attr("data-id");
+  $.ajax({
+    type: "POST",
+    url: "index.php?page=admin/iconografia_asociar&ajax=true",
+    data: {'id_recurso': id_recurso, 'id_iconografia': id_iconografia},
+    success: function (response) {
+      $("#busca-iconografia").val(response);
+      $("#iconografias-encontradas").html("").css("display", "none");
+    }
   });
-  // Cuando el autentico cambia hace cambiar al falso
-  $('input[type=file]').on('change', function(e){
-    $(this).next().find('input').val($(this).val());
+  e.preventDefault();
+});
+
+
+/* ----- Gestión de materiales asociados al recurso ----- */
+$("#buscador-materiales").on("keyup", function () {
+  var value = $(this).val();
+  $.ajax({
+    type: 'POST',
+    url: "index.php?page=admin/material_buscar&ajax=true",
+    data: {'q': value},
+    success: function (datos) {
+      $("#materiales-encontrados").html(datos).css("display", "block");
+    }
   });
+});
 
-  // ---------- Petición ajax subir fichero --------
-  $('#btn-subir').on('click', function(e){
-    e.preventDefault();
-    var formDatos = new FormData($('#form-fichero')[0]);
-
-    $.ajax(
-    {
-      type: 'POST',
-      url: $('#form-fichero').attr('action') + '&ajax=true',
-      data: formDatos,
-      //Options to tell jQuery not to process data or worry about content-type.
-      cache: false,
-      contentType: false,
-      processData: false,
-      beforeSend : function (data) {
-        $('#btn-subir').html('Subiendo...').attr('disabled','disabled');
-      },
-      success: function(datos) {  
-        // Recarga el div#lista-ficheros con el resultado de 
-        // procesar recurso_grabar_fichero.php, que llama a recurso_fichero_acordeon.tpl
-        $('#accordion').append(datos);
-        $('body').on('click', '.borrar-fichero', function(e) {
-          e.preventDefault();
-          var id = $(this).attr("data-fichero-id"); 
-          if (confirm('¿Quiéres borrar el fichero?'))
-          {
-            $.ajax(
-            {
-              type: "GET",
-              url: $(this).attr('href'),
-              success: function(data) {
-                $("#fichero" + id).remove();   
-              }
-            });
-          }
-        });
-        $('#form-fichero')[0].reset();
-        $('#btn-subir').html('Subir fichero').css('background','#04c').prop('disabled',false);
-      },                    
-    });    
+$("#materiales-encontrados").on("click", "a", function (e) {
+  var id_recurso = $("#id_recurso").val();
+  var id_material = $(this).attr("data-id");
+  $.ajax( {
+    type: "POST",
+    url: "index.php?page=admin/material_asociar&ajax=true",
+    data: {'id_recurso': id_recurso, 'id_material': id_material},
+    success: function (response) {
+      $("#materiales-asociados").append(response);
+      $("#materiales-encontrados").html("").css("display", "none");
+      $("#buscador-materiales").val("");
+    }
   });
+  e.preventDefault();
+});
 
-  /* ----- Gestión de iconografias asociados al recurso ----- */
-  $("#busca-iconografia").on("keyup", function(e){
-    var value = $(this).val();
-    $.ajax(
-    {
-      type: 'POST',
-      url: "index.php?page=admin/iconografia_buscar&ajax=true",
-      data: {'busqueda': value},
-      success: function(datos) {
-        $("#iconografias-encontradas").html(datos).css("display", "block");
-      }
-    });
-  });  
-
-  $("#iconografias-encontradas").on("click", "a", function(e){
-    var id_recurso = $("#id_recurso").val();
-    var id_iconografia = $(this).attr("data-id");
-    $.ajax(
-    {
-      type: "POST",
-      url: "index.php?page=admin/iconografia_asociar&ajax=true",
-      data: {'id_recurso': id_recurso, 'id_iconografia': id_iconografia},
-      success: function(response){
-        $("#busca-iconografia").val(response);
-        $("#iconografias-encontradas").html("").css("display","none");
-      }
-    });
-    e.preventDefault();
+$("#materiales-asociados").on("click",".material-disociar", function (e) {
+  var material = $(this);
+  $.ajax({
+    type: "POST",
+    url: material.attr("href") + "&ajax=true",
+    success: function () {
+      material.next().remove();
+      material.remove();
+    }
   });
-
-
-  /* ----- Gestión de materiales asociados al recurso ----- */
-  $("#buscador-materiales").on("keyup", function(e){
-    var value = $(this).val();
-    $.ajax(
-    {
-      type: 'POST',
-      url: "index.php?page=admin/material_buscar&ajax=true",
-      data: {'q': value},
-      success: function(datos) {
-        $("#materiales-encontrados").html(datos).css("display", "block");
-      }
-    });
-  });
-
-  $("#materiales-encontrados").on("click", "a", function(e){
-    var id_recurso = $("#id_recurso").val();
-    var id_material = $(this).attr("data-id");
-    $.ajax(
-    {
-      type: "POST",
-      url: "index.php?page=admin/material_asociar&ajax=true",
-      data: {'id_recurso': id_recurso, 'id_material': id_material},
-      success: function(response){
-        $("#materiales-asociados").append(response);
-        $("#materiales-encontrados").html("").css("display","none");
-        $("#buscador-materiales").val("");
-      }
-    });
-    e.preventDefault();
-  });
-
-  $("#materiales-asociados").on("click",".material-disociar", function(e) {
-    var material = $(this);
-    $.ajax(
-    {
-      type: "POST",
-      url: material.attr("href") + "&ajax=true",
-      success: function(){
-        material.next().remove();
-        material.remove();
-      }
-    });
-    e.preventDefault();
-  });
+  e.preventDefault();
+});
 </script>
 {/literal}

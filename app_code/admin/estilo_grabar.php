@@ -1,9 +1,9 @@
 <?php
 //--------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: iconografia_grabar.php
+// Archivo: estilo_grabar.php
 //--------------------------------------------------------------------------
-// Graba una nueva iconografía en la base de datos
+// Graba un nuevo estilo en la base de datos
 //--------------------------------------------------------------------------
 global $usuario;
 
@@ -13,21 +13,21 @@ if ($usuario->id_rol < 3)
   if (isset($_POST['id']))
   {
     $id = sanitize($_POST['id'], INT);
-    $iconografia = new iconografia();
-    $iconografia->load("id = $id"); 
-    $iconografia->nombre = isset($_POST['nombre'])?sanitize($_POST['nombre'],SQL):'';
-    $iconografia->save();
-    $smarty->assign("iconografia", $iconografia);
-    $plantilla = "admin/iconografia_grabar.tpl";
+    $estilo = new estilo();
+    $estilo->load("id = $id"); 
+    $estilo->nombre = isset($_POST['nombre'])?sanitize($_POST['nombre'],SQL):'';
+    $estilo->save();
+    $smarty->assign("estilo", $estilo);
+    $plantilla = "admin/estilo_grabar.tpl";
   }
   else
   {
-    $error = "Falta el identificador de la iconografía a editar";
+    $error = "Falta el identificador del estilo a editar";
     $smarty->assign("error", $error);
   }
 }
 else
 {
-  $error = "No tiene permisos para editar iconografías";
+  $error = "No tiene permisos para editar estilos";
   $smarty->assign("error", $error);
 }
