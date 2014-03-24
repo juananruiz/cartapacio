@@ -8,6 +8,7 @@
       <li>
         <div class="thumbnail" id="{$fichero->id}">
           <a href="{$fichero->url}" title="{$fichero->titulo}"> <img src="thumb/timthumb.php?h=100&w=100&src={$fichero->url}" alt="{$fichero->titulo}"></a>
+          <a href="{$fichero->url}" title="{$fichero->titulo}"> <img src="{$fichero->miniatura}" alt="{$fichero->titulo}"></a>
         </div>
       </li>
       {/foreach}
@@ -21,11 +22,12 @@
         <tr><th>Fecha</th><td>{$recurso->fecha_minima}{if $recurso->fecha_maxima > $recurso->fecha_minima} - {$recurso->fecha_maxima}{/if}</td></tr>
         {if isset($recurso->ubicacion->id)}<tr><th>Ubicación</th><td><a href="index.php?page=ubicacion_mostrar?id={$recurso->ubicacion->id}">{$recurso->ubicacion->nombre}</a></td></tr>{/if}
         {if isset($recurso->url_externa)}<tr><th>URL externa</th><td><a href="{$recurso->url_externa}">{$recurso->url_externa|truncate:'65':'...'}</a></td></tr>{/if}
-        {if isset($recurso->coleccion->id)}<tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>{/if}
         {if isset($recurso->cantidad)}<tr><th>Cantidad</th><td>{$recurso->cantidad}</td></tr>{/if}
         {if isset($recurso->medidas)}<tr><th>Medidas</th><td>{$recurso->medidas}</td></tr>{/if}
         {if isset($recurso->iconografia)}<tr><th>Iconografía</th><td>{$recurso->iconografia->nombre}</td></tr>{/if}
+        {if isset($recurso->estilo->id)}<tr><th>Estilo</th><td>{$recurso->estilo->nombre}</a></td></tr>{/if}
         {if is_array($recurso->materiales)}<tr><th>Materiales</th><td>{foreach $recurso->materiales as $material}{$material->material->nombre}{if !$material@last}, {/if} {/foreach}</td></tr>{/if}
+        {if isset($recurso->coleccion->id)}<tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>{/if}
       </table>
     </div>
 

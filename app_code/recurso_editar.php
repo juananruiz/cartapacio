@@ -38,6 +38,10 @@ if ($usuario->id_rol < 4)
       $autores = $autor->Find("activo =  1 ORDER BY nombre");
       $smarty->assign('autores', $autores);
 
+      $estilo = new estilo();
+      $estilos = $estilo->Find("activo = 1 ORDER BY nombre");
+      $smarty->assign('estilos', $estilos);
+
       $ubicacion = new ubicacion();
       $ubicaciones = $ubicacion->Find("activo =  1 ORDER BY nombre");
       $smarty->assign('ubicaciones', $ubicaciones);

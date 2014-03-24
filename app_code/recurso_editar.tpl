@@ -110,6 +110,18 @@
       </div>
     </div>
 
+    <div class="control-group">
+      <label class="control-label" for="id_estilo">Estilo</label>
+      <div class="controls">
+        <select class="autosave input-xxlarge" name="id_estilo">
+          <option value="">Seleccione un estilo</option>
+          {foreach $estilos as $estilo}
+            <option value="{$estilo->id}" {if $recurso->id_estilo == $estilo->id}selected="selected"{/if} >{$estilo->nombre}</option>
+          {/foreach}
+        </select>
+      </div>
+    </div>
+
 
     <div class="control-group">
       <label class="control-label" for="inscripcion_autor">Inscripciones de autoría</label>
@@ -231,24 +243,7 @@ modalsHandler();
 formHandler();
 autosave();
 
-/*
 // ---------- Función Borrar fichero --------------
-function borrarFichero(e) {
-  e.preventDefault();
-  var id = $(this).attr("data-fichero-id"); 
-  if (confirm('¿Quiéres borrar el fichero?'))
-  {
-    $.ajax(
-    {
-      type: "GET",
-      url: $(this).attr('href'),
-      success: function(data) {
-        $("#fichero" + id).remove();   
-      }
-    });
-  }
-}
-*/
 $('.borrar-fichero').on('click', function (e) {
   e.preventDefault();
   var id = $(this).attr("data-fichero-id"); 
