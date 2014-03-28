@@ -11,7 +11,7 @@ global $usuario;
 if ($usuario->id_rol < 3)
 {
   $material = new material();
-  $materiales = $material->Find_con_usos("true");
+  $materiales = $material->Find_con_usos("true ORDER BY nombre");
   $smarty->assign('materiales', $materiales);
 }
 else

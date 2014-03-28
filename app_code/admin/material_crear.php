@@ -11,6 +11,7 @@ global $plantilla;
 if ($usuario->id_rol == 1)
 {
 	$material = new material();
+  $material->activo = 1;
   if ($material->save())
   {
     $smarty->assign("material", $material);

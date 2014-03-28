@@ -11,7 +11,7 @@ global $usuario;
 if ($usuario->id_rol < 3)
 {
   $estilo = new estilo();
-  $estilos = $estilo->Find_con_usos("true");
+  $estilos = $estilo->Find_con_usos("true ORDER BY nombre");
   $smarty->assign('estilos', $estilos);
 }
 else

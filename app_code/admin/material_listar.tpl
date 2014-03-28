@@ -16,7 +16,7 @@
     <tbody id="filas-materiales">
       {foreach $materiales as $material}
         <tr>
-          <td class="editable" id="{$material->id}"><span>{if $material->nombre != ""}{$material->nombre}{else}<i class="fa fa-pencil"></i>{/if}</span></td>
+          <td class="editable" id="{$material->id}"><i class="fa fa-edit"></i> &nbsp;<span>{if $material->nombre != ""}{$material->nombre}{else}<i class="fa fa-pencil"></i>{/if}</span></td>
           <td>{$material->usos}</td>
           {if $_usuario->id_rol < 3}
             <td>
@@ -40,6 +40,10 @@
       var value = $(this).text();
       $(this).replaceWith("<input type='text' name='nombre' value='" + value + "'>");
       filaActual.find("input").focus();
+    });
+
+    $('table').on('click', 'td.editable i', function(e) {
+      $(this).next().click();
     });
 
     $("table").on("blur","td.editable input",function(e) {

@@ -46,6 +46,10 @@ if ($usuario->id_rol < 4)
       $ubicaciones = $ubicacion->Find("activo =  1 ORDER BY nombre");
       $smarty->assign('ubicaciones', $ubicaciones);
 
+      $conservacion = new conservacion();
+      $conservaciones = $conservacion->Find("true ORDER BY id");
+      $smarty->assign('conservaciones', $conservaciones);
+
       $estado = new estado();
       $estados = $estado->Find("true");
       $smarty->assign('estados', $estados);

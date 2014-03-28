@@ -122,7 +122,6 @@
       </div>
     </div>
 
-
     <div class="control-group">
       <label class="control-label" for="inscripcion_autor">Inscripciones de autoría</label>
       <div class="controls">
@@ -139,6 +138,25 @@
             <option value="{$coleccion->id}" {if $recurso->id_coleccion == $coleccion->id}selected="selected"{/if}>{$coleccion->nombre}</option>
           {/foreach}
         </select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="id_conservacion">Estado conservación</label>
+      <div class="controls">
+        <select class="autosave input-xxlarge" name="id_conservacion" id="id_conservacion">
+          <option value=""></option>
+          {foreach $conservaciones as $conservacion}
+            <option value="{$conservacion->id}" {if $recurso->id_conservacion == $conservacion->id}selected="selected"{/if}>{$conservacion->estado}</option>
+          {/foreach}
+        </select>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="integridad">Integridad</label>
+      <div class="controls">
+        <input class="autosave input-xxlarge" type="text" name="integridad" id="integridad" value="{$recurso->integridad}">
       </div>
     </div>
 

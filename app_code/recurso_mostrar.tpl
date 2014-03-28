@@ -1,13 +1,12 @@
-<h1 class="ficha">{$recurso->nombre} 
-  {if $_usuario->id_rol < 4}<a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i></a>{/if}</h1>
 
   <div class="span5">
+    <h1 class="ficha" style="margin-left: -20px; padding-left: 0;">{$recurso->nombre} 
+    {if $_usuario->id_rol < 4}<a href="index.php?page=recurso_editar&id={$recurso->id}"><i class="fa fa-pencil"></i></a>{/if}</h1>
     <div class="caja">
     <ul class="thumbnails">
       {foreach $recurso->ficheros as $fichero}
       <li>
         <div class="thumbnail" id="{$fichero->id}">
-          <a href="{$fichero->url}" title="{$fichero->titulo}"> <img src="thumb/timthumb.php?h=100&w=100&src={$fichero->url}" alt="{$fichero->titulo}"></a>
           <a href="{$fichero->url}" title="{$fichero->titulo}"> <img src="{$fichero->miniatura}" alt="{$fichero->titulo}"></a>
         </div>
       </li>
@@ -28,6 +27,8 @@
         {if isset($recurso->estilo->id)}<tr><th>Estilo</th><td>{$recurso->estilo->nombre}</a></td></tr>{/if}
         {if is_array($recurso->materiales)}<tr><th>Materiales</th><td>{foreach $recurso->materiales as $material}{$material->material->nombre}{if !$material@last}, {/if} {/foreach}</td></tr>{/if}
         {if isset($recurso->coleccion->id)}<tr><th>Colección</th><td><a href="index.php?page=coleccion_mostrar&id={$recurso->coleccion->id}">{$recurso->coleccion->nombre}</a></td></tr>{/if}
+        {if isset($recurso->conservacion)}<tr><th>Estado de conservación</th><td>{$recurso->conservacion->estado}</td></tr>{/if}
+        {if isset($recurso->integridad)}<tr><th>Integridad</th><td>{$recurso->integridad}</td></tr>{/if}
       </table>
     </div>
 
@@ -58,13 +59,14 @@
 
   <div class="span7">
     {if isset($recurso->imagen_principal)}
-      <div class="caja" id="imagen-principal" data-path="{$smarty.const.CC_URL_BASE}thumb/timthumb.php?w=700&src={$recurso->imagen_principal->url}">
+      <!--<div class="caja" id="imagen-principal" data-path="{$smarty.const.CC_URL_BASE}thumb/timthumb.php?w=700&src={$recurso->imagen_principal->url}">-->
+      <div class="caja" id="imagen-principal" data-path="{$recurso->imagen_principal->url}">
       </div>
 
       <div id="pie-visor">
         <p class="muted">{$recurso->imagen_principal->titulo}</p>
         {if $recurso->imagen_principal->es_publico == 1}
-          <p><a href="{$recurso->imagen_principal->url}"><i class="fa fa-expand"></i> Ver a pantalla completa</a></p>
+          <p><a href="{$recurso->imagen_principal->url}"><i class="fa fa-expand"></i> Ver a pantalla completa / Descargar</a></p>
         {/if}
       </div>
     {/if}
@@ -86,7 +88,7 @@
     $(".thumbnail a").on("click", function(e){
       var path = $(this).attr('href');
       var title = $(this).attr('title');
-      var htmlPieVisor = "<p class='muted'>" + title + "</p>" + "<p><a href='" + path + "'><i class='fa fa-expand'></i> Ver a pantalla completa</a></p>";
+      var htmlPieVisor = "<p class='muted'>" + title + "</p>" + "<p><a href='" + path + "'><i class='fa fa-expand'></i> Ver a pantalla completa / Descargar</a></p>";
 
       documentViewer.load(path, {width:currentWidth});
       $("#pie-visor").html(htmlPieVisor);

@@ -11,6 +11,7 @@ global $plantilla;
 if ($usuario->id_rol == 1)
 {
 	$iconografia = new iconografia();
+  $iconografia->activo = 1;
   if ($iconografia->save())
   {
     $smarty->assign("iconografia", $iconografia);

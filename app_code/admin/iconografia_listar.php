@@ -11,7 +11,7 @@ global $usuario;
 if ($usuario->id_rol < 2)
 {
   $iconografia = new iconografia();
-  $iconografias = $iconografia->Find_con_usos("true");
+  $iconografias = $iconografia->Find_con_usos("true ORDER BY nombre");
   $smarty->assign('iconografias', $iconografias);
 }
 else

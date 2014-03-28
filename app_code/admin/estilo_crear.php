@@ -11,6 +11,7 @@ global $plantilla;
 if ($usuario->id_rol == 1)
 {
 	$estilo = new estilo();
+  $estilo->activo = 1;
   if ($estilo->save())
   {
     $smarty->assign("estilo", $estilo);

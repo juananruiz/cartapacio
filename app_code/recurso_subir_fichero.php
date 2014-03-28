@@ -5,8 +5,7 @@
 //--------------------------------------------------------------------------
 // Graba los ficheros en el directorio asignado al recurso (via ajax)
 //--------------------------------------------------------------------------
-require_once("../cascara_core/lib/phpthumb/src/PHPThumb/PHPThumb.php");
-require_once("../cascara_core/lib/phpthumb/src/PHPThumb/GD.php");
+require_once '../cascara_core/lib/phpthumb1/src/ThumbLib.inc.php';
 
 global $usuario;
 
@@ -26,7 +25,8 @@ if ($usuario->id_rol < 4)
     chmod($ruta_absoluta, 0744);
   }
   $fichero_final =  $ruta_absoluta . $fichero_nombre_sano;
-  $fichero_miniatura =  $ruta_absoluta . '100/' . $fichero_nombre_sano;
+  $miniatura_absoluta =  $ruta_absoluta . 'th100_' . $fichero_nombre_sano;
+  $miniatura_relativa =  $ruta_relativa . 'th100_' . $fichero_nombre_sano;
   
   if ($tipo_imagen = exif_imagetype($fichero_original))
   {
@@ -53,9 +53,12 @@ if ($usuario->id_rol < 4)
     {
       $subida_correcta = move_uploaded_file($fichero_original, $fichero_final);
     }
-    $thumb = new PHPThumb\GD($fichero_final);
+
+    $thumb = PhpThumbFactory::create($ruta_relativa . $fichero_nombre_sano);
+    $thumb->resize(100);
     $thumb->cropFromCenter(100);
-    $thumb->save($fichero_miniatura);
+    $thumb->save($miniatura_absoluta);
+    $miniatura = $miniatura_relativa;
   }  
   else
   {
@@ -72,10 +75,6 @@ if ($usuario->id_rol < 4)
     {
       $miniatura = "img/pdf.png";
     } 
-    else
-    {
-      $miniatura = $fichero_miniatura;
-    }
 
     $subida_correcta = move_uploaded_file($fichero_original, $fichero_final);
   }

@@ -536,7 +536,7 @@ h2 + .row {
   }
 
   .container-fluid {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
   .thumbnails > li {
@@ -548,7 +548,7 @@ h2 + .row {
 @media (min-width: 980px) and (max-width: 1200px) {
 
   .container-fluid {
-    margin-top: 40px;
+    margin-top: 30px;
   }
 
 }
@@ -589,7 +589,7 @@ h2 + .row {
   }
 
   .container-fluid {
-    margin-top: 20px;
+    margin-top: 0px;
   }
 
   .thumbnails > li {
@@ -651,8 +651,8 @@ h2 + .row {
   }
 
   h1.ficha {
-    font-size: 20px;
-    line-height: 20px;
+    font-size: 24px;
+    line-height: 24px;
   }
   .jumbotron h1 {
     font-size: 65px;
@@ -714,5 +714,11 @@ h2 + .row {
     font-size: 20px;
   }
 
+  .masthead-links li a {
+  display: inline;
+  padding: 0 10px;
+  color: rgba(10,10,10,.5);
+  font-size: 18px;
+  }
 }
 

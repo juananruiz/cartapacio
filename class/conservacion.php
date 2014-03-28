@@ -1,12 +1,11 @@
 <?php
 //---------------------------------------------------------------------------------------------------
 // Proyecto: Cartapacio
-// Archivo: class/estado.php
+// Archivo: class/conservacion.php
 //---------------------------------------------------------------------------------------------------
-// Descripcion: gestiona el estado de publicación del recurso: borrador, publicado, restringido, etc
+// Descripcion: gestiona el estado de conservacion del recurso: Bueno, Regular, ...
 //---------------------------------------------------------------------------------------------------
-class estado extends ADOdb_Active_Record
+class conservacion extends ADOdb_Active_Record
 {
-	public $_table = 'estados';
-
+	public $_table = 'conservacion_estados';
 }

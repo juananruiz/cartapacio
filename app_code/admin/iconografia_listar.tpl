@@ -17,7 +17,7 @@
       <tbody id="filas-iconografias">
         {foreach $iconografias as $iconografia}
           <tr>
-            <td class="editable" id="{$iconografia->id}"><span>{if $iconografia->nombre != ""}{$iconografia->nombre}{else}<i class="fa fa-pencil"></i>{/if}</span></td>
+            <td class="editable" id="{$iconografia->id}"><i class="fa fa-edit"></i> &nbsp;<span>{if $iconografia->nombre != ""}{$iconografia->nombre}{else}<i class="fa fa-pencil"></i>{/if}</span></td>
             <td>{$iconografia->usos}</td>
             {if $_usuario->id_rol < 3}
               <td>
@@ -40,36 +40,40 @@
 
   {literal}
     
-    $("table").on("click","td.editable span",function(e) {
-      var filaActual = $(this).closest("tr");
+    $('table').on('click','td.editable span',function(e) {
+      var filaActual = $(this).closest('tr');
       var value = $(this).text();
       $(this).replaceWith("<input type='text' name='nombre' value='" + value + "'>");
-      filaActual.find("input").focus();
+      filaActual.find('input').focus();
     });
 
-    $("table").on("blur","td.editable input",function(e) {
+    $('table').on('click', 'td.editable i', function(e) {
+      $(this).next().click();
+    });
+
+    $('table').on('blur','td.editable input',function(e) {
       var value = $(this).val();
-      var id = $(this).parent().attr("id");
+      var id = $(this).parent().attr('id');
       $.ajax(
       {
-        url: "index.php?page=admin/iconografia_grabar&ajax=true",
-        type: "POST",
+        url: 'index.php?page=admin/iconografia_grabar&ajax=true',
+        type: 'POST',
         data: {'id': id, 'nombre': value},
         success: function(data){
         },
         error: {
         }
       });
-      $(this).replaceWith("<span>" + value + "</span");
+      $(this).replaceWith('<span>' + value + '</span');
     });
 
-    $('.eliminar-iconografia').on('click', function(e){
-      var filaActual = $(this).closest("tr");
+    $('table').on('click', '.eliminar-iconografia', function(e){
+      var filaActual = $(this).closest('tr');
       var usos = $(this).parent().prev().text();
       var mensaje;
       if (usos > 0)
       {
-        mensaje = "Hay " + usos + " recursos asociados a esta iconografía, al eliminarla se borrarán dichas asociaciones. ¿Seguro que quieres borrar esta iconografía?";
+        mensaje = 'Hay ' + usos + ' recursos asociados a esta iconografía, al eliminarla se borrarán dichas asociaciones. ¿Seguro que quieres borrar esta iconografía?';
       }
       else
       {
@@ -80,8 +84,8 @@
       {
         $.ajax(
         {
-          type: "GET",
-          url: $(this).attr('href') + "&ajax=true",
+          type: 'GET',
+          url: $(this).attr('href') + '&ajax=true',
           success: function(data) {
             filaActual.remove();   
           }
